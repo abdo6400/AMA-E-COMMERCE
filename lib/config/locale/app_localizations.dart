@@ -31,7 +31,7 @@ class AppLocalizations {
 
 extension TranslateString on String {
   String tr(BuildContext context) {
-    return AppLocalizations.of(context)!.translate(this) ?? "no Tr";
+    return AppLocalizations.of(context)!.translate(this) ?? "no Translation";
   }
 }
 

@@ -68,14 +68,13 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
                     vertical: AppValues.paddingHeight * 15,
                   ),
                   child: CircleAvatar(
-                    backgroundColor: AppColors.greenDarK,
                     child: Text(
                       (AppLocalizations.of(context)!.isEnLocale
-                          ? AppStrings.arabicCode
-                          : AppStrings.englishCode).toUpperCase(),
+                              ? AppStrings.arabicCode
+                              : AppStrings.englishCode)
+                          .toUpperCase(),
                       style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                          fontWeight: FontWeight.w900,
-                          color: AppColors.white),
+                          fontWeight: FontWeight.w900, color: AppColors.white),
                     ),
                   ),
                 ),
@@ -85,10 +84,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: appBarText != null
           ? Text(
               appBarText!.translateWithNullSafetyString(context)!,
-              style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                  fontSize: AppValues.font * 24,
-                  color: AppColors.black,
-                  fontWeight: FontWeight.w500),
+              style: Theme.of(context).textTheme.displayLarge,
             )
           : null,
     );

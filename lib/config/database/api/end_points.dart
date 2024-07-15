@@ -2,10 +2,22 @@ class EndPoints {
   //basic urls
   static const String baseUrl = '';
   static const String prefixToken = 'Bearer';
-  static const String images =
-      "";
-  //authentiaction
+  static const String images = "";
 
+  static const String forgetPassword = "";
+
+  static const String resendCode = "";
+
+  static const String resetPassword = "";
+
+  static const String verifyEmail = "";
+
+  static const String login = "";
+
+  static const String register = "";
+
+  static const String checkEmail = "";
+  //authentiaction
 }
 
 class ApiKeys {

@@ -2,22 +2,21 @@
 import 'package:ama/config/locale/app_localizations.dart';
 import 'package:ama/core/utils/commons.dart';
 import 'package:flutter/material.dart';
-import '../../../config/database/local/sql_local_database.dart';
 import '../../../config/routes/app_routes.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_images.dart';
 import '../../utils/app_strings.dart';
 import '../../utils/app_values.dart';
 
-class WindowsLayout extends StatefulWidget {
+class WindowsHomeLayout extends StatefulWidget {
   final List<Map<String, dynamic>> screens;
-  const WindowsLayout({super.key, required this.screens});
+  const WindowsHomeLayout({super.key, required this.screens});
 
   @override
-  State<WindowsLayout> createState() => _WindowsLayoutState();
+  State<WindowsHomeLayout> createState() => _WindowsHomeLayoutState();
 }
 
-class _WindowsLayoutState extends State<WindowsLayout> {
+class _WindowsHomeLayoutState extends State<WindowsHomeLayout> {
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -193,13 +192,7 @@ class HomeDrawer extends StatelessWidget {
               SizedBox(
                 height: AppValues.sizeHeight * 28,
               ),
-              CutomDrawerButton(
-                index: 2,
-                fun: fun,
-                selectedIndex: selectedIndex,
-                name: AppStrings.clients.tr(context),
-                iconData: Icons.groups_outlined,
-              ),
+             
               SizedBox(
                 height: AppValues.sizeHeight * 28,
               ),
@@ -213,13 +206,7 @@ class HomeDrawer extends StatelessWidget {
               SizedBox(
                 height: AppValues.sizeHeight * 28,
               ),*/
-              CutomDrawerButton(
-                index: 3,
-                fun: fun,
-                selectedIndex: selectedIndex,
-                name: AppStrings.tanks.tr(context),
-                iconData: Icons.propane_tank,
-              ),
+              
               SizedBox(
                 height: AppValues.sizeHeight * 28,
               ),

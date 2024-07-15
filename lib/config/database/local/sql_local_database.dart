@@ -1,10 +1,5 @@
-import 'dart:async';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as p;
-import 'dart:io' as io;
-
 class SqlLocalDatabase {
- /*static const _databaseName = 'baraneq.db';
+  /*static const _databaseName = 'baraneq.db';
   static const _databaseVersion = 1;
 
   // Table names

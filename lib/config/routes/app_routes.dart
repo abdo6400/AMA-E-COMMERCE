@@ -1,4 +1,5 @@
-
+import 'package:ama/core/components/basic_screens/onboarding_screen.dart';
+import 'package:ama/core/components/basic_screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../core/components/basic_screens/main_screen.dart';
@@ -30,11 +31,16 @@ class Routes {
 class AppRoutes {
   static Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
-     /* case Routes.initialRoute:
+      case Routes.initialRoute:
         return PageTransition(
-            child: const LoginScreen(),
+            child: const SplashScreen(),
             type: PageTransitionType.fade,
-            settings: routeSettings);*/
+            settings: routeSettings);
+      case Routes.onBoardingRoute:
+        return PageTransition(
+            child: const OnBoardingScreen(),
+            type: PageTransitionType.leftToRight,
+            settings: routeSettings);
       case Routes.mainRoute:
         return PageTransition(
             child: const MainScreen(),

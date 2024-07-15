@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import '../config/locale/app_localizations_setup.dart';
 import '../config/routes/app_routes.dart';
+import '../config/routes/route_observer.dart';
 import '../config/themes/app_theme.dart';
 import '../core/bloc/global_cubit/locale_cubit.dart';
 import '../core/bloc/global_cubit/theme_cubit.dart';
@@ -28,8 +28,7 @@ class UserApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => sl<LocaleCubit>()..getSavedLang()),
-          BlocProvider(create: (context) => sl<ThemeCubit>()),
-         
+          BlocProvider(create: (context) => sl<ThemeCubit>()..getThemeMode()),
         ],
         child: BlocBuilder<ThemeCubit, ThemeState>(
           builder: (context, mode) {
@@ -52,6 +51,7 @@ class UserApp extends StatelessWidget {
                         navigatorKey: UserApp.navigatorKey,
                         onGenerateRoute: AppRoutes.onGenerateRoute,
                         locale: state.locale,
+                        navigatorObservers: [sl<RouteLogger>()],
                         supportedLocales:
                             AppLocalizationsSetup.supportedLocales,
                         localeResolutionCallback:

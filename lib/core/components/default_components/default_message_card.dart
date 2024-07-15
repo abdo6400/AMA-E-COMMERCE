@@ -25,9 +25,9 @@ class DefaultMessageCard extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: (AppValues.radius * 35),
-            backgroundColor: AppColors.lightPrimary.withOpacity(0.3),
+            backgroundColor: AppColors.primary.withOpacity(0.3),
             child: CircleAvatar(
-              backgroundColor: AppColors.greySoft1,
+              backgroundColor: AppColors.grey,
               radius: (AppValues.radius * 30),
               child: Text(
                 sign,

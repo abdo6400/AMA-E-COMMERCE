@@ -48,7 +48,7 @@ class DefaultTextFormField extends StatelessWidget {
       this.maxLines = 1,
       this.contentPadding,
       this.textColor,
-      this.hintColor = AppColors.greyBarel,
+      this.hintColor = AppColors.grey,
       this.color,
       this.backgroundColor,
       this.radius = 16,

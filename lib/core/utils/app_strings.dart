@@ -18,6 +18,7 @@ class AppStrings {
   static const pleaseEnterVaildPassword = "pleaseEnterVaildPassword";
   static const pleaseEnterVaildName = "pleaseEnterVaildName";
   static const pleaseEnterVaildPhoneNumber = "pleaseEnterVaildPhoneNumber";
+  static const pleaseEnterValidDate = "pleaseEnterValidDate";
   static const pleaseEnterVaildConfirmPassword =
       "pleaseEnterVaildConfirmPassword";
   static const pleaseEnterVaildValue = "pleaseEnterVaildValue";
@@ -42,7 +43,6 @@ class AppStrings {
   static const onboardingSub2 = "onboardingSub2";
   static const onboarding3 = "onboarding3";
   static const onboardingSub3 = "onboardingSub3";
-
   static const search = "search";
   static const favorite = "favourite";
   static const profile = "profile";
@@ -51,89 +51,64 @@ class AppStrings {
   static const email = 'email';
   static const name = 'name';
   static const phoneNumber = 'phoneNumber';
-  static const addNewClient = 'addNewClient';
   static const invoices = "invoices";
   static const note = "note";
   static const fromDate = "fromDate";
   static const toDate = "toDate";
-  static const pleaseEnterValidDate = "pleaseEnterValidDate";
   static const balance = "balance";
-  static const importer = "importer";
-  static const exporter = "exporter";
-  static const clientType = "clientType";
   static const kilo = "kilo";
   static const add = "add";
-  static const newClientAdded = "newClientAdded";
-  static const bont = "bont";
   static const quantity = "quantity";
-  static const tank = "tank";
   static const import = "import";
   static const export = "export";
   static const addReceipt = "addReceipt";
   static const receiptAdded = "receiptAdded";
   static const receiptEdited = "receiptEdited";
   static const receiptDeleted = "receiptDeleted";
-  static const noImportersBeAddedYet = "noImportersBeAddedYet";
-  static const noExportersBeAddedYet = "noExportersBeAddedYet";
   static const totalQuantity = "totalQuantity";
   static const day = "day";
   static const noResultsForSearch = "noResultsForSearch";
-  static const searchAboutClient = "searchAboutClient";
   static const share = "share";
   static const print = "print";
   static const exportExecl = "exportExecl";
   static const shareResult = "shareResult";
   static const printFailed = "printFailed";
   static const printSuccess = "printSuccess";
-  static const exportExeclFileFailed = "ExportExeclFileFailed";
-  static const exportExeclFileSuccess = "ExportExeclFileSuccess";
-  static const onlyOneClient = "onlyOneClient";
-  static const setOfClients = "setOfClients";
-  static const allClients = "allClients";
   static const noInvoicesFound = "noInvoicesFound";
-  static const tanks = "tanks";
   static const id = "id";
-  static const clientsNumber = "clientsNumber";
-  static const totalQuantityForAllClients = "totalQuantityForAllClients";
-  static const client = "client";
   static const pdf = "pdf";
-  static const capacity = "capacity";
   static const currentQuantity = "currentQuantity";
-  static const noTanksFound = "noTanksFound";
-  static const addTanks = "addTanks";
-  static const receiptsCount = "receiptsCount";
-  static const noClientsFound = "noClientsFound";
-  static const clients = "clients";
-  static const newTankAdded = "newTankAdded";
-  static const addNewTank = "addNewTank";
   static const login = "login";
   static const password = "password";
   static const date = "date";
   static const logout = "logout";
   static const receiptType = "receiptType";
-  static const youShouldAddTankFirst = "youShouldAddTankFirst";
-  static const youShouldAddClientFirst = "youShouldAddClientFirst";
   static const price = "price";
   static const printReceipt = "printReceipt";
   static const enterKiloPrice = "enterKiloPrice";
-  static const youChooseClientFirst = "youChooseClientFirst";
-
   static const previous = "previous";
-
   static const notEnoughQuantity = "notEnoughQuantity";
-
-  static const chooseTank = "chooseTankFirst";
-
-  static const confirme = "confirme";
-
-  static const doYOuWantToDeleteReceiptForSure =
-      "doYOuWantToDeleteReceiptForSure";
-
-  static const doYOuWantToDeleteTankForSure = "doYOuWantToDeleteTankForSure";
-  static const doYOuWantToDeleteClientForSure =
-      "doYOuWantToDeleteClientForSure";
-
-  static const weeklyReportfor ="weeklyReportfor";
-
-  static const receipts="receipts";
+  static const confirm = "confirm";
+  static const forgetPassword = "forgetPassword";
+  static const emailCodeMessage = "emailCodeMessage";
+  static const confirmPassword = "confirmPassword";
+  static const signIn = "signIn";
+  static const showPassword = "showPassword";
+  static const hidePassword = "hidePassword";
+  static const signUp = "signUp";
+  static const or = "or";
+  static const codeExpired = "codeExpired";
+  static const didNotReciveCode = "didNotReciveCode";
+  static const resendCodeTo = "resendCodeTo";
+  static const enterTheCode = "enterTheCode";
+  static const fillInformation = "fillInformation";
+  static const editMessage = "editMessage";
+  static const letsSignIn = "letsSignIn";
+  static const loginSubTitle = "loginSubTitle";
+  static const dontHaveAnAccount = "dontHaveAnAccount";
+  static const success = "success";
+  static const enterEmailThat = "enterEmailThat";
+  static const createAccount = "createAccount";
+  static const reigsterSubTitle = "reigsterSubTitle";
+  static const haveAnAccount = "haveAnAccount";
 }
