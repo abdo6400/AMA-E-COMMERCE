@@ -33,10 +33,11 @@ Welcome to AMA E-COMMERCE, your one-stop solution for all your shopping needs. D
 
 ## App Screenshots
 
-![Screenshot 1](screenshot1.png)
-![Screenshot 2](screenshot2.png)
-![Screenshot 3](screenshot3.png)
-![Screenshot 4](screenshot4.png)
+<div style="display: flex; align-items: center; margin-bottom: 20px;">
+    <img src="screenshots\1.png" height="200" width="200" style="vertical-align: middle; margin-right: 10px;"/>
+    <img src="screenshots\2.png" height="200" width="200" style="vertical-align: middle; margin-right: 10px;"/>
+    <img src="screenshots\3.png" height="200" width="200" style="vertical-align: middle; margin-right: 10px;"/>
+</div>
 
 ---
 
