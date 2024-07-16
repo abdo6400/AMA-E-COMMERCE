@@ -41,7 +41,7 @@ Our dual-app approach ensures that both customers and delivery personnel have th
 
 ---
 
-## App Features
+## System Features
 
 - User-friendly interface
 - Secure payment options
