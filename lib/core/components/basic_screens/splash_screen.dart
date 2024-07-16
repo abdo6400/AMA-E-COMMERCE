@@ -8,7 +8,7 @@ import '../../../../config/routes/app_routes.dart';
 import '../../../../core/utils/app_enums.dart';
 import '../../../../core/utils/app_images.dart';
 import '../../../config/database/cache/cache_consumer.dart';
-import '../../utils/app_colors.dart';
+
 import '../../utils/app_strings.dart';
 import '../../utils/app_values.dart';
 

@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   //* Main Colors
-  static const Color primary =
-      Color.fromRGBO(100, 0, 130, 1); // Darkened primary color
-  static const Color secondary =
-      Color.fromRGBO(150, 100, 160, 1); // Darkened secondary color
+  static const Color primary = Color.fromRGBO(219, 56, 44, 1.0);
+  static const Color secondary = Color.fromRGBO(176, 81, 37, 1.0); 
 
   //* Greyscale Colors
   static const Color darkGrey = Color(0xff525252);
