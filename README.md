@@ -18,7 +18,7 @@ Welcome to AMA E-COMMERCE, your one-stop solution for all your shopping needs. D
 
 Our comprehensive e-commerce platform is designed to streamline the shopping and delivery experience. It features two distinct applications, each tailored to meet the needs of our users and delivery personnel.
 
-User App
+## User App
 The User App is a feature-rich application that provides customers with a seamless and intuitive shopping experience. Key features include:
 
 User-Friendly Interface: Easy navigation and a clean layout make browsing and purchasing a breeze.
@@ -28,7 +28,7 @@ Secure Payments: Multiple payment options, including credit cards, digital walle
 Order Tracking: Real-time updates on order status, from purchase to delivery.
 Wishlist and Favorites: Users can save their favorite products for future reference.
 Customer Support: In-app support options, including chat and email, for quick resolution of issues.
-Delivery Man App
+## Delivery Man App
 The Delivery Man App is designed to optimize the efficiency of our delivery personnel, ensuring timely and accurate deliveries. Key features include:
 
 Order Management: Easy access to assigned orders with detailed information on pickup and delivery locations.
