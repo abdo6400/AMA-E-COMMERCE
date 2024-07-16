@@ -5,14 +5,14 @@ import 'package:ama/core/utils/commons.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:quickalert/quickalert.dart';
 import '../../../../../config/routes/app_routes.dart';
-import '../../../../../core/components/default_components/default_appbar.dart';
-import '../../../../../core/utils/app_enums.dart';
-import '../../../../../core/utils/app_images.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_values.dart';
 import '../../bloc/register/register_bloc.dart';
 import '../../components/register_components/register_input_section.dart';
+import '../../components/shared_components/auth_curve.dart';
 import '../../components/shared_components/bottombar.dart';
+import '../../components/shared_components/lang_appbar.dart';
+import '../../components/shared_components/sign_with_google.dart';
 import '../../components/shared_components/topbar.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -32,6 +32,7 @@ class RegisterScreen extends StatelessWidget {
               type: QuickAlertType.error,
               autoCloseDuration: Durations.extralong4,
               showConfirmBtn: false,
+              text: state.message,
               width: AppValues.screenWidth / 4,
               title: AppStrings.someThingWentWrong.tr(context));
         } else if (state is SignUpLoadedState) {
@@ -72,33 +73,34 @@ class RegisterScreen extends StatelessWidget {
                   screenRoute: Routes.informationRoute, arg: state.email));
         }
       },
-      child: Scaffold(
-        appBar: const DefaultAppBar(
-          addLang: true,
-          addLeadingButton: false,
+      child: AuthCurve(
+        widget: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: const LangAppbar(),
+          body: ListView(
+              padding: EdgeInsets.symmetric(
+                  horizontal: AppValues.paddingWidth * 22,
+                  vertical: AppValues.paddingHeight * 15),
+              children: [
+                const TopBar(
+                    title: AppStrings.createAccount,
+                    subTitle: AppStrings.registerSubTitle),
+                SizedBox(
+                  height: AppValues.sizeHeight * 30,
+                ),
+                const RegisterInputSection(),
+                SizedBox(
+                  height: AppValues.sizeHeight * 20,
+                ),
+                const SignWithGoogle()
+              ]),
+          bottomNavigationBar: BottomBar(
+            firstTitle: AppStrings.haveAnAccount,
+            secondTitle: AppStrings.login,
+            function: () =>
+                context.navigateAndFinish(screenRoute: Routes.loginRoute),
+          ),
         ),
-        body: ListView(
-            padding:
-                EdgeInsets.symmetric(horizontal: AppValues.paddingWidth * 22),
-            children: [
-              const TopBar(
-                  title: AppStrings.createAccount,
-                  subTitle: AppStrings.reigsterSubTitle),
-              SizedBox(
-                height: AppValues.sizeHeight * 30,
-              ),
-              const RegisterInputSection(),
-              SizedBox(
-                height: AppValues.sizeHeight * 30,
-              ),
-              BottomBar(
-                firstTitle: AppStrings.haveAnAccount,
-                secondTitle: AppStrings.login,
-                function: () {
-                  context.navigateAndFinish(screenRoute: Routes.loginRoute);
-                },
-              )
-            ]),
       ),
     ));
   }

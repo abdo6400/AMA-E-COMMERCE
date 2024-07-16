@@ -1,8 +1,6 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ama/config/locale/app_localizations.dart';
-import 'package:ama/core/utils/app_colors.dart';
 import 'package:ama/features/authentication/presentation/bloc/cubit/information_cubit.dart';
 import '../../../../../core/components/default_components/default_button.dart';
 import '../../../../../core/components/default_components/default_form_field.dart';
@@ -42,110 +40,79 @@ class _PersonalInformationSectionState
   Widget build(BuildContext context) {
     return Form(
       key: _informationFormKey,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: AppValues.paddingWidth * 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                context.watch<InformationCubit>().profilePic != null
-                    ? CircleAvatar(
-                        radius: AppValues.radius * 60,
-                        backgroundImage: FileImage(File(context
-                            .watch<InformationCubit>()
-                            .profilePic!
-                            .path)),
-                      )
-                    : CircleAvatar(
-                        radius: AppValues.radius * 60,
-                        backgroundColor: AppColors.lightGrey,
-                        child: Icon(
-                          Icons.person_2_outlined,
-                          size: AppValues.font * 30,
-                          color: AppColors.blueLight,
-                        ),
-                      ),
-                Positioned(
-                  bottom: -10,
-                  right: 0,
-                  child: GestureDetector(
-                      onTap: () async {
-                        context.read<InformationCubit>().pikeImage(context);
-                      },
-                      child: CircleAvatar(
-                          backgroundColor: AppColors.lightGrey.withOpacity(0.7),
-                          radius: AppValues.radius * 20,
-                          child: Icon(
-                            Icons.edit,
-                            color: AppColors.primary,
-                            size: AppValues.font * 25,
-                          ))),
-                )
-              ],
-            ),
-            SizedBox(
-              height: AppValues.sizeHeight * 20,
-            ),
-            DefaultTextFormField(
-                controller: _name,
-                type: TextInputType.name,
-                prefix: Icons.person,
-                validate: (value) => CustomValidationHandler.isValidName(value!)
-                    .translateWithNullSafetyString(context),
-                label: AppStrings.name),
-            SizedBox(
-              height: AppValues.sizeHeight * 20,
-            ),
-            DefaultTextFormField(
-                controller: _phoneNumber,
-                type: TextInputType.phone,
-                prefix: Icons.phone,
-                validate: (value) =>
-                    CustomValidationHandler.isValidPhoneNumber(value!)
-                        .translateWithNullSafetyString(context),
-                label: AppStrings.phoneNumber),
-            SizedBox(
-              height: AppValues.sizeHeight * 20,
-            ),
-            PasswordInput(
-              controller: _password,
-              title: AppStrings.password,
-            ),
-            SizedBox(
-              height: AppValues.sizeHeight * 20,
-            ),
-            PasswordInput(
-              controller: _password,
-              confirmPassword: _confirmPassword,
-              title: AppStrings.confirmPassword,
-            ),
-            SizedBox(
-              height: AppValues.sizeHeight * 20,
-            ),
-            DefaultButton(
-              text: AppStrings.signUp,
-              onPressed: () {
-                if (_informationFormKey.currentState!.validate()) {
-                  context.read<RegisterBloc>().add(SignUpEvent(
-                        image: context.read<InformationCubit>().profilePic,
-                        name: _name.text,
-                        phone: _phoneNumber.text,
-                        email: widget.email,
-                        password: _password.text,
-                        confirmPassword: _confirmPassword.text,
-                      ));
-                }
-              },
-              margin:
-                  EdgeInsets.symmetric(horizontal: AppValues.marginWidth * 60),
-              padding: EdgeInsets.symmetric(
-                  horizontal: AppValues.paddingWidth * 28,
-                  vertical: AppValues.paddingHeight * 14),
-            ),
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          DefaultTextFormField(
+            controller: null,
+            type: TextInputType.emailAddress,
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            color: Theme.of(context).cardColor,
+            hint: widget.email,
+            suffix: Icons.email_outlined,
+            textColor: Theme.of(context).cardColor,
+            contentPadding: EdgeInsets.symmetric(
+                horizontal: AppValues.paddingWidth * 20,
+                vertical: AppValues.paddingHeight * 6),
+            readOnly: true,
+          ),
+          SizedBox(
+            height: AppValues.sizeHeight * 15,
+          ),
+          DefaultTextFormField(
+              controller: _name,
+              type: TextInputType.name,
+              prefix: Icons.person,
+              validate: (value) => CustomValidationHandler.isValidName(value!)
+                  .translateWithNullSafetyString(context),
+              label: AppStrings.name),
+          SizedBox(
+            height: AppValues.sizeHeight * 15,
+          ),
+          DefaultTextFormField(
+              controller: _phoneNumber,
+              type: TextInputType.phone,
+              prefix: Icons.phone,
+              validate: (value) =>
+                  CustomValidationHandler.isValidPhoneNumber(value!)
+                      .translateWithNullSafetyString(context),
+              label: AppStrings.phoneNumber),
+          SizedBox(
+            height: AppValues.sizeHeight * 15,
+          ),
+          PasswordInput(
+            controller: _password,
+            title: AppStrings.password,
+          ),
+          SizedBox(
+            height: AppValues.sizeHeight * 15,
+          ),
+          PasswordInput(
+            controller: _password,
+            confirmPassword: _confirmPassword,
+            title: AppStrings.confirmPassword,
+          ),
+          SizedBox(
+            height: AppValues.sizeHeight * 15,
+          ),
+          DefaultButton(
+            text: AppStrings.signUp,
+            onPressed: () {
+              if (_informationFormKey.currentState!.validate()) {
+                context.read<RegisterBloc>().add(SignUpEvent(
+                      image: context.read<InformationCubit>().profilePic,
+                      name: _name.text,
+                      phone: _phoneNumber.text,
+                      email: widget.email,
+                      password: _password.text,
+                      confirmPassword: _confirmPassword.text,
+                    ));
+              }
+            },
+            margin:
+                EdgeInsets.symmetric(horizontal: AppValues.marginWidth * 30),
+          ),
+        ],
       ),
     );
   }

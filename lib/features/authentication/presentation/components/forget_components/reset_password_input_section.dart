@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/components/default_components/default_button.dart';
+
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_values.dart';
 import '../../bloc/forget_password/forget_password_bloc.dart';
@@ -26,6 +27,7 @@ class _ResetPasswordInputSectionState extends State<ResetPasswordInputSection> {
     _confirmPassword.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -40,6 +42,9 @@ class _ResetPasswordInputSectionState extends State<ResetPasswordInputSection> {
               title: AppStrings.password,
               confirmPassword: null,
             ),
+            SizedBox(
+              height: AppValues.sizeHeight * 20,
+            ),
             PasswordInput(
               controller: _password,
               title: AppStrings.confirmPassword,
@@ -49,13 +54,8 @@ class _ResetPasswordInputSectionState extends State<ResetPasswordInputSection> {
               height: AppValues.sizeHeight * 40,
             ),
             DefaultButton(
-              height: AppValues.sizeHeight * 60,
-              fontSize: AppValues.font * 22,
-              radius: AppValues.font * 20,
-              elevation: 0.5,
-              margin: EdgeInsets.symmetric(
-                horizontal: AppValues.marginWidth * 80,
-              ),
+              margin:
+                  EdgeInsets.symmetric(horizontal: AppValues.marginWidth * 30),
               onPressed: () {
                 if (_resetFormKey.currentState!.validate()) {
                   context.read<ForgetPasswordBloc>().add(ResetPasswordEvent(

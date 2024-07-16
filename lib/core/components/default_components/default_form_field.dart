@@ -1,4 +1,3 @@
-
 import 'package:ama/core/utils/commons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -48,7 +47,7 @@ class DefaultTextFormField extends StatelessWidget {
       this.maxLines = 1,
       this.contentPadding,
       this.textColor,
-      this.hintColor = AppColors.grey,
+      this.hintColor = AppColors.hintColor,
       this.color,
       this.backgroundColor,
       this.radius = 16,
@@ -57,11 +56,11 @@ class DefaultTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  
     return TextFormField(
       inputFormatters: inputFormatters,
       maxLines: maxLines,
       cursorColor: AppColors.primary,
-      
       controller: controller,
       keyboardType: type,
       obscureText: isPassword,
@@ -77,6 +76,8 @@ class DefaultTextFormField extends StatelessWidget {
           fontWeight: FontWeight.w400,
           color: textColor ?? AppColors.black),
       decoration: InputDecoration(
+        fillColor: backgroundColor ?? AppColors.white,
+        filled: backgroundColor != null,
         prefixIconColor: AppColors.black,
         enabledBorder: UnderlineInputBorder(
           borderRadius: BorderRadius.circular(radius!),
@@ -87,7 +88,6 @@ class DefaultTextFormField extends StatelessWidget {
             EdgeInsets.symmetric(vertical: AppValues.paddingHeight * 6),
         errorBorder: UnderlineInputBorder(
           borderRadius: BorderRadius.circular(radius!),
-          borderSide: BorderSide(color: AppColors.error),
         ),
         focusedBorder: UnderlineInputBorder(
           borderRadius: BorderRadius.circular(radius!),
@@ -103,19 +103,20 @@ class DefaultTextFormField extends StatelessWidget {
         labelStyle: Theme.of(context)
             .textTheme
             .titleMedium!
-            .copyWith(color: textColor ?? AppColors.hintColor.withOpacity(0.7)),
-        hintStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-            fontWeight: FontWeight.w800,
-            color: textColor ?? AppColors.hintColor),
-        hintText: hint?.tr(context),
+            .copyWith(color: textColor ?? Theme.of(context).hintColor),
+        hintStyle: Theme.of(context)
+            .textTheme
+            .titleMedium!
+            .copyWith(color: textColor ?? Theme.of(context).hintColor),
+        hintText: hint?.translateWithNullSafetyString(context)??hint,
         floatingLabelStyle: Theme.of(context)
             .textTheme
             .titleMedium!
-            .copyWith(color: AppColors.blueLight),
+            .copyWith(color: Theme.of(context).primaryColor),
         prefixIcon: prefix != null
             ? Icon(
                 prefix,
-                color: textColor ?? AppColors.blueLight,
+                color: textColor ?? Theme.of(context).hintColor,
               )
             : null,
         suffixIcon: suffix != null
@@ -123,7 +124,7 @@ class DefaultTextFormField extends StatelessWidget {
                 onTap: suffixPressed,
                 child: Icon(
                   suffix,
-                  color: textColor ?? AppColors.hintColor,
+                  color: textColor ?? Theme.of(context).hintColor,
                   size: AppValues.font * 28,
                 ),
               )

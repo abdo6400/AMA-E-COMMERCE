@@ -12,8 +12,6 @@ import '../../../config/database/cache/cache_consumer.dart';
 import '../../bloc/global_cubit/locale_cubit.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_enums.dart';
-import '../default_components/default_appbar.dart';
-
 import '../../../../config/routes/app_routes.dart';
 
 class OnBoardingScreen extends StatelessWidget {
@@ -99,14 +97,18 @@ class OnBoardingScreen extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.displayLarge,
                         ),
-                        image: Image.asset(
-                          e.image!,
-                          width: double.infinity,
-                          height: double.infinity,
-                          fit: BoxFit.fill,
+                        image: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: AppValues.paddingWidth * 10),
+                          child: Image.asset(
+                            e.image!,
+                            width: double.infinity,
+                            height: double.infinity,
+                            fit: BoxFit.fill,
+                          ),
                         ),
                         decoration: const PageDecoration(
-                            imageFlex: 1, fullScreen: false),
+                            imageFlex: 2, fullScreen: false),
                         bodyWidget: Text(
                           e.subtitle!.tr(context),
                           textAlign: TextAlign.center,
@@ -115,13 +117,39 @@ class OnBoardingScreen extends StatelessWidget {
                       ))
                   .toList(),
               showSkipButton: false,
-              next: Text(
-                AppStrings.next.tr(context),
-                style: Theme.of(context).textTheme.titleMedium,
+              next: Card(
+                margin: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppValues.radius * 5),
+                    side: BorderSide(color: Theme.of(context).primaryColor)),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: AppValues.paddingHeight * 5,
+                      horizontal: AppValues.paddingWidth * 15),
+                  child: Text(
+                    AppStrings.next.tr(context),
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ),
               ),
-              done: Text(
-                AppStrings.getStarted.tr(context),
-                style: Theme.of(context).textTheme.titleMedium,
+              done: Card(
+                color: Theme.of(context).primaryColor,
+                margin: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppValues.radius * 10),
+                    side: BorderSide(color: Theme.of(context).primaryColor)),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: AppValues.paddingHeight * 5,
+                      horizontal: AppValues.paddingWidth * 10),
+                  child: Text(
+                    AppStrings.getStarted.tr(context),
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium!
+                        .copyWith(color: Theme.of(context).cardColor),
+                  ),
+                ),
               ),
               dotsDecorator: const DotsDecorator(),
               onDone: () {

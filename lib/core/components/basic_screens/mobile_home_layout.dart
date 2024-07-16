@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_values.dart';
-import '../default_components/default_appbar.dart';
 
 class MobileHomeLayout extends StatelessWidget {
   const MobileHomeLayout({super.key, required this.screens});
@@ -16,13 +15,13 @@ class MobileHomeLayout extends StatelessWidget {
       context,
       screens: List<Widget>.from(screens.map((e) => SafeArea(
             child: Scaffold(
-              appBar: DefaultAppBar(
+              /* appBar: DefaultAppBar(
                 addLang: false,
                 addLeadingButton: false,
                 appBarText: e["title"].toString(),
                 backgroundColor: AppColors.white,
                 elevation: 0.5,
-              ),
+              ),*/
               body: e["screen"],
             ),
           ))),

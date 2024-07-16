@@ -42,13 +42,8 @@ class _ForgetInputSectionState extends State<ForgetInputSection> {
             height: AppValues.sizeHeight * 40,
           ),
           DefaultButton(
-            height: AppValues.sizeHeight * 60,
-            fontSize: AppValues.font * 22,
-            radius: AppValues.font * 20,
-            elevation: 0.5,
-            margin: EdgeInsets.symmetric(
-              horizontal: AppValues.marginWidth * 80,
-            ),
+            margin:
+                EdgeInsets.symmetric(horizontal: AppValues.marginWidth * 30),
             onPressed: () {
               if (_forgetFormKey.currentState!.validate()) {
                 context

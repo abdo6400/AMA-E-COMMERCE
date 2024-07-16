@@ -24,101 +24,103 @@ class _OtpBottomBarState extends State<OtpBottomBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: AppValues.sizeHeight * 190,
-        ),
-        Card(
-          elevation: 0,
-          color: AppColors.white,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppValues.radius * 100)),
-          margin: EdgeInsets.symmetric(horizontal: AppValues.marginWidth * 80),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: AppValues.paddingWidth * 20,
-                vertical: AppValues.paddingHeight * 12),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(
-                  Icons.timer_outlined,
-                  color: AppColors.blueLight,
-                ),
-                SizedBox(
-                  width: AppValues.sizeWidth * 12,
-                ),
-                BlocBuilder<WorkoutCubit, TimerState>(
-                    builder: (context, state) {
-                  if (state is WorkoutInitial) {
-                    return Text(
-                      AppStrings.codeExpired.tr(context).toString(),
-                      style: Theme.of(context).textTheme.titleSmall,
-                    );
-                  }
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: AppValues.paddingWidth * 20,
+          vertical: AppValues.paddingHeight * 20),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Card(
+            elevation: 0,
+            color: AppColors.white,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppValues.radius * 100)),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: AppValues.paddingWidth * 20,
+                  vertical: AppValues.paddingHeight * 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(
+                    Icons.timer_outlined,
+                    color: AppColors.blueLight,
+                  ),
+                  SizedBox(
+                    width: AppValues.sizeWidth * 12,
+                  ),
+                  BlocBuilder<WorkoutCubit, TimerState>(
+                      builder: (context, state) {
+                    if (state is WorkoutInitial) {
+                      return Text(
+                        AppStrings.codeExpired.tr(context).toString(),
+                        style: Theme.of(context).textTheme.titleSmall,
+                      );
+                    }
 
-                  if (state is WorkoutInProgress) {
-                    return Text(
-                      state.elapsed.toString(),
-                      style: Theme.of(context).textTheme.titleSmall,
-                    );
-                  }
+                    if (state is WorkoutInProgress) {
+                      return Text(
+                        state.elapsed.toString(),
+                        style: Theme.of(context).textTheme.titleSmall,
+                      );
+                    }
 
-                  return Container();
-                })
-              ],
+                    return Container();
+                  })
+                ],
+              ),
             ),
           ),
-        ),
-        SizedBox(
-          height: AppValues.sizeHeight * 40,
-        ),
-        Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(AppStrings.didNotReciveCode.tr(context),
-                  style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                      fontSize: AppValues.font * 14,
-                      fontWeight: FontWeight.bold)),
-              BlocBuilder<WorkoutCubit, TimerState>(
-                builder: (context, state) {
-                  return TextButton(
-                    onPressed: state is WorkoutInProgress
-                        ? null
-                        : () {
-                            widget.function();
-                          },
-                    child: Column(
-                      children: [
-                        Text(AppStrings.resendCodeTo.tr(context),
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelLarge!
-                                .copyWith(
-                                    color: state is WorkoutInProgress
-                                        ? AppColors.hintColor
-                                        : AppColors.primary,
-                                    fontSize: AppValues.font * 14,
-                                    fontWeight: FontWeight.bold)),
-                        Text(widget.email,
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelLarge!
-                                .copyWith(
-                                    color: state is WorkoutInProgress
-                                        ? AppColors.hintColor
-                                        : AppColors.primary,
-                                    fontSize: AppValues.font * 14,
-                                    fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-                  );
-                },
-              )
-            ])
-      ],
+          SizedBox(
+            height: AppValues.sizeHeight * 20,
+          ),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(AppStrings.didNotReciveCode.tr(context),
+                    style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                        fontSize: AppValues.font * 14,
+                        fontWeight: FontWeight.bold)),
+                BlocBuilder<WorkoutCubit, TimerState>(
+                  builder: (context, state) {
+                    return TextButton(
+                      onPressed: state is WorkoutInProgress
+                          ? null
+                          : () {
+                              widget.function();
+                            },
+                      child: Column(
+                        children: [
+                          Text(AppStrings.resendCodeTo.tr(context),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .copyWith(
+                                      color: state is WorkoutInProgress
+                                          ? AppColors.hintColor
+                                          : AppColors.primary,
+                                      fontSize: AppValues.font * 14,
+                                      fontWeight: FontWeight.bold)),
+                          Text(widget.email,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .copyWith(
+                                      color: state is WorkoutInProgress
+                                          ? AppColors.hintColor
+                                          : AppColors.primary,
+                                      fontSize: AppValues.font * 14,
+                                      fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                    );
+                  },
+                )
+              ])
+        ],
+      ),
     );
   }
 }

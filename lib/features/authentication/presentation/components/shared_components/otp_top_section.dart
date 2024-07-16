@@ -14,11 +14,9 @@ class OtpTopSection extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          AppStrings.enterTheCode.tr(context),
-          textAlign: TextAlign.start,
-          style: Theme.of(context).textTheme.titleLarge!
-        ),
+        Text(AppStrings.enterTheCode.tr(context),
+            textAlign: TextAlign.start,
+            style: Theme.of(context).textTheme.titleLarge!),
         SizedBox(
           height: AppValues.sizeHeight * 12,
         ),
@@ -41,7 +39,7 @@ class OtpTopSection extends StatelessWidget {
               .copyWith(color: AppColors.hintColor),
         ),
         SizedBox(
-          height: AppValues.sizeHeight * 40,
+          height: AppValues.sizeHeight * 15,
         ),
         Text(
           email,

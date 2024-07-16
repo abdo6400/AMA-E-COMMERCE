@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ama/config/locale/app_localizations.dart';
 import '../../../../../core/utils/app_colors.dart';
+import '../../../../../core/utils/app_images.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_values.dart';
 
@@ -15,14 +16,27 @@ class ForgetTopSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Material(
+                elevation: 1,
+                type: MaterialType.circle,
+                color: Theme.of(context).cardColor,
+                child: CircleAvatar(
+                  radius: AppValues.radius * 40,
+                  backgroundImage: const AssetImage(AppImages.appLogo),
+                ),
+              ),
+            ],
+          ),
           SizedBox(
             height: AppValues.sizeHeight * 28,
           ),
           Text(
             AppStrings.forgetPassword.tr(context),
             textAlign: TextAlign.start,
-            style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                fontSize: AppValues.font * 28, color: AppColors.white),
+            style: Theme.of(context).textTheme.titleLarge!,
           ),
           SizedBox(
             height: AppValues.sizeHeight * 28,

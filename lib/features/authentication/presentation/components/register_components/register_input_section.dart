@@ -23,6 +23,7 @@ class _RegisterInputSectionState extends State<RegisterInputSection> {
     _email.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -40,9 +41,8 @@ class _RegisterInputSectionState extends State<RegisterInputSection> {
             height: AppValues.sizeHeight * 24,
           ),
           DefaultButton(
-            height: AppValues.sizeHeight * 60,
-            margin:
-                EdgeInsets.symmetric(horizontal: AppValues.marginWidth * 45),
+          margin:
+                  EdgeInsets.symmetric(horizontal: AppValues.marginWidth * 30),
             onPressed: () {
               if (_registerFormKey.currentState!.validate()) {
                 BlocProvider.of<RegisterBloc>(context)

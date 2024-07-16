@@ -109,6 +109,11 @@ class AppStrings {
   static const success = "success";
   static const enterEmailThat = "enterEmailThat";
   static const createAccount = "createAccount";
-  static const reigsterSubTitle = "reigsterSubTitle";
+  static const registerSubTitle = "registerSubTitle";
   static const haveAnAccount = "haveAnAccount";
+  static const continueWithGoogle = "continueWithGoogle";
+  static const forgetPasswordStep1 = "forgetPasswordStep1";
+  static const forgetPasswordStep2 = "forgetPasswordStep2";
+  static const forgetPasswordStep3 = "forgetPasswordStep3";
+  static const forgetPasswordInstructions = "forgetPasswordInstructions";
 }

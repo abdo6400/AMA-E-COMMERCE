@@ -9,17 +9,16 @@ import '../../utils/app_enums.dart';
 part 'locale_state.dart';
 
 class LocaleCubit extends Cubit<LocaleState> {
-  LocaleCubit()
-      : super(const ChangeLocaleState(Locale(AppStrings.arabicCode)));
+  LocaleCubit() : super(const ChangeLocaleState(Locale(AppStrings.arabicCode)));
 
   String currentLangCode = AppStrings.arabicCode;
 
   Future<void> getSavedLang() async {
-    final currentLangCode = await sl<CacheConsumer>()
-            .getData(key: MySharedKeys.language.name) ??
-        AppStrings.arabicCode;
-    await sl<CacheConsumer>().saveData(
-        key: MySharedKeys.language.name, value: AppStrings.arabicCode);
+    final currentLangCode =
+        await sl<CacheConsumer>().getData(key: MySharedKeys.language.name) ??
+            AppStrings.arabicCode;
+    await sl<CacheConsumer>()
+        .saveData(key: MySharedKeys.language.name, value: currentLangCode);
     emit(ChangeLocaleState(Locale(currentLangCode)));
   }
 

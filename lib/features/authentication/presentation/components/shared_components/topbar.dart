@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ama/config/locale/app_localizations.dart';
 import 'package:ama/core/utils/app_values.dart';
-
-import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_images.dart';
-import '../../../../../core/utils/app_strings.dart';
 
 class TopBar extends StatelessWidget {
   final String title;
@@ -14,71 +10,49 @@ class TopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const TitleAppWidget(),
-        SizedBox(
-          width: ScreenUtil().screenWidth,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
+    return SizedBox(
+      width: AppValues.screenWidth,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(title.tr(context),
-                  textAlign: TextAlign.start,
-                  style: Theme.of(context).textTheme.displayLarge),
-              SizedBox(
-                height: AppValues.sizeHeight * 12,
+              Flexible(
+                flex: 1,
+                child: Text(title.tr(context),
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          color: Theme.of(context).cardColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: AppValues.font * 25,
+                        )),
               ),
-              Text(
-                subTitle.tr(context),
-                textAlign: TextAlign.start,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall!
-                    .copyWith(color: AppColors.hintColor),
+              Flexible(
+                flex: 1,
+                child: Material(
+                  elevation: 1,
+                  type: MaterialType.circle,
+                  color: Theme.of(context).cardColor,
+                  child: CircleAvatar(
+                    radius: AppValues.radius * 40,
+                    backgroundImage: const AssetImage(AppImages.appLogo),
+                  ),
+                ),
               ),
             ],
           ),
-        ),
-      ],
-    );
-  }
-}
-
-class TitleAppWidget extends StatelessWidget {
-  const TitleAppWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppValues.paddingWidth * 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        textDirection: TextDirection.ltr,
-        children: [
-          Image.asset(
-            AppImages.appLogo,
-            height: AppValues.sizeHeight * 100,
+          SizedBox(
+            height: AppValues.sizeHeight * 35,
           ),
-          RichText(
-              text: TextSpan(children: [
-            TextSpan(
-              text: AppStrings.appName.tr(context).split("&")[0],
-              style: Theme.of(context).textTheme.displayLarge!,
-            ),
-            TextSpan(
-              text: "&",
-              style: Theme.of(context)
-                  .textTheme
-                  .displayLarge!
-                  .copyWith(color: AppColors.primary),
-            ),
-            TextSpan(
-              text: AppStrings.appName.tr(context).split("&")[1],
-              style: Theme.of(context).textTheme.displayLarge!,
-            ),
-          ])),
+          Text(
+            subTitle.tr(context),
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
         ],
       ),
     );

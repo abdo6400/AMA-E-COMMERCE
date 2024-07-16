@@ -4,7 +4,7 @@ const iconsPath = "assets/icons";
 class AppImages {
   //main images
   static const String appLogo = "$iconsPath/appicon.png";
-  static const String googleLogo = "$iconsPath/google.png";
+  static const String googleLogo = "$iconsPath/gmail.png";
   static const facebookLogo = "$iconsPath/facebook.png";
   static const splashOnboardingBackground = "$imagesPath/splash_background.png";
   static const onBoardingBackground1 = "$imagesPath/onboarding_img1.png";
