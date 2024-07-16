@@ -34,13 +34,13 @@ Welcome to AMA E-COMMERCE, your one-stop solution for all your shopping needs. D
 ## App Screenshots
 
 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;"> 
-    <img src="screenshots/7.png" height="300" width="150" style="margin-right: 10px;"/>
-    <img src="screenshots/4.png" height="300" width="150" style="margin-right: 10px;"/>
-    <img src="screenshots/5.png" height="300" width="150" style="margin-right: 10px;"/>
-    <img src="screenshots/6.png" height="300" width="150" style="margin-right: 10px;"/>
-    <img src="screenshots/1.png" height="300" width="150" style="margin-right: 10px;"/>
-    <img src="screenshots/2.png" height="300" width="150" style="margin-right: 10px;"/>
-    <img src="screenshots/3.png" height="300" width="150" style="margin-right: 10px;"/>
+    <img src="screenshots/4.png" height="300" width="150" style="margin-right: 20px;"/>
+    <img src="screenshots/7.png" height="300" width="150" style="margin-right: 20px;"/>
+    <img src="screenshots/5.png" height="300" width="150" style="margin-right: 20px;"/>
+    <img src="screenshots/6.png" height="300" width="150" style="margin-right: 20px;"/>
+    <img src="screenshots/1.png" height="300" width="150" style="margin-right: 20px;"/>
+    <img src="screenshots/2.png" height="300" width="150" style="margin-right: 20px;"/>
+    <img src="screenshots/3.png" height="300" width="150" style="margin-right: 20px;"/>
 </div>
 
 ---
