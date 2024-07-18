@@ -3,6 +3,8 @@ class AppStrings {
   static const appName = "appName";
   static const englishCode = "en";
   static const arabicCode = "ar";
+   static const arabic  = "العربية";
+  static const english  = "english";
   static const cancel = "cancel";
   static const ok = "ok";
   static const camera = "camera";
@@ -44,7 +46,7 @@ class AppStrings {
   static const onboarding3 = "onboarding3";
   static const onboardingSub3 = "onboardingSub3";
   static const search = "search";
-  static const favorite = "favourite";
+
   static const profile = "profile";
   static const home = "home";
   static const settings = "settings";
@@ -116,4 +118,19 @@ class AppStrings {
   static const forgetPasswordStep2 = "forgetPasswordStep2";
   static const forgetPasswordStep3 = "forgetPasswordStep3";
   static const forgetPasswordInstructions = "forgetPasswordInstructions";
+  static const favourite = "favourite";
+  static const cart = "cart";
+  static const account = "account";
+  static const deleteAccount  = "deleteAccount";
+  static const learnMoreAboutApp  = "learnMoreAboutApp";
+  static const aboutUs  = "aboutUs";
+  static const contactUs  = "contactUs";
+  static const theme  = "theme";
+  static const changeTheme  = "changeTheme";
+  static const profileInformation  = "profileInformation";
+  static const changeAccountInformation    = "changeAccountInformation";
+
+   static const myOrders  = "myOrders";
+
+ static const location  = "location";
 }

@@ -1,34 +1,47 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
+import '../../../features/home/presentation/screens/home_screen.dart';
+import '../../../features/profile/presentation/screens/profile_screen.dart';
 import '../../utils/app_strings.dart';
 import 'mobile_home_layout.dart';
-import 'windows_home_layout.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
   static final List<Map<String, dynamic>> _screens = [
-    {"icon": Icons.home, "title": AppStrings.home, "screen": const Card()},
     {
-      "icon": Icons.receipt,
-      "title": AppStrings.invoices,
+      "icon": Icons.home,
+      "iconBorder": Icons.home_outlined,
+      "title": AppStrings.home,
+      "screen": const HomeScreen()
+    },
+    {
+      "icon": Icons.favorite,
+      "iconBorder": Icons.favorite_border,
+      "title": AppStrings.favourite,
       "screen": const Card()
     },
-    /* {
-      "icon": Icons.search_sharp,
-      "title": AppStrings.search,
-      "screen":  SearchScreen()
-    },*/
-    
-    {"icon": Icons.person, "title": AppStrings.profile, "screen": const Card()},
+    {
+      "icon": Icons.shopping_cart_checkout,
+      "iconBorder": Icons.shopping_cart_checkout_outlined,
+      "title": AppStrings.cart,
+      "screen": const Card()
+    },
+    {
+      "icon": Icons.person,
+      "iconBorder": Icons.person_outline,
+      "title": AppStrings.profile,
+      "screen": const ProfileScreen()
+    },
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Platform.isAndroid || Platform.isIOS
-        ? MobileHomeLayout(screens: _screens)
-        : WindowsHomeLayout(
-            screens: _screens,
-          );
+    return MobileHomeLayout(screens: _screens);
+
+    // Platform.isAndroid || Platform.isIOS
+    //     ? MobileHomeLayout(screens: _screens)
+    //     : WindowsHomeLayout(
+    //         screens: _screens,
+    //       );
   }
 }

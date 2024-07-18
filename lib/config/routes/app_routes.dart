@@ -47,7 +47,7 @@ class AppRoutes {
     switch (routeSettings.name) {
       case Routes.initialRoute:
         return PageTransition(
-            child: const SplashScreen(),
+            child: const MainScreen(),
             type: PageTransitionType.fade,
             settings: routeSettings);
       case Routes.onBoardingRoute:

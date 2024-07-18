@@ -109,5 +109,19 @@
     "forgetPasswordInstructions": "اتبع هذه الخطوات لإعادة تعيين كلمة المرور:",
     "forgetPasswordStep1": "أدخل عنوان البريد الإلكتروني المرتبط بحسابك.",
     "forgetPasswordStep2": "تحقق من بريدك الإلكتروني للحصول على رمز إعادة تعيين كلمة المرور.",
-    "forgetPasswordStep3": "انقر على الرابط واتبع التعليمات للحصول على رمز إعادة التعيين."
+    "forgetPasswordStep3": "انقر على الرابط واتبع التعليمات للحصول على رمز إعادة التعيين.",
+    "favourite": "المفضلة",
+    "cart": "عربة التسوق",
+    "account": "الحساب",
+    "deleteAccount": "حذف الحساب",
+    "learnMoreAboutApp": "تعرف على المزيد عن التطبيق",
+    "aboutUs": "معلومات عنا",
+    "contactUs": "اتصل بنا",
+    "theme": "الثيم",
+    "changeTheme": "تغيير الثيم",
+    "profileInformation": "معلومات الملف الشخصي",
+    "changeAccountInformation": "تغيير معلومات الحساب",
+    "myOrders": "طلباتي",
+    "location": "الموقع",
+    "changeLocation": "تغيير الموقع"
 }

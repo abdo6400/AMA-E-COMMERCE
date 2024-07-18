@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/utils/app_colors.dart';
+import 'widgets_theme/appbar_theme.dart';
 import 'widgets_theme/elevated_button_theme.dart';
 import 'widgets_theme/tab_bar_theme.dart';
 import 'widgets_theme/text_theme.dart';
@@ -26,6 +27,7 @@ class AppTheme {
         hintColor: AppColors.hintColor,
         textTheme: AppTextTheme.lightTextTheme,
         tabBarTheme: AppTapBarTheme.tabBarLightTheme,
+        appBarTheme: AAppBarTheme.appBarLightTheme,
         elevatedButtonTheme: AppElevatedButtonTheme.elevatedButtonLightTheme);
   }
 

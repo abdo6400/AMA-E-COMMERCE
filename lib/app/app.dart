@@ -1,3 +1,5 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,29 +39,38 @@ class UserApp extends StatelessWidget {
               return previousState != currentState;
             }, builder: (context, state) {
               return GlobalLoaderOverlay(
-                child: ScreenUtilInit(
-                    designSize: AppValues.getPlatformSize(),
-                    minTextAdapt: true,
-                    splitScreenMode: true,
-                    builder: (context, _) {
-                      return MaterialApp(
-                        title: AppStrings.appName,
-                        debugShowCheckedModeBanner: false,
-                        themeMode: mode.themeMode,
-                        theme: AppTheme.getApplicationLightTheme(),
-                        darkTheme: AppTheme.getApplicationDarkTheme(),
-                        navigatorKey: UserApp.navigatorKey,
-                        onGenerateRoute: AppRoutes.onGenerateRoute,
-                        locale: state.locale,
-                        navigatorObservers: [sl<RouteLogger>()],
-                        supportedLocales:
-                            AppLocalizationsSetup.supportedLocales,
-                        localeResolutionCallback:
-                            AppLocalizationsSetup.localeResolutionCallback,
-                        localizationsDelegates:
-                            AppLocalizationsSetup.localizationsDelegates,
-                      );
-                    }),
+                child: DevicePreview(
+                  enabled: kIsWeb,
+                  builder: (context) => ScreenUtilInit(
+                      ensureScreenSize: true,
+                      designSize: AppValues.getPlatformSize(),
+                      minTextAdapt: true,
+                      splitScreenMode: true,
+                      useInheritedMediaQuery: true,
+                      builder: (context, _) {
+                        ScreenUtil.configure(
+                          data: MediaQuery.of(context),
+                        );
+                        return MaterialApp(
+                          title: AppStrings.appName,
+                          builder: DevicePreview.appBuilder,
+                          debugShowCheckedModeBanner: false,
+                          themeMode: mode.themeMode,
+                          theme: AppTheme.getApplicationLightTheme(),
+                          darkTheme: AppTheme.getApplicationDarkTheme(),
+                          navigatorKey: UserApp.navigatorKey,
+                          onGenerateRoute: AppRoutes.onGenerateRoute,
+                          locale: state.locale,
+                          navigatorObservers: [sl<RouteLogger>()],
+                          supportedLocales:
+                              AppLocalizationsSetup.supportedLocales,
+                          localeResolutionCallback:
+                              AppLocalizationsSetup.localeResolutionCallback,
+                          localizationsDelegates:
+                              AppLocalizationsSetup.localizationsDelegates,
+                        );
+                      }),
+                ),
               );
             });
           },
