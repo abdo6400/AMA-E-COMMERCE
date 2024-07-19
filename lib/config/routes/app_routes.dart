@@ -1,5 +1,8 @@
 import 'package:ama/core/components/basic_screens/onboarding_screen.dart';
 import 'package:ama/core/components/basic_screens/splash_screen.dart';
+import 'package:ama/features/ama_chat/presentation/screens/ama_chat_screen.dart';
+import 'package:ama/features/profile/presentation/screens/languages_screen.dart';
+import 'package:ama/features/profile/presentation/screens/theme_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
@@ -22,8 +25,12 @@ import '../../features/authentication/presentation/screens/register/user_informa
 class Routes {
   //basic routes
   static const String initialRoute = '/';
+  static const String themeRoute = "/themeRoute";
+  static const String languagesRoute = "/languagesRoute";
+  static const String amaChatRoute = "/amaChatRoute";
   static const String mapRoute = '/mapRoute';
   static const String onBoardingRoute = "/onBoardingRoute";
+
   static const String loginRoute = "/loginRoute";
   static const String registerRoute = "/registerRoute";
   static const String informationRoute = "/informationRoute";
@@ -32,10 +39,8 @@ class Routes {
   static const String forgetPasswordRoute = "/forgetPasswordRoute";
   static const String resetPasswordRoute = "/resetPasswordRoute";
   static const String mainRoute = "/mainRoute";
-
   static const String changePasswordRoute = "/changePasswordRoute";
   static const String editProfileRoute = "/editProfileRoute";
-
   static const String estateRoute = "/estateRoute";
   static const String topLocationsRoute = "/topLocationsRoute";
   static const String topAgentsRoute = "/topAgentsRoute";
@@ -49,6 +54,21 @@ class AppRoutes {
         return PageTransition(
             child: const MainScreen(),
             type: PageTransitionType.fade,
+            settings: routeSettings);
+      case Routes.themeRoute:
+        return PageTransition(
+            child: const ThemeScreen(),
+            type: PageTransitionType.bottomToTop,
+            settings: routeSettings);
+      case Routes.amaChatRoute:
+        return PageTransition(
+            child: const AmaChatScreen(),
+            type: PageTransitionType.topToBottom,
+            settings: routeSettings);
+      case Routes.languagesRoute:
+        return PageTransition(
+            child: const LanguagesScreen(),
+            type: PageTransitionType.bottomToTop,
             settings: routeSettings);
       case Routes.onBoardingRoute:
         return PageTransition(

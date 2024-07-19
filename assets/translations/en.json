@@ -122,5 +122,15 @@
   "changeAccountInformation": "Change Account Information",
   "myOrders": "My Orders",
   "location": "Location",
-  "changeLocation": "Change Location"
+  "changeLocation": "Change Location",
+  "themes": "Themes",
+  "languages": "Languages",
+  "darkTheme": "Dark Theme",
+  "lightTheme": "Light Theme",
+  "automaticTheme": "Automatic Theme",
+  "bestOffers": "Best Offers",
+  "categories": "Categories",
+  "searchForProducts": "Search for Products",
+  "bestSeller": "Best Seller",
+  "viewAll": "View All"
 }

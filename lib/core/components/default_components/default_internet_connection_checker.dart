@@ -23,10 +23,10 @@ class _CustomInternetConnectionCheckerState
     return OfflineBuilder(
       connectivityBuilder: (
         BuildContext context,
-        ConnectivityResult connectivity,
+        List<ConnectivityResult> connectivity,
         Widget child,
       ) {
-        if (connectivity == ConnectivityResult.none) {
+        if (connectivity.contains(ConnectivityResult.none)) {
           return const _NoInternet();
         } else {
           return child;

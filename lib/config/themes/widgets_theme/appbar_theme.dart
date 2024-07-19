@@ -5,21 +5,20 @@ import 'package:flutter/material.dart';
 
 class AAppBarTheme {
   static AppBarTheme appBarLightTheme = AppBarTheme(
-    // color: AppColors.white, // white
-    iconTheme: IconThemeData(
-      color: AppColors.white,
-      size: AppValues.font*25
+    iconTheme: IconThemeData(color: AppColors.black, size: AppValues.font * 25),
+    backgroundColor: AppColors.white,
+    elevation: 0,
+    titleTextStyle: AppTextTheme.lightTextTheme.labelLarge!.copyWith(
+      color: AppColors.black,
     ),
-    backgroundColor: AppColors.primary.withOpacity(0.8),
+  );
+
+  static AppBarTheme appBarDarkTheme = AppBarTheme(
+    iconTheme: IconThemeData(color: AppColors.white, size: AppValues.font * 25),
+    backgroundColor: AppColors.black,
     elevation: 0,
     titleTextStyle: AppTextTheme.lightTextTheme.labelLarge!.copyWith(
       color: AppColors.white,
     ),
-  );
-
-  static AppBarTheme appBarDarkTheme = const AppBarTheme(
-    color: AppColors.black,
-    iconTheme: IconThemeData(color: AppColors.white),
-    elevation: 1,
   );
 }

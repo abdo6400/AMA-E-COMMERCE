@@ -123,5 +123,15 @@
     "changeAccountInformation": "تغيير معلومات الحساب",
     "myOrders": "طلباتي",
     "location": "الموقع",
-    "changeLocation": "تغيير الموقع"
+    "changeLocation": "تغيير الموقع",
+    "themes": "الثيمات",
+    "languages": "اللغات",
+    "darkTheme": "الثيم الداكن",
+    "lightTheme": "الثيم الفاتح",
+    "automaticTheme": "الثيم التلقائي",
+    "bestOffers": "اخر العروض",
+    "categories": "التصنيفات",
+    "searchForProducts": "البحث عن منتجات",
+    "bestSeller": "الاكثر مبيعا",
+    "viewAll": "عرض الكل"
 }

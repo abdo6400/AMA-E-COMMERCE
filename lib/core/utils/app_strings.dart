@@ -3,8 +3,8 @@ class AppStrings {
   static const appName = "appName";
   static const englishCode = "en";
   static const arabicCode = "ar";
-   static const arabic  = "العربية";
-  static const english  = "english";
+  static const arabic = "العربية";
+  static const english = "english";
   static const cancel = "cancel";
   static const ok = "ok";
   static const camera = "camera";
@@ -121,16 +121,24 @@ class AppStrings {
   static const favourite = "favourite";
   static const cart = "cart";
   static const account = "account";
-  static const deleteAccount  = "deleteAccount";
-  static const learnMoreAboutApp  = "learnMoreAboutApp";
-  static const aboutUs  = "aboutUs";
-  static const contactUs  = "contactUs";
-  static const theme  = "theme";
-  static const changeTheme  = "changeTheme";
-  static const profileInformation  = "profileInformation";
-  static const changeAccountInformation    = "changeAccountInformation";
-
-   static const myOrders  = "myOrders";
-
- static const location  = "location";
+  static const deleteAccount = "deleteAccount";
+  static const learnMoreAboutApp = "learnMoreAboutApp";
+  static const aboutUs = "aboutUs";
+  static const contactUs = "contactUs";
+  static const theme = "theme";
+  static const changeTheme = "changeTheme";
+  static const profileInformation = "profileInformation";
+  static const changeAccountInformation = "changeAccountInformation";
+  static const myOrders = "myOrders";
+  static const location = "location";
+  static const themes = "themes";
+  static const languages = "languages";
+  static const darkTheme = "darkTheme";
+  static const lightTheme = "lightTheme";
+  static const automaticTheme = "automaticTheme";
+  static const bestOffers = "bestOffers";
+  static const categories = "categories";
+  static const searchForProducts = "searchForProducts";
+  static const bestSeller = "bestSeller";
+  static const viewAll = "viewAll";
 }

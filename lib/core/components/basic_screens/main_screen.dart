@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '../../../features/home/presentation/screens/home_screen.dart';
 import '../../../features/profile/presentation/screens/profile_screen.dart';
@@ -37,7 +39,6 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MobileHomeLayout(screens: _screens);
-
     // Platform.isAndroid || Platform.isIOS
     //     ? MobileHomeLayout(screens: _screens)
     //     : WindowsHomeLayout(

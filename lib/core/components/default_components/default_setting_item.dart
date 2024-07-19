@@ -1,4 +1,3 @@
-import 'package:ama/core/utils/app_colors.dart';
 import 'package:ama/core/utils/app_values.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +20,7 @@ class SettingsGroup extends StatelessWidget {
       children: [
         (settingsGroupTitle != null)
             ? Card(
+                elevation: 0.5,
                 child: Container(
                   width: AppValues.screenWidth,
                   padding: EdgeInsets.symmetric(
@@ -30,7 +30,7 @@ class SettingsGroup extends StatelessWidget {
                     children: [
                       Icon(
                         icon,
-                        color: AppColors.hintColor,
+                        color: Theme.of(context).hintColor,
                       ),
                       SizedBox(
                         width: AppValues.paddingWidth * 10,
@@ -67,7 +67,7 @@ class SettingsGroup extends StatelessWidget {
 }
 
 class SettingsItem extends StatelessWidget {
-  final Icon icon;
+  final Icon? icon;
   final String title;
   final TextStyle? titleStyle;
   final String? subtitle;
@@ -81,7 +81,7 @@ class SettingsItem extends StatelessWidget {
 
   const SettingsItem(
       {super.key,
-      required this.icon,
+       this.icon,
       required this.title,
       this.titleStyle,
       this.subtitle,
@@ -102,7 +102,7 @@ class SettingsItem extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppValues.radius * 15),
         ),
-        leading: Material(
+        leading:icon!=null? Material(
           elevation: 1,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppValues.radius * 10)),
@@ -111,7 +111,7 @@ class SettingsItem extends StatelessWidget {
             padding: EdgeInsets.all(AppValues.radius * 5),
             child: icon,
           ),
-        ),
+        ):null,
         title: Text(
           title,
           style: titleStyle,
