@@ -132,5 +132,16 @@
   "categories": "Categories",
   "searchForProducts": "Search for Products",
   "bestSeller": "Best Seller",
-  "viewAll": "View All"
+  "viewAll": "View All",
+  "available": "Available",
+  "outOffStock": "Out Of Stock",
+  "off": "OFF",
+  "notifcations": "Notifications",
+  "chatWithAi": "Chat With AMA Bot",
+  "chatWithUs": "Chat With Us",
+  "notificationsSettings": "Notifications Settings",
+  "checkOut": "Check Out",
+  "noNotifications": "No Notifications",
+  "noNotificationsAvailable": "No Notifications Available",
+  "noNotificationsAvailableSub": "You have no notifications. Check back later"
 }

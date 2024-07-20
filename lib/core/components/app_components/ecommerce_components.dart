@@ -16,80 +16,6 @@ class EcommerceElement extends StatelessWidget {
     );
   }
 
-  /// Slider with assets images
-  factory EcommerceElement.sliderAssets({
-    ///
-    /// [slidersList] is required
-    ///
-    /// slidersList
-    ///
-    List<String>? slidersList,
-
-    ///
-    /// [aspectRatio] for slider aspect ratio
-    ///
-    /// aspectRatio
-    ///
-    double? aspectRatio,
-
-    ///
-    /// [height] for slider height
-    ///
-    /// height
-    ///
-    double? height,
-
-    ///
-    /// [enlargeCenterPage] for slider enlarge center page
-    ///
-    /// enlargeCenterPage
-    ///
-    bool? enlargeCenterPage,
-
-    ///
-    /// [autoPlay] for slider auto play
-    ///
-    /// autoPlay
-    ///
-    bool? autoPlay,
-
-    ///
-    /// [onTap] for slider on tap
-    ///
-    /// onTap
-    ///
-    Function()? onTap,
-
-    ///
-    /// [imageFit] for slider image fit
-    ///
-    /// imageFit
-    ///
-    BoxFit? imageFit,
-  }) {
-    return EcommerceElement(
-      child: VxSwiper.builder(
-        aspectRatio: aspectRatio ?? 16 / 9,
-        autoPlay: autoPlay ?? true,
-        height: height ?? 220,
-        enlargeCenterPage: enlargeCenterPage ?? false,
-        itemCount: slidersList?.length ?? 4,
-        itemBuilder: (context, index) {
-          return Image.asset(
-            slidersList?[index] ?? 'assets/images/product.jpg',
-            fit: imageFit ?? BoxFit.cover,
-          )
-              .box
-              .roundedSM
-              .clip(Clip.antiAlias)
-              .margin(const EdgeInsets.symmetric(horizontal: 8))
-              .make()
-              .onInkTap(onTap ?? () {});
-        },
-      ),
-    );
-  }
-
   /// Slider with network images
   factory EcommerceElement.slider({
     ///
@@ -146,7 +72,7 @@ class EcommerceElement extends StatelessWidget {
       child: VxSwiper.builder(
         aspectRatio: aspectRatio ?? 16 / 9,
         autoPlay: autoPlay ?? true,
-        height: height ?? AppValues.sizeHeight*150,
+        height: height ?? AppValues.sizeHeight * 150,
         viewportFraction: viewportFraction ?? 0.8,
         enlargeCenterPage: enlargeCenterPage ?? true,
         itemCount: slidersList?.length ?? 2,
@@ -290,375 +216,52 @@ class EcommerceElement extends StatelessWidget {
     Function()? onTap,
   }) {
     return EcommerceElement(
-      child: SizedBox(
-        width: width ?? 150,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.network(
-              image ??
-                  'https://images.pexels.com/photos/380954/pexels-photo-380954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-              width: (width ?? 150) - 5,
-              fit: imageBoxFit ?? BoxFit.cover,
-            ),
-            10.heightBox,
-            (title ?? 'Product Title')
-                .text
-                .color(titleColor ?? Colors.black)
-                .fontFamily(titleFontFamily ?? 'sans-serif')
-                .size(titleFontSize ?? 14)
-                .make(),
-            10.heightBox,
-            (price ?? 'Rs. 2000')
-                .text
-                .color(priceColor ?? Colors.black)
-                .fontFamily(priceFontFamily ?? 'sans-serif')
-                .size(priceFontSize ?? 16)
-                .make(),
-            10.heightBox,
-            (description ??
-                    'This is a small description of the product. hope you understand')
-                .text
-                .color(descriptionColor ?? Colors.grey.shade500)
-                .fontFamily(descriptionFontFamily ?? 'sans-serif')
-                .size(descriptionFontSize ?? 12)
-                .overflow(TextOverflow.ellipsis)
-                .maxLines(2)
-                .make(),
-          ],
-        )
-            .box
-            .color(backgroundColor ?? Colors.white)
-            .margin(const EdgeInsets.symmetric(
-              horizontal: 4,
-            ))
-            .roundedSM
-            .padding(const EdgeInsets.all(8))
-            .make()
-            .onInkTap(onTap ?? () {}),
-      ),
-    );
-  }
-
-  /// Product card with assets image
-  factory EcommerceElement.productCardAsset({
-    ///
-    /// [image] is required
-    ///
-    /// image
-    ///
-    String? image,
-
-    ///
-    /// [title] for product title
-    ///
-    /// title
-    ///
-    String? title,
-
-    ///
-    /// [titleColor] for product title color
-    ///
-    /// title color
-    ///
-    Color? titleColor,
-
-    ///
-    /// [titleFontFamily] for product title font family
-    ///
-    /// title font family
-    ///
-    String? titleFontFamily,
-
-    ///
-    /// [titleFontSize] for product title font size
-    ///
-    /// title font size
-    ///
-    double? titleFontSize,
-
-    ///
-    /// [titleFontWeight] for product title font weight
-    ///
-    /// title font weight
-    ///
-    FontWeight? titleFontWeight,
-
-    ///
-    /// [price] for product price
-    ///
-    /// price
-    ///
-    String? price,
-
-    ///
-    /// [priceColor] for product price color
-    ///
-    /// price color
-    ///
-    Color? priceColor,
-
-    ///
-    /// [priceFontFamily] for product price font family
-    ///
-    /// price font family
-    ///
-    String? priceFontFamily,
-
-    ///
-    /// [priceFontSize] for product price font size
-    ///
-    /// price font size
-    ///
-    double? priceFontSize,
-
-    ///
-    /// [priceFontWeight] for product price font weight
-    ///
-    /// price font weight
-    ///
-    FontWeight? priceFontWeight,
-
-    ///
-    /// [description] for product description
-    ///
-    /// description
-    ///
-    String? description,
-
-    ///
-    /// [descriptionColor] for product description color
-    ///
-    /// description color
-    ///
-    Color? descriptionColor,
-
-    ///
-    /// [descriptionFontFamily] for product description font family
-    ///
-    /// description font family
-    ///
-    String? descriptionFontFamily,
-
-    ///
-    /// [descriptionFontSize] for product description font size
-    ///
-    /// description font size
-    ///
-    double? descriptionFontSize,
-
-    ///
-    /// [backgroundColor] for product card background color
-    ///
-    /// background color
-    ///
-    Color? backgroundColor,
-
-    ///
-    /// [width] for product card width
-    ///
-    /// width
-    ///
-    double? width,
-
-    ///
-    /// [boxFit] for product card image box fit
-    ///
-    /// box fit
-    ///
-    BoxFit? imageBoxFit,
-
-    ///
-    /// [onTap] for product card onTap
-    ///
-    /// onTap
-    ///
-    Function()? onTap,
-  }) {
-    return EcommerceElement(
-      child: SizedBox(
-        width: width ?? 150,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.asset(
-              image ?? 'assets/images/product.jpg',
-              width: (width ?? 150) - 5,
-              fit: imageBoxFit ?? BoxFit.cover,
-            ),
-            10.heightBox,
-            (title ?? 'Product Title')
-                .text
-                .color(titleColor ?? Colors.black)
-                .fontFamily(titleFontFamily ?? 'sans-serif')
-                .fontWeight(titleFontWeight ?? FontWeight.bold)
-                .size(titleFontSize ?? 14)
-                .make(),
-            10.heightBox,
-            (price ?? 'Rs. 2000')
-                .text
-                .color(priceColor ?? Colors.black)
-                .fontFamily(priceFontFamily ?? 'sans-serif')
-                .fontWeight(priceFontWeight ?? FontWeight.normal)
-                .size(priceFontSize ?? 16)
-                .make(),
-            (description ??
-                    'This is a small description of the product. hope you understand')
-                .text
-                .color(descriptionColor ?? Colors.grey.shade500)
-                .fontFamily(descriptionFontFamily ?? 'sans-serif')
-                .size(descriptionFontSize ?? 12)
-                .overflow(TextOverflow.ellipsis)
-                .maxLines(2)
-                .make(),
-          ],
-        )
-            .box
-            .color(backgroundColor ?? Colors.white)
-            .margin(const EdgeInsets.symmetric(horizontal: 4))
-            .roundedSM
-            .padding(const EdgeInsets.all(8))
-            .make()
-            .onInkTap(onTap ?? () {}),
-      ),
-    );
-  }
-
-  /// Category card with assets image
-  factory EcommerceElement.categoryCardAsset({
-    ///
-    /// [image] for category image
-    ///
-    /// image
-    ///
-    String? image,
-
-    ///
-    /// [title] for category title
-    ///
-    /// title
-    ///
-    String? title,
-
-    ///
-    /// [titleColor] for category title color
-    ///
-    /// title color
-    ///
-    Color? titleColor,
-
-    ///
-    /// [titleFontFamily] for category title font family
-    ///
-    /// title font family
-    ///
-    String? titleFontFamily,
-
-    ///
-    /// [titleFontSize] for category title font size
-    ///
-    /// title font size
-    ///
-    double? titleFontSize,
-
-    ///
-    /// [description] for category description
-    ///
-    /// description
-    ///
-    String? description,
-
-    ///
-    /// [descriptionColor] for category description color
-    ///
-    /// description color
-    ///
-    Color? descriptionColor,
-
-    ///
-    /// [descriptionFontFamily] for category description font family
-    ///
-    /// description font family
-    ///
-    String? descriptionFontFamily,
-
-    ///
-    /// [descriptionFontSize] for category description font size
-    ///
-    /// description font size
-    ///
-    double? descriptionFontSize,
-
-    ///
-    /// [backgroundColor] for category card background color
-    ///
-    /// background color
-    ///
-    Color? backgroundColor,
-
-    ///
-    /// [onTap] for category card onTap
-    ///
-    /// onTap
-    ///
-    Function()? onTap,
-
-    ///
-    /// [height] for category card height
-    ///
-    /// height
-    ///
-    double? height,
-
-    ///
-    /// [width] for category card width
-    ///
-    /// width
-    ///
-    double? width,
-
-    ///
-    /// [imageBoxFit] for category card image box fit
-    ///
-    /// box fit
-    ///
-    BoxFit? imageBoxFit,
-  }) {
-    return EcommerceElement(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(
-            image ?? 'assets/images/product.jpg',
-            height: height ?? 120,
-            width: width ?? 200,
-            fit: imageBoxFit ?? BoxFit.cover,
+          Expanded(
+            flex: 2,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(AppValues.radius * 10),
+              child: Image.network(
+                image ??
+                    'https://images.pexels.com/photos/380954/pexels-photo-380954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                fit: imageBoxFit ?? BoxFit.fill,
+              ),
+            ),
           ),
-          10.heightBox,
-          (title ?? 'Category Title')
-              .text
-              .color(titleColor ?? Colors.black)
-              .align(TextAlign.center)
-              .fontFamily(titleFontFamily ?? 'sans-serif')
-              .make(),
-          10.heightBox,
-          (description ?? 'This is a small description of the category')
-              .text
-              .color(descriptionColor ?? Colors.grey.shade500)
-              .fontFamily(descriptionFontFamily ?? 'sans-serif')
-              .size(descriptionFontSize ?? 12)
-              .align(TextAlign.center)
-              .overflow(TextOverflow.ellipsis)
-              .maxLines(2)
-              .make(),
+          Expanded(
+            flex: 2,
+            child: Column(
+              children: [
+                10.heightBox,
+                (title ?? 'Product Title')
+                    .text
+                    .color(titleColor ?? Colors.black)
+                    .fontFamily(titleFontFamily ?? 'sans-serif')
+                    .size(titleFontSize ?? 14)
+                    .make(),
+                10.heightBox,
+                (price ?? 'Rs. 2000')
+                    .text
+                    .color(priceColor ?? Colors.black)
+                    .fontFamily(priceFontFamily ?? 'sans-serif')
+                    .size(priceFontSize ?? 16)
+                    .make(),
+                10.heightBox,
+              ],
+            ),
+          )
         ],
       )
           .box
           .color(backgroundColor ?? Colors.white)
-          .margin(const EdgeInsets.all(5))
-          .roundedSM
-          .clip(Clip.antiAlias)
+          .topRightRounded(value: AppValues.radius * 40)
+          .bottomLeftRounded(value: AppValues.radius * 40)
+          .topLeftRounded(value: AppValues.radius * 10)
+          .bottomRightRounded(value: AppValues.radius * 10)
           .make()
-          .onTap(onTap ?? () {}),
+          .onInkTap(onTap ?? () {}),
     );
   }
 
@@ -765,36 +368,35 @@ class EcommerceElement extends StatelessWidget {
     return EcommerceElement(
       child: Column(
         children: [
-          Image.network(
-            image ?? 'https://picsum.photos/200/300',
-            height: height ?? 70,
-            width: width ?? 70,
-            fit: BoxFit.fill,
+          Expanded(
+            flex: 2,
+            child: CircleAvatar(
+              radius: AppValues.radius * 42,
+              child: CircleAvatar(
+                radius: AppValues.radius * 40,
+                backgroundImage: NetworkImage(image ?? ""),
+              ),
+            ),
           ),
           10.heightBox,
-          (title ?? 'Category Title')
-              .text
-              .color(titleColor ?? Colors.black)
-              .align(TextAlign.center)
-              .fontFamily(titleFontFamily ?? 'sans-serif')
-              .make(),
-          if (description != null)
-            (description)
+          Expanded(
+            flex: 1,
+            child: (title ?? 'Category Title')
                 .text
-                .color(descriptionColor ?? Colors.grey.shade500)
-                .fontFamily(descriptionFontFamily ?? 'sans-serif')
-                .size(descriptionFontSize ?? 12)
-                .align(TextAlign.center)
+                // .color(titleColor ?? Colors.black)
                 .overflow(TextOverflow.ellipsis)
-                .maxLines(2)
+                .maxLines(1)
+                .align(TextAlign.center)
+                .fontFamily(titleFontFamily ?? 'sans-serif')
                 .make(),
+          ),
         ],
       )
           .box
-          .color(backgroundColor ?? Colors.white)
+          // .color(backgroundColor ?? Colors.white)
           .rounded
           .clip(Clip.antiAlias)
-          .outerShadowSm
+          //.outerShadowSm
           .make()
           .onTap(onTap ?? () {}),
     );
@@ -1379,129 +981,6 @@ class EcommerceElement extends StatelessWidget {
     );
   }
 
-  /// Featured Button
-  factory EcommerceElement.featuredButtonAsset({
-    ///
-    /// [image] for image
-    ///
-    /// image
-    ///
-    String? image,
-
-    ///
-    /// [title] for title
-    ///
-    /// title
-    ///
-    String? title,
-
-    ///
-    /// [titleColor] for title Color
-    ///
-    /// title Color
-    ///
-    Color? titleColor,
-
-    ///
-    /// [titleFontFamily] for title font family
-    ///
-    /// title font family
-    ///
-    String? titleFontFamily,
-
-    ///
-    /// [subtitle] for subtitle
-    ///
-    /// subtitle
-    ///
-    String? subtitle,
-
-    ///
-    /// [subtitleColor] for subtitle Color
-    ///
-    /// subtitle Color
-    ///
-    Color? subtitleColor,
-
-    ///
-    /// [subtitleFontFamily] for subtitle font family
-    ///
-    /// subtitle font family
-    ///
-    String? subtitleFontFamily,
-
-    ///
-    /// [onTap] for on tap
-    ///
-    /// on tap
-    ///
-    Function()? onTap,
-
-    ///
-    /// [backgroundColor] for background color
-    ///
-    /// background color
-    ///
-    Color? backgroundColor,
-
-    ///
-    /// [imageFit] for image fit
-    ///
-    /// image fit
-    ///
-    BoxFit? imageBoxFit,
-
-    ///
-    /// [imageWidth] for image width
-    ///
-    /// image width
-    ///
-    double? imageWidth,
-
-    ///
-    /// [featuredButtonWidth] for featured button width
-    ///
-    /// featured button width
-    ///
-    double? featuredButtonWidth,
-  }) {
-    return EcommerceElement(
-        child: Row(
-      children: [
-        Image.asset(
-          image ?? 'assets/images/product.jpg',
-          width: imageWidth ?? 60,
-          fit: imageBoxFit ?? BoxFit.cover,
-        ),
-        10.widthBox,
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            (title ?? 'Title')
-                .text
-                .fontFamily(titleFontFamily ?? 'sans-serif')
-                .color(titleColor ?? Colors.black)
-                .make(),
-            (subtitle ?? '')
-                .text
-                .fontFamily(subtitleFontFamily ?? 'sans-serif')
-                .color(subtitleColor ?? Colors.grey.shade500)
-                .make(),
-          ],
-        )
-      ],
-    )
-            .box
-            .width(featuredButtonWidth ?? 200)
-            .color(backgroundColor ?? Colors.white)
-            .margin(const EdgeInsets.symmetric(horizontal: 4))
-            .padding(const EdgeInsets.all(4))
-            .roundedSM
-            .outerShadowSm
-            .make()
-            .onInkTap(onTap ?? () {}));
-  }
-
   /// Slide Show of product images
   factory EcommerceElement.slideShow({
     ///
@@ -1557,12 +1036,13 @@ class EcommerceElement extends StatelessWidget {
       child: VxSwiper.builder(
           autoPlay: autoPlay ?? true,
           height: height ?? 350,
+          viewportFraction: 1.0,
           aspectRatio: aspectRatio ?? 16 / 9,
           autoPlayAnimationDuration: const Duration(milliseconds: 800),
           itemCount: images?.length ?? 3,
           itemBuilder: (context, index) {
-            return Image.asset(
-              images?[index] ?? 'assets/images/product.jpg',
+            return Image.network(
+              images?[index] ?? 'https://picsum.photos/1260/760?random=${index + 1}',
               height: imageHeight ?? double.infinity,
               width: imageWidth ?? double.infinity,
               fit: imageBoxFit ?? BoxFit.cover,

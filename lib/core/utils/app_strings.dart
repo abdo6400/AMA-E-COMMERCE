@@ -141,4 +141,15 @@ class AppStrings {
   static const searchForProducts = "searchForProducts";
   static const bestSeller = "bestSeller";
   static const viewAll = "viewAll";
+  static const available = "available";
+  static const outOffStock = "outOffStock";
+  static const off = "off";
+  static const notifcations = "notifcations";
+  static const chatWithUs = "chatWithUs";
+  static const chatWithAi = "chatWithAi";
+  static const notificationsSettings = "notificationsSettings";
+  static const checkOut = "checkOut";
+  static const noNotifications = "noNotifications";
+  static const noNotificationsAvailable = "noNotificationsAvailable";
+  static const noNotificationsAvailableSub = "noNotificationsAvailableSub";
 }

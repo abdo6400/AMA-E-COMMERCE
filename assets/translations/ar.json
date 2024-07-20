@@ -133,5 +133,16 @@
     "categories": "التصنيفات",
     "searchForProducts": "البحث عن منتجات",
     "bestSeller": "الاكثر مبيعا",
-    "viewAll": "عرض الكل"
+    "viewAll": "عرض الكل",
+    "available": "متوفر",
+    "outOffStock": "غير متوفر",
+    "off": "خصم",
+    "notifcations": "الاشعارات",
+    "chatWithAi": "الدردشة مع بوت AMA",
+    "chatWithUs": "الدردشة معنا",
+    "notificationsSettings": "اعدادات الاشعارات",
+    "checkOut": "إنهاء الطلب",
+    "noNotifications": "لا توجد إشعارات",
+    "noNotificationsAvailable": "لا توجد إشعارات متاحة",
+    "noNotificationsAvailableSub": "ليس لديك أي إشعارات حالياً"
 }

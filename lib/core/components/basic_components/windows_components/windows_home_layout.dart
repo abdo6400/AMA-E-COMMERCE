@@ -2,11 +2,11 @@
 import 'package:ama/config/locale/app_localizations.dart';
 import 'package:ama/core/utils/commons.dart';
 import 'package:flutter/material.dart';
-import '../../../config/routes/app_routes.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/app_images.dart';
-import '../../utils/app_strings.dart';
-import '../../utils/app_values.dart';
+import '../../../../config/routes/app_routes.dart';
+import '../../../utils/app_colors.dart';
+import '../../../utils/app_images.dart';
+import '../../../utils/app_strings.dart';
+import '../../../utils/app_values.dart';
 
 class WindowsHomeLayout extends StatefulWidget {
   final List<Map<String, dynamic>> screens;

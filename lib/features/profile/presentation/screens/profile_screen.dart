@@ -15,7 +15,10 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.symmetric(horizontal: AppValues.paddingWidth * 10),
+      padding: EdgeInsets.only(
+          right: AppValues.paddingWidth * 10,
+          left: AppValues.paddingWidth * 10,
+          bottom: AppValues.paddingHeight * 50),
       children: [
         SettingsGroup(
           settingsGroupTitle: AppStrings.settings.tr(context),
@@ -44,6 +47,16 @@ class ProfileScreen extends StatelessWidget {
               title: AppStrings.changeTheme.tr(context),
               subtitle:
                   context.read<ThemeCubit>().currentThemeMode.name.toString(),
+            ),
+            SettingsItem(
+              onTap: () =>
+                  context.navigateTo(screenRoute: Routes.notifcationsRoute),
+              icon: const Icon(
+                Icons.edit_notifications_outlined,
+                color: AppColors.white,
+              ),
+              backgroundColor: Colors.amber,
+              title: AppStrings.notificationsSettings.tr(context),
             ),
           ],
         ),

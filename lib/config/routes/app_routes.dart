@@ -1,5 +1,4 @@
-import 'package:ama/core/components/basic_screens/onboarding_screen.dart';
-import 'package:ama/core/components/basic_screens/splash_screen.dart';
+import 'package:ama/core/components/basic_components/starting_components/onboarding_screen.dart';
 import 'package:ama/features/ama_chat/presentation/screens/ama_chat_screen.dart';
 import 'package:ama/features/profile/presentation/screens/languages_screen.dart';
 import 'package:ama/features/profile/presentation/screens/theme_screen.dart';
@@ -7,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../app/service_locator.dart';
-import '../../core/components/basic_screens/main_screen.dart';
+import '../../core/components/basic_components/main_screen.dart';
 import '../../core/utils/app_strings.dart';
 import '../../features/authentication/presentation/bloc/cubit/information_cubit.dart';
 import '../../features/authentication/presentation/bloc/forget_password/forget_password_bloc.dart';
@@ -30,7 +29,6 @@ class Routes {
   static const String amaChatRoute = "/amaChatRoute";
   static const String mapRoute = '/mapRoute';
   static const String onBoardingRoute = "/onBoardingRoute";
-
   static const String loginRoute = "/loginRoute";
   static const String registerRoute = "/registerRoute";
   static const String informationRoute = "/informationRoute";
@@ -41,10 +39,8 @@ class Routes {
   static const String mainRoute = "/mainRoute";
   static const String changePasswordRoute = "/changePasswordRoute";
   static const String editProfileRoute = "/editProfileRoute";
-  static const String estateRoute = "/estateRoute";
-  static const String topLocationsRoute = "/topLocationsRoute";
-  static const String topAgentsRoute = "/topAgentsRoute";
-  static const String topAgentDetailsRoute = "/topAgentDetailsRoute";
+
+  static var notifcationsRoute;
 }
 
 class AppRoutes {

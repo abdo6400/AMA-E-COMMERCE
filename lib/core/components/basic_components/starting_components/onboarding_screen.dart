@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
-import '../../../../core/utils/app_images.dart';
-import '../../../../core/utils/app_strings.dart';
-import '../../../../core/utils/app_values.dart';
-import '../../../app/service_locator.dart';
-import '../../../config/database/cache/cache_consumer.dart';
-import '../../bloc/global_cubit/locale_cubit.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/app_enums.dart';
-import '../../../../config/routes/app_routes.dart';
+import '../../../../../core/utils/app_images.dart';
+import '../../../../../core/utils/app_strings.dart';
+import '../../../../../core/utils/app_values.dart';
+import '../../../../app/service_locator.dart';
+import '../../../../config/database/cache/cache_consumer.dart';
+import '../../../bloc/global_cubit/locale_cubit.dart';
+import '../../../utils/app_colors.dart';
+import '../../../utils/app_enums.dart';
+import '../../../../../config/routes/app_routes.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});

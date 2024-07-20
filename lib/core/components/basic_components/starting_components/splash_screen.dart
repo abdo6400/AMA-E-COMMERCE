@@ -3,14 +3,14 @@ import 'package:ama/config/locale/app_localizations.dart';
 import 'package:ama/core/utils/commons.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../app/service_locator.dart';
-import '../../../../config/routes/app_routes.dart';
-import '../../../../core/utils/app_enums.dart';
-import '../../../../core/utils/app_images.dart';
-import '../../../config/database/cache/cache_consumer.dart';
+import '../../../../../app/service_locator.dart';
+import '../../../../../config/routes/app_routes.dart';
+import '../../../../../core/utils/app_enums.dart';
+import '../../../../../core/utils/app_images.dart';
+import '../../../../config/database/cache/cache_consumer.dart';
 
-import '../../utils/app_strings.dart';
-import '../../utils/app_values.dart';
+import '../../../utils/app_strings.dart';
+import '../../../utils/app_values.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
