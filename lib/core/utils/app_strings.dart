@@ -152,4 +152,18 @@ class AppStrings {
   static const noNotifications = "noNotifications";
   static const noNotificationsAvailable = "noNotificationsAvailable";
   static const noNotificationsAvailableSub = "noNotificationsAvailableSub";
+  static const subTotalAmount = "subTotalAmount";
+  static const deliveryFees = "deliveryFees";
+  static const totalAmount = "totalAmount";
+  static const payment = "payment";
+  static const cash = "cash";
+  static const visa = "visa";
+  static const masterCard = "masterCard";
+  static const orPaywithCash = "orPaywithCash";
+  static const orPaywithCard = "orPaywithVisa";
+  static const orderReview = "orderReview";
+  static const back = "back";
+  static const orderPlaced = "orderPlaced";
+  static const orderPlacedSub = "orderPlacedSub";
+  static const orderPlacedSub2 = "orderPlacedSub2";
 }

@@ -193,6 +193,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  device_preview_screenshot:
+    dependency: "direct dev"
+    description:
+      name: device_preview_screenshot
+      sha256: c79f185e155c0ed5d97b4e1afff6df181c2045fe28c7414c95f0b46307c549e6
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   diffutil_dart:
     dependency: transitive
     description:
@@ -523,6 +531,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.2"
+  flutter_stripe:
+    dependency: "direct main"
+    description:
+      name: flutter_stripe
+      sha256: "6c10f839e2623a336de79023a95a49c8d177032d5fd54b1f7ee9755fc577e227"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.2.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -1042,6 +1058,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  stripe_android:
+    dependency: transitive
+    description:
+      name: stripe_android
+      sha256: "74c977ae0a918949e84796a8a3524a68610f4719c66170f01592b4bc5196f049"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.2.1"
+  stripe_ios:
+    dependency: transitive
+    description:
+      name: stripe_ios
+      sha256: eb91cb9b971e22f865937309b0e5e4e0f5bcbfc39e671bd41c0fdaddbb5ad948
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.2.0"
+  stripe_platform_interface:
+    dependency: transitive
+    description:
+      name: stripe_platform_interface
+      sha256: "1a2e3fe106bc723c0c0cda2f97f15bfef16944507621639c636041845a96ff57"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.2.0"
   supercharged:
     dependency: "direct main"
     description:
@@ -1074,6 +1114,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.0"
+  text_form_field_wrapper:
+    dependency: "direct main"
+    description:
+      name: text_form_field_wrapper
+      sha256: "9ec8f9af0021a692a35699f5756d7b7f140eaa1e6894ff86c357f50dc5474b88"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   typed_data:
     dependency: transitive
     description:

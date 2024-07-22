@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,8 @@ import '../core/bloc/global_cubit/theme_cubit.dart';
 import '../core/utils/app_strings.dart';
 import '../core/utils/app_values.dart';
 import 'service_locator.dart';
+import 'package:device_preview_screenshot/device_preview_screenshot.dart';
+import 'package:path/path.dart' as path;
 
 class UserApp extends StatelessWidget {
   static final GlobalKey<NavigatorState> navigatorKey =
@@ -40,7 +44,55 @@ class UserApp extends StatelessWidget {
             }, builder: (context, state) {
               return GlobalLoaderOverlay(
                 child: DevicePreview(
-                  enabled: kIsWeb,
+                  enabled: true,
+                  tools: [
+                    ...DevicePreview.defaultTools,
+                    DevicePreviewScreenshot(
+                        onScreenshot: (context, image) async {
+                      try {
+                        // Get the bytes and format of the image
+                        final bytes = image.bytes;
+
+                        final directoryPath =
+                            'D:\\Custom_Projects\\ama\\screenshots';
+                        final screenshotsDir = Directory(directoryPath);
+                        // Get a list of existing screenshot files
+                        final existingFiles = screenshotsDir
+                            .listSync()
+                            .where((file) =>
+                                file is File && file.path.endsWith('.png'))
+                            .map((file) =>
+                                path.basenameWithoutExtension(file.path))
+                            .toList();
+                        print('existingFiles: $existingFiles');
+                        // Find the next available number from 1 to 1000
+                        int nextNumber = 1;
+                        while (existingFiles.contains('$nextNumber') &&
+                            nextNumber <= 20) {
+                          nextNumber++;
+                        }
+
+                        if (nextNumber > 20) {
+                          print('Screenshot limit reached');
+                          return;
+                        }
+
+                        // Generate the file path with the next available number
+                        final filePath =
+                            path.join(screenshotsDir.path, '$nextNumber.png');
+
+                        // Save the image to the file
+                        final file = File(filePath);
+                        await file.writeAsBytes(bytes);
+
+                        print('Screenshot saved to $filePath');
+                      } catch (e) {
+                        print('Error saving screenshot: $e');
+                      }
+                    }),
+                  ],
+                  availableLocales:
+                      AppLocalizationsSetup.supportedLocales.toList(),
                   builder: (context) => ScreenUtilInit(
                       ensureScreenSize: true,
                       designSize: AppValues.getPlatformSize(),

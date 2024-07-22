@@ -1,7 +1,4 @@
-import 'package:ama/config/locale/app_localizations.dart';
 import 'package:flutter/material.dart';
-
-import '../../../utils/app_strings.dart';
 import '../../../utils/app_values.dart';
 
 class AppbarComponents extends StatelessWidget implements PreferredSizeWidget {
@@ -26,14 +23,17 @@ class AppbarComponents extends StatelessWidget implements PreferredSizeWidget {
           width: AppValues.sizeWidth * 10,
         ),
         IconButton(
-          icon: const Icon(Icons.notifications_none_outlined),
+          icon: Icon(
+            Icons.notifications_none_outlined,
+            color: Theme.of(context).colorScheme.secondary,
+          ),
           onPressed: () {},
         ),
         SizedBox(
           width: AppValues.sizeWidth * 10,
         ),
       ],
-      title: Row(
+      /* title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(Icons.shopify,
@@ -47,7 +47,7 @@ class AppbarComponents extends StatelessWidget implements PreferredSizeWidget {
             textAlign: TextAlign.center,
           ),
         ],
-      ),
+      ),*/
       centerTitle: true,
     );
   }
@@ -55,3 +55,14 @@ class AppbarComponents extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
+/**SearchBar(
+              trailing: const [
+                Icon(Icons.search),
+              ],
+              hintText: AppStrings.search.tr(context),
+              elevation: WidgetStateProperty.all(0.5),
+              shape: WidgetStateProperty.all(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppValues.radius * 10)),
+              ),
+            ) */

@@ -40,7 +40,8 @@ dependencies:
   flex_color_scheme: ^7.3.1
   floating_draggable_widget: ^2.1.5
   flutter_chat_ui: ^1.6.14
-
+  text_form_field_wrapper: ^1.0.0
+  flutter_stripe: ^10.2.0
 ####################### Not used ############################
 
 ####################### App ############################
@@ -58,7 +59,7 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^4.0.0
   flutter_launcher_icons: "^0.13.1"
- 
+  device_preview_screenshot: ^1.0.0
 
 flutter_launcher_icons:
   android: "launcher_icon"
@@ -82,6 +83,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/checkout_images/
     - assets/icons/
     - assets/translations/en.json
     - assets/translations/ar.json

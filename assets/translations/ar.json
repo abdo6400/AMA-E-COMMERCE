@@ -144,5 +144,20 @@
     "checkOut": "إنهاء الطلب",
     "noNotifications": "لا توجد إشعارات",
     "noNotificationsAvailable": "لا توجد إشعارات متاحة",
-    "noNotificationsAvailableSub": "ليس لديك أي إشعارات حالياً"
+    "noNotificationsAvailableSub": "ليس لديك أي إشعارات حالياً",
+    "subTotalAmount": "المجموع الفرعي",
+    "deliveryFees": "رسوم التوصيل",
+    "totalAmount": "المبلغ الكلي",
+    "payment": "الدفع",
+    "cash": "الكاش",
+    "visa": "فيزا",
+    "masterCard": "ماستر كارد",
+    "orPaywithCash": " او الدفع عن طريق الكاش",
+    "orPaywithVisa": " او الدفع عن طريق فيزا",
+    "orderReview": " مراجعة الطلب",
+    "back": " رجوع",
+    "confirmOrder": " تأكيد الطلب",
+    "orderPlaced": " تم الطلب بنجاح",
+    "orderPlacedSub": " تم تقديم الطلب بنجاح. سيتم التواصل معك في وقت لاحق.",
+    "orderPlacedSub2": " يمكنك التحقق من حالة طلبك في حسابك."
 }

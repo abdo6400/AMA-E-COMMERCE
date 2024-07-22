@@ -1,5 +1,6 @@
 import 'package:ama/core/components/basic_components/starting_components/onboarding_screen.dart';
 import 'package:ama/features/ama_chat/presentation/screens/ama_chat_screen.dart';
+import 'package:ama/features/check_out/presentation/bloc/cubit/controller_screens_cubit.dart';
 import 'package:ama/features/profile/presentation/screens/languages_screen.dart';
 import 'package:ama/features/profile/presentation/screens/theme_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ import '../../features/authentication/presentation/screens/login/login_screen.da
 import '../../features/authentication/presentation/screens/register/otp_screen.dart';
 import '../../features/authentication/presentation/screens/register/register_screen.dart';
 import '../../features/authentication/presentation/screens/register/user_information_screen.dart';
+import '../../features/check_out/presentation/screens/check_out_screen.dart';
 
 class Routes {
   //basic routes
@@ -40,7 +42,8 @@ class Routes {
   static const String changePasswordRoute = "/changePasswordRoute";
   static const String editProfileRoute = "/editProfileRoute";
 
-  static var notifcationsRoute;
+  static const String notifcationsRoute = "/notifcationsRoute";
+  static const String checkOutRoute = "/checkOutRoute";
 }
 
 class AppRoutes {
@@ -157,6 +160,14 @@ class AppRoutes {
         return PageTransition(
             child: const MainScreen(),
             type: PageTransitionType.fade,
+            settings: routeSettings);
+      case Routes.checkOutRoute:
+        return PageTransition(
+            child: BlocProvider(
+              create: (context) => ControllerScreensCubit(),
+              child: const CheckOutScreen(),
+            ),
+            type: PageTransitionType.bottomToTop,
             settings: routeSettings);
 
       default:

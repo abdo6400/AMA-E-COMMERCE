@@ -10,9 +10,11 @@ class AppTheme {
         useMaterial3: true,
         useMaterial3ErrorColors: true,
         scheme: FlexScheme.orangeM3,
+        scaffoldBackground: AppColors.nearlyWhite,
         primary: AppColors.primary,
         fontFamily: 'Cairo',
-        appBarStyle: FlexAppBarStyle.surface,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        appBarStyle: FlexAppBarStyle.background,
         textTheme: AppTextTheme.lightTextTheme);
   }
 
@@ -23,7 +25,8 @@ class AppTheme {
         scheme: FlexScheme.orangeM3,
         primary: AppColors.primary,
         fontFamily: 'Cairo',
-        appBarStyle: FlexAppBarStyle.surface,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        appBarStyle: FlexAppBarStyle.background,
         textTheme: AppTextTheme.darkTextTheme);
   }
 }

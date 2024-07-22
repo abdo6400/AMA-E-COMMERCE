@@ -15,7 +15,8 @@ class BestSellerComponent extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
-               padding:  EdgeInsets.symmetric(horizontal: AppValues.paddingWidth*10),
+          padding:
+              EdgeInsets.symmetric(horizontal: AppValues.paddingWidth * 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -38,12 +39,11 @@ class BestSellerComponent extends StatelessWidget {
           height: AppValues.sizeHeight * 20,
         ),
         SizedBox(
-          height: AppValues.sizeHeight * 600,
+          height: AppValues.sizeHeight * 500,
           child: GridView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.only(
-                bottom: AppValues.paddingHeight * 50,
                 left: AppValues.paddingWidth * 10,
                 right: AppValues.paddingWidth * 10,
               ),
@@ -51,7 +51,7 @@ class BestSellerComponent extends StatelessWidget {
                   mainAxisSpacing: AppValues.sizeHeight * 10,
                   crossAxisSpacing: AppValues.sizeWidth * 10,
                   crossAxisCount: 2,
-                  mainAxisExtent: AppValues.sizeHeight * 180),
+                  mainAxisExtent: AppValues.sizeHeight * 160),
               itemCount: 8,
               itemBuilder: (context, index) => ProductCard(
                     onTap: () {},
@@ -60,10 +60,13 @@ class BestSellerComponent extends StatelessWidget {
                     rating: index * 1.0,
                     productName: 'prdouct $index',
                     isAvailable: index / 2.0 == 1,
-                   // discountPercentage: 10,
+                    // discountPercentage: 10,
                     price: 10.0,
                   )),
-        )
+        ),
+        SizedBox(
+          height: AppValues.sizeHeight * 50,
+        ),
       ],
     );
   }

@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
     return ListView(
       children: [
         EcommerceElement.slideShow(
-          height: AppValues.sizeHeight * 50,
+          height: AppValues.sizeHeight * 100,
         ),
         const CustomDivider(),
         const Column(

@@ -1,8 +1,5 @@
-
 import 'package:ama/config/locale/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../utils/app_values.dart';
 import '/core/utils/app_colors.dart';
 
@@ -55,14 +52,16 @@ class DefaultButton extends StatelessWidget {
       margin: margin,
       child: ElevatedButton(
         style: buttonStyle ??
-            Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                elevation: WidgetStatePropertyAll(elevation),
-                shape: WidgetStatePropertyAll(RoundedRectangleBorder(
-                    side: borderColor != null
-                        ? BorderSide(color: borderColor!)
-                        : BorderSide.none,
-                    borderRadius: BorderRadius.circular(radius.r))),
-                backgroundColor: WidgetStatePropertyAll(background)),
+            ButtonStyle(
+              elevation: WidgetStateProperty.all(elevation),
+              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                      side:
+                          BorderSide(color: borderColor ?? Colors.transparent),
+                      borderRadius: BorderRadius.circular(radius))),
+              backgroundColor: WidgetStateProperty.all<Color>(
+                  background ?? Theme.of(context).primaryColor),
+            ),
         onPressed: onPressed,
         child: Padding(
           padding: padding ?? const EdgeInsets.symmetric(),
@@ -72,9 +71,7 @@ class DefaultButton extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
                 style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                      color: textColor,
-                      fontSize: AppValues.font * fontSize!,
-                    ),
+                    fontSize: AppValues.font * fontSize!, color: textColor),
               ),
         ),
       ),

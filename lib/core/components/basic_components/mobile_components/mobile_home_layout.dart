@@ -34,10 +34,10 @@ class MobileHomeLayout extends StatelessWidget {
         floatingWidgetHeight: AppValues.sizeHeight * 60,
         floatingWidgetWidth: AppValues.sizeWidth * 60,
         autoAlign: true,
-        screenHeight: MediaQuery.of(context).size.height,
-        screenWidth: MediaQuery.of(context).size.width,
-        dx: MediaQuery.of(context).size.width * 0.9,
-        dy: MediaQuery.of(context).size.height * 0.5,
+        screenHeight: AppValues.screenHeight,
+        screenWidth: AppValues.screenWidth,
+        dx: AppValues.screenWidth * 0.9,
+        dy: AppValues.screenHeight * 0.5,
         mainScreenWidget: Scaffold(
           appBar: AppbarComponents(
             scaffoldKey: scaffoldKey,

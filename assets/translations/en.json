@@ -143,5 +143,21 @@
   "checkOut": "Check Out",
   "noNotifications": "No Notifications",
   "noNotificationsAvailable": "No Notifications Available",
-  "noNotificationsAvailableSub": "You have no notifications. Check back later"
+  "noNotificationsAvailableSub": "You have no notifications. Check back later",
+  "subTotalAmount": "Sub Total Amount",
+  "deliveryFees": "Delivery Fees",
+  "totalAmount": "Total Amount",
+  "payment": "Payment",
+  "cash": "Cash",
+  "visa": "Visa",
+  "masterCard": "Master Card",
+  "orPaywithCash": "Or pay with Cash",
+  "orPaywithVisa": "Or pay with Visa",
+  "orderReview": "Order Review",
+  "back": "Back",
+  "confirmOrder": "Confirm Order",
+
+  "orderPlaced": "Order Placed",
+  "orderPlacedSub": "Your order has been placed successfully. We will contact you shortly.",
+  "orderPlacedSub2": "You can check your order status in your account."
 }

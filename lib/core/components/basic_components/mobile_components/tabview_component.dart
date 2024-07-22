@@ -31,11 +31,8 @@ class TabviewComponent extends StatelessWidget {
                       inactiveIcon: Icon(e["iconBorder"]),
                     ))
                 .toList(),
-            backgroundColor:
-                Theme.of(context).cardColor, // Default is Colors.white.
-            handleAndroidBackButtonPress: true, // Default is true.
+            backgroundColor:  Theme.of(context).cardColor, 
             resizeToAvoidBottomInset: true,
-            stateManagement: true, // Default is true.
             decoration: NavBarDecoration(
               colorBehindNavBar: Theme.of(context).cardColor,
               borderRadius: BorderRadius.zero,
