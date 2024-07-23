@@ -71,12 +71,12 @@ class CheckOutScreen extends StatelessWidget {
                   Flexible(
                     flex: 2,
                     child: DefaultButton(
-                      onPressed: () => state == 2
+                      onPressed: () => state == 3
                           ? Navigator.pop(context)
                           : pageController.nextPage(
                               duration: Durations.extralong1,
                               curve: Curves.easeIn),
-                      text: state == 2 ? AppStrings.confirm : AppStrings.next,
+                      text: state == 3 ? AppStrings.confirm : AppStrings.next,
                     ),
                   ),
                 ],

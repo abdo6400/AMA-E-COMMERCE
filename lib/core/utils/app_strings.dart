@@ -166,4 +166,29 @@ class AppStrings {
   static const orderPlaced = "orderPlaced";
   static const orderPlacedSub = "orderPlacedSub";
   static const orderPlacedSub2 = "orderPlacedSub2";
+  static const shippingName = "shippingName";
+  static const fullName = "fullName";
+  static const shippingAddress = "shippingAddress";
+  static const shippingCity = "shippingCity";
+  static const shippingState = "shippingState";
+  static const shippingCountry = "shippingCountry";
+  static const shippingPostalCode = "shippingPostalCode";
+  static const shippingPhone = "shippingPhone";
+  static const shippingEmail = "shippingEmail";
+  static const paymentMethod = "paymentMethod";
+  static const paymentMethodSub = "paymentMethodSub";
+  static const orderReviewSub = "orderReviewSub";
+  static const streetName = "streetName";
+  static const buildingNumber = "buildingNumber";
+  static const houseNumber = "houseNumber";
+  static const cityORArea = "cityORArea";
+  static const district = "district";
+  static const governorate = "governorate";
+  static const nearestLandmark = "nearestLandmark";
+  static const addNewAddress = "addNewAddress";
+  static const addNewCard = "addNewCard";
+
+  static const cardHolder = "cardHolder";
+  static const expires = "expires";
+  static const cvv = "cvv";
 }

@@ -1114,14 +1114,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.0"
-  text_form_field_wrapper:
-    dependency: "direct main"
-    description:
-      name: text_form_field_wrapper
-      sha256: "9ec8f9af0021a692a35699f5756d7b7f140eaa1e6894ff86c357f50dc5474b88"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   typed_data:
     dependency: transitive
     description:

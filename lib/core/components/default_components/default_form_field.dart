@@ -102,16 +102,16 @@ class DefaultTextFormField extends StatelessWidget {
         labelText: label?.tr(context),
         labelStyle: Theme.of(context)
             .textTheme
-            .titleMedium!
+            .bodySmall!
             .copyWith(color: textColor ?? Theme.of(context).hintColor),
         hintStyle: Theme.of(context)
             .textTheme
-            .titleMedium!
+            .bodySmall!
             .copyWith(color: textColor ?? Theme.of(context).hintColor),
         hintText: hint?.translateWithNullSafetyString(context)??hint,
         floatingLabelStyle: Theme.of(context)
             .textTheme
-            .titleMedium!
+            .bodySmall!
             .copyWith(color: Theme.of(context).primaryColor),
         prefixIcon: prefix != null
             ? Icon(
@@ -125,7 +125,7 @@ class DefaultTextFormField extends StatelessWidget {
                 child: Icon(
                   suffix,
                   color: textColor ?? Theme.of(context).hintColor,
-                  size: AppValues.font * 28,
+          
                 ),
               )
             : null,
