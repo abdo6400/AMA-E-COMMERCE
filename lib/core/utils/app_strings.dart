@@ -187,8 +187,12 @@ class AppStrings {
   static const nearestLandmark = "nearestLandmark";
   static const addNewAddress = "addNewAddress";
   static const addNewCard = "addNewCard";
-
   static const cardHolder = "cardHolder";
   static const expires = "expires";
   static const cvv = "cvv";
+
+  static const myOrder = "myOrder";
+
+   static const discountAmount = "discountAmount";
+
 }

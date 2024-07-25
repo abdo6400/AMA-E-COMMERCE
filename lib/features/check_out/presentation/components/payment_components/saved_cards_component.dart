@@ -16,7 +16,7 @@ class SavedCardsComponent extends StatelessWidget {
               ),
           itemCount: fakeDataList.length+1,
           itemBuilder: (context, index) {
-            return const PaymentCardComponent();
+            return const PaymentCardComponent(isSelected: false,);
           }),
     );
   }

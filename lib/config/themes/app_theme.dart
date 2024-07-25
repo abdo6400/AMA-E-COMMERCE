@@ -9,9 +9,9 @@ class AppTheme {
     return FlexThemeData.light(
         useMaterial3: true,
         useMaterial3ErrorColors: true,
-        scheme: FlexScheme.orangeM3,
+        scheme: FlexScheme.blueM3,
         scaffoldBackground: AppColors.nearlyWhite,
-        primary: AppColors.primary,
+        primary: AppColors.blueLight,
         fontFamily: 'Cairo',
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         appBarStyle: FlexAppBarStyle.background,
@@ -22,8 +22,8 @@ class AppTheme {
     return FlexThemeData.dark(
         useMaterial3: true,
         useMaterial3ErrorColors: true,
-        scheme: FlexScheme.orangeM3,
-        primary: AppColors.primary,
+        scheme: FlexScheme.blueM3,
+        primary: AppColors.blueLight,
         fontFamily: 'Cairo',
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         appBarStyle: FlexAppBarStyle.background,

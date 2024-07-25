@@ -183,5 +183,7 @@
   "addNewCard": "Add New Card",
   "cardHolder": "Card Holder",
   "expires": "Expires",
-  "cvv": "CVV"
+  "cvv": "CVV",
+  "myOrder": "My Order",
+  "discountAmount": "Discount Amount"
 }

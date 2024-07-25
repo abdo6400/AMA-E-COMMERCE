@@ -15,6 +15,7 @@ class AddressCardComponent extends StatelessWidget {
   final String districtController;
   final String governorateController;
   final String neatestLandmarkController;
+
   const AddressCardComponent({
     super.key,
     required this.shippingNameController,
@@ -27,6 +28,7 @@ class AddressCardComponent extends StatelessWidget {
     required this.districtController,
     required this.governorateController,
     required this.neatestLandmarkController,
+
   });
   Widget _buildDetailRow(String label, String value, BuildContext context) {
     return Padding(
@@ -52,7 +54,6 @@ class AddressCardComponent extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-       
         Expanded(
           child: Card(
             elevation: 0,
@@ -76,22 +77,23 @@ class AddressCardComponent extends StatelessWidget {
                         AppStrings.shippingAddress.tr(context),
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
-                      Row(
-                        children: [
-                          InkWell(
+               
+                        Row(
+                          children: [
+                            InkWell(
+                                onTap: () {},
+                                child: const Icon(Icons.edit,
+                                    color: AppColors.greenDark)),
+                            SizedBox(
+                              width: AppValues.sizeWidth * 10,
+                            ),
+                            InkWell(
                               onTap: () {},
-                              child: const Icon(Icons.edit,
-                                  color: AppColors.greenDark)),
-                          SizedBox(
-                            width: AppValues.sizeWidth * 10,
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: const Icon(Icons.delete,
-                                color: AppColors.error),
-                          ),
-                        ],
-                      )
+                              child: const Icon(Icons.delete,
+                                  color: AppColors.error),
+                            ),
+                          ],
+                        )
                     ],
                   ),
                   Divider(
@@ -122,7 +124,8 @@ class AddressCardComponent extends StatelessWidget {
               ),
             ),
           ),
-        ), Checkbox(value: true, onChanged: (_) {}),
+        ),
+     Checkbox(value: true, onChanged: (_) {}),
       ],
     );
   }

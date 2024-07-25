@@ -20,10 +20,17 @@ class ItemsScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(height: AppValues.sizeHeight * 10),
-            Text(
-              AppStrings.orderReview.tr(context),
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            Row(
+              //mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+              
+              children: [
+              const Icon(Icons.list),
+              SizedBox(width: AppValues.sizeWidth * 10),
+              Text(
+                AppStrings.orderReview.tr(context),
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ]),
             SizedBox(height: AppValues.sizeHeight * 10),
             Expanded(
               child: ListView.separated(

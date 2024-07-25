@@ -183,5 +183,7 @@
     "addNewCard":   "اضافة كارد جديد",
     "cardHolder": "حامل البطاقة",
     "expires": "تاريخ الانتهاء",
-    "cvv": "CVV"
+    "cvv": "CVV",
+    "myOrder": "طلبي",
+    "discountAmount": "الخصم"
 }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import '../../../../../config/locale/app_localizations.dart';
-import '../../../../../core/utils/app_colors.dart';
 
 class AuthCurve extends StatelessWidget {
   final Widget widget;
@@ -11,7 +9,7 @@ class AuthCurve extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: AppColors.nearlyWhite,
+        color: Theme.of(context).scaffoldBackgroundColor,
         child: Stack(children: [
           CustomPaint(
             size: Size(MediaQuery.of(context).size.width,

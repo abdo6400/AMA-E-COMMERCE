@@ -1,4 +1,5 @@
 import 'package:ama/core/components/basic_components/starting_components/onboarding_screen.dart';
+import 'package:ama/core/components/basic_components/starting_components/splash_screen.dart';
 import 'package:ama/features/ama_chat/presentation/screens/ama_chat_screen.dart';
 import 'package:ama/features/check_out/presentation/bloc/cubit/controller_screens_cubit.dart';
 import 'package:ama/features/profile/presentation/screens/languages_screen.dart';
@@ -51,7 +52,7 @@ class AppRoutes {
     switch (routeSettings.name) {
       case Routes.initialRoute:
         return PageTransition(
-            child: const MainScreen(),
+            child: const SplashScreen(),
             type: PageTransitionType.fade,
             settings: routeSettings);
       case Routes.themeRoute:
@@ -150,12 +151,6 @@ class AppRoutes {
             ),
             type: PageTransitionType.leftToRightWithFade,
             settings: routeSettings);
-      /* case Routes.loginRoute:
-        return PageTransition(
-            child: const LoginScreen(),
-            type: PageTransitionType.leftToRight,
-            settings: routeSettings);*/
-
       case Routes.mainRoute:
         return PageTransition(
             child: const MainScreen(),
