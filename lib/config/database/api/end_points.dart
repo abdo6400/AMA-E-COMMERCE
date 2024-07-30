@@ -3,21 +3,22 @@ class EndPoints {
   static const String baseUrl = '';
   static const String prefixToken = 'Bearer';
   static const String images = "";
-
   static const String forgetPassword = "";
-
   static const String resendCode = "";
-
   static const String resetPassword = "";
-
   static const String verifyEmail = "";
-
   static const String login = "";
-
   static const String register = "";
-
   static const String checkEmail = "";
-  //authentiaction
+
+  static const String bestSellerProducts = "";
+  static const String categories = "";
+  static const String offers = "";
+  static const String ads = "";
+
+  static const String addToWishlist = "";
+  static const String removeFromWishlist = "";
+  static const String wishlist = "";
 }
 
 class ApiKeys {

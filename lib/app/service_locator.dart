@@ -1,4 +1,7 @@
 import 'package:ama/config/routes/route_observer.dart';
+import 'package:ama/features/home/data/datasources/home_remote_data_source.dart';
+import 'package:ama/features/home/data/repositories/home_repository_impl.dart';
+import 'package:ama/features/home/domain/repositories/home_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -35,6 +38,21 @@ import '../features/authentication/presentation/bloc/forget_password/forget_pass
 import '../features/authentication/presentation/bloc/login/login_bloc.dart';
 import '../features/authentication/presentation/bloc/register/register_bloc.dart';
 import '../features/authentication/presentation/bloc/timer/timer_cubit.dart';
+import '../features/home/domain/usecases/get_ads_usecase.dart';
+import '../features/home/domain/usecases/get_best_selling_products_usecase.dart';
+import '../features/home/domain/usecases/get_categories_usecase.dart';
+import '../features/home/domain/usecases/get_offers_usecase.dart';
+import '../features/home/presentation/bloc/ads_bloc/ads_bloc.dart';
+import '../features/home/presentation/bloc/best_prodcuts_bloc/best_selling_products_bloc.dart';
+import '../features/home/presentation/bloc/categories_bloc/categories_bloc.dart';
+import '../features/home/presentation/bloc/offers_bloc/offers_bloc.dart';
+import '../features/wishlist/data/datasources/wishlist_remote_data_source.dart';
+import '../features/wishlist/data/repositories/wishlist_repository_impl.dart';
+import '../features/wishlist/domain/repositories/wishlist_repository.dart';
+import '../features/wishlist/domain/usecases/add_product_to_wishlist_usecase.dart';
+import '../features/wishlist/domain/usecases/get_wishlist_products_usecase.dart';
+import '../features/wishlist/domain/usecases/remove_product_from_wishlist_usecase.dart';
+import '../features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import '/core/bloc/global_cubit/locale_cubit.dart';
 import '/core/bloc/global_cubit/theme_cubit.dart';
 
@@ -76,12 +94,41 @@ Future<void> serviceLocatorInit() async {
 
 Future<void> _app() async {
   //! Blocs or cubits
+  sl.registerLazySingleton(() => BestSellingProductsBloc(sl()));
+  sl.registerLazySingleton(() => CategoriesBloc(sl())); // Add CategoriesBloc
+  sl.registerLazySingleton(() => OffersBloc(sl())); // Add OffersBloc
+  sl.registerLazySingleton(() => AdsBloc(sl())); // Add AdsBloc
+
+  sl.registerLazySingleton(() => WishlistBloc(
+        getWishlistProductsUseCase: sl(),
+        addProductToWishlistUseCase: sl(),
+        removeProductFromWishlistUseCase: sl(),
+      )); // Add WishlistBloc
 
   //! Use cases
+  sl.registerLazySingleton(() => GetBestSellingProductsUseCase(sl()));
+  sl.registerLazySingleton(() => GetCategoriesUseCase(sl()));
+  sl.registerLazySingleton(() => GetOffersUseCase(sl()));
+  sl.registerLazySingleton(() => GetAdsUseCase(sl()));
 
-  //! repositories
+  sl.registerLazySingleton(() => GetWishlistProductsUseCase(sl()));
+  sl.registerLazySingleton(() => AddProductToWishlistUseCase(sl()));
+  sl.registerLazySingleton(() => RemoveProductFromWishlistUseCase(sl()));
+
+  //! Repositories
+  sl.registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl(
+        remoteDataSource: sl(),
+      ));
+
+  sl.registerLazySingleton<WishlistRepository>(() => WishlistRepositoryImpl(
+        remoteDataSource: sl(),
+      ));
 
   //! Data sources
+  sl.registerLazySingleton<HomeRemoteDataSource>(
+      () => HomeRemoteDataSourceImpl(apiConsumer: sl()));
+  sl.registerLazySingleton<WishlistRemoteDataSource>(
+      () => WishlistRemoteDataSourceImpl(apiConsumer: sl()));
 }
 
 Future<void> _authInit() async {

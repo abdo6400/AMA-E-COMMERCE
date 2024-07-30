@@ -2,12 +2,14 @@ import 'package:ama/core/utils/app_values.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class EcommerceElement extends StatelessWidget {
+import '../../utils/app_strings.dart';
+
+class EcommerceComponents extends StatelessWidget {
   ///
   /// [child] to return a custom widget depending on the requirement of the user
   ///
   final Widget? child;
-  const EcommerceElement({super.key, this.child});
+  const EcommerceComponents({super.key, this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class EcommerceElement extends StatelessWidget {
   }
 
   /// Slider with network images
-  factory EcommerceElement.slider({
+  factory EcommerceComponents.slider({
     ///
     /// [slidersList] for slider images
     ///
@@ -68,7 +70,7 @@ class EcommerceElement extends StatelessWidget {
     Function()? onTap,
   }) {
     /// create a slider
-    return EcommerceElement(
+    return EcommerceComponents(
       child: VxSwiper.builder(
         aspectRatio: aspectRatio ?? 16 / 9,
         autoPlay: autoPlay ?? true,
@@ -94,179 +96,8 @@ class EcommerceElement extends StatelessWidget {
     );
   }
 
-  /// Product card
-  factory EcommerceElement.productCard({
-    ///
-    /// [image] is required
-    ///
-    /// image
-    ///
-    String? image,
-
-    ///
-    /// [title] for product title
-    ///
-    /// title
-    ///
-    String? title,
-
-    ///
-    /// [titleColor] for product title color
-    ///
-    /// title color
-    ///
-    Color? titleColor,
-
-    ///
-    /// [titleFontFamily] for product title font family
-    ///
-    /// title font family
-    ///
-    String? titleFontFamily,
-
-    ///
-    /// [titleFontSize] for product title font size
-    ///
-    /// title font size
-    ///
-    double? titleFontSize,
-
-    ///
-    /// [price] for product price
-    ///
-    /// price
-    ///
-    String? price,
-
-    ///
-    /// [priceColor] for product price color
-    ///
-    /// price color
-    ///
-    Color? priceColor,
-
-    ///
-    /// [priceFontFamily] for product price font family
-    ///
-    /// price font family
-    ///
-    String? priceFontFamily,
-
-    ///
-    /// [priceFontSize] for product price font size
-    ///
-    /// price font size
-    ///
-    double? priceFontSize,
-
-    ///
-    /// [description] for product description
-    ///
-    /// description
-    ///
-    String? description,
-
-    ///
-    /// [descriptionColor] for product description color
-    ///
-    /// description color
-    ///
-    Color? descriptionColor,
-
-    ///
-    /// [descriptionFontFamily] for product description font family
-    ///
-    /// description font family
-    ///
-    String? descriptionFontFamily,
-
-    ///
-    /// [descriptionFontSize] for product description font size
-    ///
-    /// description font size
-    ///
-    double? descriptionFontSize,
-
-    ///
-    /// [backgroundColor] for product card background color
-    ///
-    /// background color
-    ///
-    Color? backgroundColor,
-
-    ///
-    /// [width] for product card width
-    ///
-    /// width
-    ///
-    double? width,
-
-    ///
-    /// [boxFit] for product card image box fit
-    ///
-    /// box fit
-    ///
-    BoxFit? imageBoxFit,
-
-    ///
-    /// [onTap] for product card on tap
-    ///
-    /// on tap
-    ///
-    Function()? onTap,
-  }) {
-    return EcommerceElement(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 2,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(AppValues.radius * 10),
-              child: Image.network(
-                image ??
-                    'https://images.pexels.com/photos/380954/pexels-photo-380954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-                fit: imageBoxFit ?? BoxFit.fill,
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Column(
-              children: [
-                10.heightBox,
-                (title ?? 'Product Title')
-                    .text
-                    .color(titleColor ?? Colors.black)
-                    .fontFamily(titleFontFamily ?? 'sans-serif')
-                    .size(titleFontSize ?? 14)
-                    .make(),
-                10.heightBox,
-                (price ?? 'Rs. 2000')
-                    .text
-                    .color(priceColor ?? Colors.black)
-                    .fontFamily(priceFontFamily ?? 'sans-serif')
-                    .size(priceFontSize ?? 16)
-                    .make(),
-                10.heightBox,
-              ],
-            ),
-          )
-        ],
-      )
-          .box
-          .color(backgroundColor ?? Colors.white)
-          .topRightRounded(value: AppValues.radius * 40)
-          .bottomLeftRounded(value: AppValues.radius * 40)
-          .topLeftRounded(value: AppValues.radius * 10)
-          .bottomRightRounded(value: AppValues.radius * 10)
-          .make()
-          .onInkTap(onTap ?? () {}),
-    );
-  }
-
   /// Category card with network image
-  factory EcommerceElement.categoryCard({
+  factory EcommerceComponents.categoryCard({
     ///
     /// [image] for category image
     ///
@@ -365,7 +196,7 @@ class EcommerceElement extends StatelessWidget {
     ///
     BoxFit? imageBoxFit,
   }) {
-    return EcommerceElement(
+    return EcommerceComponents(
       child: Column(
         children: [
           Expanded(
@@ -403,7 +234,7 @@ class EcommerceElement extends StatelessWidget {
   }
 
   /// Cart item
-  factory EcommerceElement.cartItem({
+  factory EcommerceComponents.cartItem({
     ///
     /// [image] for cart item image
     ///
@@ -572,7 +403,7 @@ class EcommerceElement extends StatelessWidget {
     ///
     Color? productQuantityColor,
   }) {
-    return EcommerceElement(
+    return EcommerceComponents(
       child: Row(
         children: [
           Column(
@@ -658,7 +489,7 @@ class EcommerceElement extends StatelessWidget {
   }
 
   /// Profile Image
-  factory EcommerceElement.profileImage({
+  factory EcommerceComponents.profileImage({
     ///
     /// [image] for profile image
     ///
@@ -694,7 +525,7 @@ class EcommerceElement extends StatelessWidget {
     ///
     Function()? onTap,
   }) {
-    return EcommerceElement(
+    return EcommerceComponents(
       child: Image.network(
         image ?? 'https://picsum.photos/200/300',
         height: height ?? 100,
@@ -705,7 +536,7 @@ class EcommerceElement extends StatelessWidget {
   }
 
   /// Prfile image circular
-  factory EcommerceElement.profileImageCircular({
+  factory EcommerceComponents.profileImageCircular({
     ///
     /// [image] for profile image
     ///
@@ -741,7 +572,7 @@ class EcommerceElement extends StatelessWidget {
     ///
     Function()? onTap,
   }) {
-    return EcommerceElement(
+    return EcommerceComponents(
       child: Image.network(
         image ?? 'https://picsum.photos/200/300',
         height: height ?? 100,
@@ -752,7 +583,7 @@ class EcommerceElement extends StatelessWidget {
   }
 
   /// Increase Decrease Quantity
-  factory EcommerceElement.increaseDecreaseQuantity({
+  factory EcommerceComponents.increaseDecreaseQuantity({
     ///
     /// [productQuantity] for product quantity
     ///
@@ -788,7 +619,7 @@ class EcommerceElement extends StatelessWidget {
     ///
     Function()? decreaseQuantity,
   }) {
-    return EcommerceElement(
+    return EcommerceComponents(
       child: Row(
         children: [
           const Icon(
@@ -810,7 +641,7 @@ class EcommerceElement extends StatelessWidget {
     );
   }
 
-  factory EcommerceElement.menuItem({
+  factory EcommerceComponents.menuItem({
     ///
     /// [onTap] for on tap
     ///
@@ -853,7 +684,7 @@ class EcommerceElement extends StatelessWidget {
     ///
     Color? backgroundColor,
   }) {
-    return EcommerceElement(
+    return EcommerceComponents(
       child: ListTile(
         tileColor: backgroundColor ?? Colors.white,
         onTap: onTap ?? () {},
@@ -866,7 +697,7 @@ class EcommerceElement extends StatelessWidget {
   }
 
   /// Hedaing
-  factory EcommerceElement.heading({
+  factory EcommerceComponents.heading({
     ///
     /// [title] for title
     ///
@@ -958,7 +789,7 @@ class EcommerceElement extends StatelessWidget {
     ///
     Color? backgroundColor,
   }) {
-    return EcommerceElement(
+    return EcommerceComponents(
       child: ListTile(
         tileColor: backgroundColor ?? Colors.white,
         onTap: onTap ?? () {},
@@ -982,7 +813,7 @@ class EcommerceElement extends StatelessWidget {
   }
 
   /// Slide Show of product images
-  factory EcommerceElement.slideShow({
+  factory EcommerceComponents.slideShow({
     ///
     /// [images] for images
     ///
@@ -1032,7 +863,7 @@ class EcommerceElement extends StatelessWidget {
     ///
     double? imageHeight,
   }) {
-    return EcommerceElement(
+    return EcommerceComponents(
       child: VxSwiper.builder(
           autoPlay: autoPlay ?? true,
           height: height ?? 350,
@@ -1042,7 +873,30 @@ class EcommerceElement extends StatelessWidget {
           itemCount: images?.length ?? 3,
           itemBuilder: (context, index) {
             return Image.network(
-              images?[index] ?? 'https://picsum.photos/1260/760?random=${index + 1}',
+              images?[index] ??
+                  'https://picsum.photos/1260/760?random=${index + 1}',
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) {
+                  // Image has finished loading
+                  return child;
+                } else {
+                  // Image is still loading
+                  return Center(
+                    child: LinearProgressIndicator(
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded /
+                              (loadingProgress.expectedTotalBytes ?? 1)
+                          : null,
+                    ),
+                  );
+                }
+              },
+              errorBuilder: (context, error, stackTrace) {
+                // Handle image loading errors
+                return const Center(
+                  child: Icon(Icons.error, color: Colors.red),
+                );
+              },
               height: imageHeight ?? double.infinity,
               width: imageWidth ?? double.infinity,
               fit: imageBoxFit ?? BoxFit.cover,
@@ -1052,7 +906,7 @@ class EcommerceElement extends StatelessWidget {
   }
 
   /// Rating
-  factory EcommerceElement.rating({
+  factory EcommerceComponents.rating({
     ///
     /// [onRatingUpdate] for on rating update
     ///
@@ -1102,7 +956,7 @@ class EcommerceElement extends StatelessWidget {
     ///
     bool? isSelectable,
   }) {
-    return EcommerceElement(
+    return EcommerceComponents(
       child: VxRating(
         isSelectable: isSelectable ?? true,
         onRatingUpdate: onRatingUpdate ?? (value) {},
@@ -1111,6 +965,182 @@ class EcommerceElement extends StatelessWidget {
         count: count ?? 5,
         size: size ?? 20,
         stepInt: stepInt ?? true,
+      ),
+    );
+  }
+
+  factory EcommerceComponents.productCard({
+    /// The URL of the product image.
+    required String imageUrl,
+
+    /// The category name of the product.
+    String? categoryName,
+
+    /// The name of the product.
+    required String productName,
+
+    /// The price of the product.
+    required double price,
+
+    /// The currency symbol used for the price.
+    String currency = '\$',
+
+    /// A callback function triggered when the card is tapped.
+    VoidCallback? onTap,
+
+    /// A callback function triggered when the favorite button is pressed.
+    VoidCallback? onFavoritePressed,
+
+    /// Indicates whether the product is available.
+    bool isAvailable = true,
+
+    /// The background color of the card.
+    Color cardColor = Colors.white,
+
+    /// The text color used for labels and descriptions.
+    Color textColor = Colors.black,
+
+    /// The border radius of the card.
+    double borderRadius = 12.0,
+
+    /// The rating of the product (optional).
+    double? rating,
+    required BuildContext context,
+    bool isFavorite = false,
+
+    /// The discount percentage of the product (optional).
+    double? discountPercentage,
+  }) {
+    return EcommerceComponents(
+      child: InkWell(
+        radius: AppValues.radius * 10,
+        onTap: () {
+          if (onTap != null) {
+            onTap();
+          }
+        },
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppValues.radius * 20),
+          ),
+          elevation: 0.5,
+          // color: cardColor,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Product image and favorite button
+              Expanded(
+                flex: 4,
+                child: Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(borderRadius),
+                      child: Builder(
+                        builder: (context) {
+                          try {
+                            return Image.network(
+                              imageUrl,
+                              fit: BoxFit.fill,
+                              width: double.infinity,
+                              height: double.infinity,
+                            );
+                          } catch (e) {
+                            // Handle error
+                            return const Center(
+                              child: Text('Failed to load image'),
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                    Positioned(
+                      top: 8,
+                      right: 8,
+                      child: StatefulBuilder(builder: (context, setState) {
+                        return IconButton(
+                          onPressed: () {
+                            if (onFavoritePressed != null) {
+                              onFavoritePressed();
+                            }
+                          },
+                          icon: Icon(
+                            isFavorite
+                                ? Icons.favorite_rounded
+                                : Icons.favorite_outline_rounded,
+                            color: isFavorite ? Colors.red : Colors.white,
+                          ),
+                        );
+                      }),
+                    ),
+                  ],
+                ),
+              ),
+              // Product details
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: AppValues.paddingWidth * 10,
+                      vertical: AppValues.paddingHeight * 5),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: AppValues.sizeHeight * 2),
+                      Text(
+                        productName,
+                        style: Theme.of(context).textTheme.titleSmall,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+
+                      // Product rating (if available)
+                      if (rating != null)
+                        Padding(
+                          padding:
+                              EdgeInsets.only(top: AppValues.paddingHeight * 5),
+                          child: Row(
+                            children: List.generate(
+                              5,
+                              (index) => Icon(
+                                index < rating.round()
+                                    ? Icons.star
+                                    : Icons.star_border,
+                                color: Colors.amber,
+                                size: AppValues.font * 15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      SizedBox(height: AppValues.sizeHeight * 5),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text('$currency${price.toStringAsFixed(2)}',
+                              style: Theme.of(context).textTheme.bodyLarge),
+                          if (discountPercentage != null)
+                            SizedBox(
+                              width: AppValues.sizeWidth * 5,
+                            ),
+                          if (discountPercentage != null)
+                            Text(
+                                '${discountPercentage.toStringAsFixed(0)}% ${AppStrings.off}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .error)),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -23,6 +23,11 @@ import '../../features/authentication/presentation/screens/register/otp_screen.d
 import '../../features/authentication/presentation/screens/register/register_screen.dart';
 import '../../features/authentication/presentation/screens/register/user_information_screen.dart';
 import '../../features/check_out/presentation/screens/check_out_screen.dart';
+import '../../features/home/presentation/bloc/ads_bloc/ads_bloc.dart';
+import '../../features/home/presentation/bloc/best_prodcuts_bloc/best_selling_products_bloc.dart';
+import '../../features/home/presentation/bloc/categories_bloc/categories_bloc.dart';
+import '../../features/home/presentation/bloc/offers_bloc/offers_bloc.dart';
+import '../../features/wishlist/presentation/bloc/wishlist_bloc.dart';
 
 class Routes {
   //basic routes
@@ -153,7 +158,28 @@ class AppRoutes {
             settings: routeSettings);
       case Routes.mainRoute:
         return PageTransition(
-            child: const MainScreen(),
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (_) => sl<BestSellingProductsBloc>()
+                    ..add(FetchBestSellingProductsEvent()),
+                ),
+                BlocProvider(
+                    create: (_) =>
+                        sl<WishlistBloc>()..add(GetWishlistProductsEvent())),
+                BlocProvider(
+                  create: (_) =>
+                      sl<CategoriesBloc>()..add(FetchCategoriesEvent()),
+                ),
+                BlocProvider(
+                  create: (_) => sl<OffersBloc>()..add(FetchOffersEvent()),
+                ),
+                BlocProvider(
+                  create: (_) => sl<AdsBloc>()..add(FetchAdsEvent()),
+                ),
+              ],
+              child: const MainScreen(),
+            ),
             type: PageTransitionType.fade,
             settings: routeSettings);
       case Routes.checkOutRoute:

@@ -1,7 +1,4 @@
 import 'dart:io';
-
-import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,13 +47,10 @@ class UserApp extends StatelessWidget {
                     DevicePreviewScreenshot(
                         onScreenshot: (context, image) async {
                       try {
-                        // Get the bytes and format of the image
                         final bytes = image.bytes;
-
-                        final directoryPath =
+                        const directoryPath =
                             'D:\\Custom_Projects\\ama\\screenshots';
                         final screenshotsDir = Directory(directoryPath);
-                        // Get a list of existing screenshot files
                         final existingFiles = screenshotsDir
                             .listSync()
                             .where((file) =>
@@ -64,31 +58,19 @@ class UserApp extends StatelessWidget {
                             .map((file) =>
                                 path.basenameWithoutExtension(file.path))
                             .toList();
-                        print('existingFiles: $existingFiles');
-                        // Find the next available number from 1 to 1000
                         int nextNumber = 1;
                         while (existingFiles.contains('$nextNumber') &&
                             nextNumber <= 20) {
                           nextNumber++;
                         }
-
                         if (nextNumber > 20) {
-                          print('Screenshot limit reached');
                           return;
                         }
-
-                        // Generate the file path with the next available number
                         final filePath =
                             path.join(screenshotsDir.path, '$nextNumber.png');
-
-                        // Save the image to the file
                         final file = File(filePath);
                         await file.writeAsBytes(bytes);
-
-                        print('Screenshot saved to $filePath');
-                      } catch (e) {
-                        print('Error saving screenshot: $e');
-                      }
+                      } catch (e) {}
                     }),
                   ],
                   availableLocales:

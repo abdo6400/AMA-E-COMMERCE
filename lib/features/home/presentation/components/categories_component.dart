@@ -1,9 +1,14 @@
 import 'package:ama/config/locale/app_localizations.dart';
+import 'package:ama/core/components/default_components/default_simmer_loading.dart';
+import 'package:ama/core/utils/app_enums.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/components/app_components/ecommerce_components.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/app_values.dart';
+
+import '../bloc/categories_bloc/categories_bloc.dart';
 
 class CategoriesComponent extends StatelessWidget {
   const CategoriesComponent({super.key});
@@ -36,27 +41,38 @@ class CategoriesComponent extends StatelessWidget {
             ],
           ),
         ),
+        SizedBox(height: AppValues.sizeHeight * 20),
         SizedBox(
-          height: AppValues.sizeHeight * 20,
-        ),
-        SizedBox(
-          height: AppValues.sizeHeight * 100,
-          child: ListView.separated(
-            padding:
-                EdgeInsets.symmetric(horizontal: AppValues.paddingWidth * 10),
-            separatorBuilder: (context, index) => SizedBox(
-              width: AppValues.sizeWidth * 15,
-            ),
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (item, index) => EcommerceElement.categoryCard(
-              image: 'https://picsum.photos/1260/760?random=$index',
-              title: 'category $index',
-            ),
-            itemCount: 10,
-            shrinkWrap: true,
-            physics: const ClampingScrollPhysics(),
-          ),
-        ),
+            height: AppValues.sizeHeight * 100,
+            child: BlocBuilder<CategoriesBloc, CategoriesState>(
+              builder: (context, state) {
+                
+                if (state is CategoriesLoading) {
+                  return const DefaultSimmerLoading(
+                      type: SimmerLoadingType.listOfCircleText);
+                } else if (state is CategoriesError) {
+                  return Center(child: Text('Error: ${state.message}'));
+                } else if (state is CategoriesLoaded) {
+                  return ListView.separated(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: AppValues.paddingWidth * 10),
+                    separatorBuilder: (context, index) => SizedBox(
+                      width: AppValues.sizeWidth * 15,
+                    ),
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) =>
+                        EcommerceComponents.categoryCard(
+                      image: state.categories[index].image,
+                      title: state.categories[index].name,
+                    ),
+                    itemCount: state.categories.length,
+                    shrinkWrap: true,
+                    physics: const ClampingScrollPhysics(),
+                  );
+                }
+                return const SizedBox.shrink();
+              },
+            )),
       ],
     );
   }

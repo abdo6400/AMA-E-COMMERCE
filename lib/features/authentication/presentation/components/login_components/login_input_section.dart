@@ -98,10 +98,11 @@ class _LoginInputSectionState extends State<LoginInputSection> {
         margin:
                   EdgeInsets.symmetric(horizontal: AppValues.marginWidth * 30),
             onPressed: () {
-              if (_loginFormKey.currentState!.validate()) {
-                context.read<LoginBloc>().add(
-                    SignInEvent(email: _email.text, password: _password.text));
-              }
+              context.navigateAndFinish(screenRoute: Routes.mainRoute);
+              // if (_loginFormKey.currentState!.validate()) {
+              //   context.read<LoginBloc>().add(
+              //       SignInEvent(email: _email.text, password: _password.text));
+              // }
             },
             text: AppStrings.login,
           ),
