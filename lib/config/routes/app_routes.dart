@@ -1,7 +1,10 @@
 import 'package:ama/core/components/basic_components/starting_components/onboarding_screen.dart';
 import 'package:ama/core/components/basic_components/starting_components/splash_screen.dart';
 import 'package:ama/features/ama_chat/presentation/screens/ama_chat_screen.dart';
+import 'package:ama/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:ama/features/check_out/presentation/bloc/cubit/controller_screens_cubit.dart';
+import 'package:ama/features/product_details/presentation/bloc/product_details_bloc.dart';
+import 'package:ama/features/product_details/presentation/screens/product_details_screen.dart';
 import 'package:ama/features/profile/presentation/screens/languages_screen.dart';
 import 'package:ama/features/profile/presentation/screens/theme_screen.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +53,8 @@ class Routes {
 
   static const String notifcationsRoute = "/notifcationsRoute";
   static const String checkOutRoute = "/checkOutRoute";
+
+  static const String productDetailsRoute = "/productDetailsRoute";
 }
 
 class AppRoutes {
@@ -177,6 +182,9 @@ class AppRoutes {
                 BlocProvider(
                   create: (_) => sl<AdsBloc>()..add(FetchAdsEvent()),
                 ),
+                BlocProvider(
+                  create: (_) => sl<CartBloc>()..add(GetCartProductsEvent()),
+                ),
               ],
               child: const MainScreen(),
             ),
@@ -190,7 +198,15 @@ class AppRoutes {
             ),
             type: PageTransitionType.bottomToTop,
             settings: routeSettings);
-
+      case Routes.productDetailsRoute:
+        return PageTransition(
+            child: BlocProvider(
+              create: (context) => sl<ProductDetailsBloc>()
+                ..add(FetchProductDetailsEvent(routeSettings.arguments as int)),
+              child: const ProductDetailsScreen(),
+            ),
+            type: PageTransitionType.fade,
+            settings: routeSettings);
       default:
         return undefinedRoute();
     }
@@ -198,8 +214,9 @@ class AppRoutes {
 
   static Route<dynamic> undefinedRoute() {
     return MaterialPageRoute(
-        builder: ((context) => const Scaffold(
-              body: Center(
+        builder: ((context) => Scaffold(
+              appBar: AppBar(),
+              body: const Center(
                 child: Text(AppStrings.noRouteFound),
               ),
             )));

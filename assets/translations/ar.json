@@ -180,10 +180,17 @@
     "governorate": "المحافظة",
     "nearestLandmark": "أقرب معلم",
     "addNewAddress": "اضافة عنوان جديد",
-    "addNewCard":   "اضافة كارد جديد",
+    "addNewCard": "اضافة كارد جديد",
     "cardHolder": "حامل البطاقة",
     "expires": "تاريخ الانتهاء",
     "cvv": "CVV",
     "myOrder": "طلبي",
-    "discountAmount": "الخصم"
+    "discountAmount": "الخصم",
+    "description": "الوصف",
+    "stars": "نجوم",
+    "addToCart": "اضافة للسلة",
+    "moreInformation": "مزيد من المعلومات",
+    "colors": "الالوان",
+    "sizes": "الحجم",
+    "relatedProducts": "منتجات ذات صلة"
 }

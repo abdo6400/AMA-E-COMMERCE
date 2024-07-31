@@ -19,6 +19,13 @@ class EndPoints {
   static const String addToWishlist = "";
   static const String removeFromWishlist = "";
   static const String wishlist = "";
+
+  static const String updateCartQuantity = "";
+  static const String removeProductFromCart = "";
+  static const String addProductToCart = "";
+  static const String cartProducts = "";
+
+  static var productDetails;
 }
 
 class ApiKeys {

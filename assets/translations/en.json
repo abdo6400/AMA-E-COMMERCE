@@ -185,5 +185,12 @@
   "expires": "Expires",
   "cvv": "CVV",
   "myOrder": "My Order",
-  "discountAmount": "Discount Amount"
+  "discountAmount": "Discount Amount",
+  "description": "Description",
+  "stars": "Stars",
+  "addToCart": "Add To Cart",
+  "moreInformation": "More Information",
+  "colors": "Colors",
+  "sizes": "Sizes",
+  "relatedProducts": "Related Products"
 }

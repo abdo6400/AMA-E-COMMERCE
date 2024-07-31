@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/components/app_components/ecommerce_components.dart';
+import '../../../../core/components/default_components/default_error_message.dart';
+import '../../../../core/components/default_components/default_internet_connection_checker.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/app_values.dart';
 
@@ -44,14 +46,16 @@ class CategoriesComponent extends StatelessWidget {
         SizedBox(height: AppValues.sizeHeight * 20),
         SizedBox(
             height: AppValues.sizeHeight * 100,
-            child: BlocBuilder<CategoriesBloc, CategoriesState>(
+            child:CustomInternetConnectionChecker(child: BlocBuilder<CategoriesBloc, CategoriesState>(
               builder: (context, state) {
                 
                 if (state is CategoriesLoading) {
                   return const DefaultSimmerLoading(
                       type: SimmerLoadingType.listOfCircleText);
                 } else if (state is CategoriesError) {
-                  return Center(child: Text('Error: ${state.message}'));
+                   return DefaultErrorMessage(
+              message: state.message,
+            );
                 } else if (state is CategoriesLoaded) {
                   return ListView.separated(
                     padding: EdgeInsets.symmetric(
@@ -72,7 +76,7 @@ class CategoriesComponent extends StatelessWidget {
                 }
                 return const SizedBox.shrink();
               },
-            )),
+            ))),
       ],
     );
   }

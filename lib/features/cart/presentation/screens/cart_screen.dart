@@ -3,10 +3,9 @@ import 'package:ama/config/routes/app_routes.dart';
 import 'package:ama/core/components/default_components/default_button.dart';
 import 'package:ama/core/utils/commons.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/app_values.dart';
-import '../components/cart_item.dart';
+import '../components/cart_product_listview_component.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -33,27 +32,7 @@ class CartScreen extends StatelessWidget {
                   SizedBox(height: AppValues.sizeHeight * 5),
                   const Divider(),
                   SizedBox(height: AppValues.sizeHeight * 5),
-                  Expanded(
-                    child: ListView.separated(
-                        padding: EdgeInsets.only(
-                            bottom: AppValues.paddingHeight * 50),
-                        separatorBuilder: (context, index) => SizedBox(
-                              height: AppValues.sizeHeight * 10,
-                            ),
-                        itemCount: 3,
-                        itemBuilder: (context, index) {
-                          return CartItem(
-                            name: 'Graphic T-shirt',
-                            category: "clothing",
-                            price: 12.99,
-                            quantity: 4,
-                            imageUrl:
-                                'https://picsum.photos/1260/760?random=$index',
-                            onAdd: () => {},
-                            onRemove: () => {},
-                          );
-                        }),
-                  ),
+                  const Expanded(child: CartProductListviewComponent()),
                 ]),
           ),
         ),
@@ -118,10 +97,11 @@ class CartScreen extends StatelessWidget {
                   ),
                   SizedBox(height: AppValues.sizeHeight * 10),
                   DefaultButton(
-                      width: AppValues.screenWidth ,
+                      width: AppValues.screenWidth,
                       elevation: 0.5,
                       radius: AppValues.radius * 10,
-                      onPressed: () => context.navigateTo(screenRoute: Routes.checkOutRoute),
+                      onPressed: () =>
+                          context.navigateTo(screenRoute: Routes.checkOutRoute),
                       textColor: Theme.of(context).scaffoldBackgroundColor,
                       text: AppStrings.checkOut),
                 ],

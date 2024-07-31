@@ -190,9 +190,15 @@ class AppStrings {
   static const cardHolder = "cardHolder";
   static const expires = "expires";
   static const cvv = "cvv";
-
   static const myOrder = "myOrder";
+  static const discountAmount = "discountAmount";
+  static const description = "description";
+  static const stars = "stars";
+  static const addToCart = "addToCart";
+  static const moreInformation = "moreInformation";
 
-   static const discountAmount = "discountAmount";
+  static const colors = "colors";
+  static const sizes = "sizes";
 
+  static const relatedProducts = "relatedProducts";
 }

@@ -1,10 +1,14 @@
 import 'package:ama/config/locale/app_localizations.dart';
 import 'package:ama/core/components/default_components/default_simmer_loading.dart';
 import 'package:ama/core/utils/app_enums.dart';
+import 'package:ama/core/utils/commons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../config/routes/app_routes.dart';
 import '../../../../core/components/app_components/ecommerce_components.dart';
+import '../../../../core/components/default_components/default_error_message.dart';
+import '../../../../core/components/default_components/default_internet_connection_checker.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/app_values.dart';
 import '../bloc/best_prodcuts_bloc/best_selling_products_bloc.dart';
@@ -43,22 +47,24 @@ class BestSellerComponent extends StatelessWidget {
         SizedBox(height: AppValues.sizeHeight * 20),
         SizedBox(
             height: AppValues.sizeHeight * 500,
-            child:
+            child: CustomInternetConnectionChecker(child:
                 BlocBuilder<BestSellingProductsBloc, BestSellingProductsState>(
               builder: (context, state) {
                 if (state is BestSellingProductsLoading) {
                   return const DefaultSimmerLoading(
                       type: SimmerLoadingType.grid);
                 } else if (state is BestSellingProductsError) {
-                  return Center(child: Text('Error: ${state.message}'));
+                  return DefaultErrorMessage(
+                    message: state.message,
+                  );
                 } else if (state is BestSellingProductsLoaded) {
                   return GridView.builder(
-                    
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     padding: EdgeInsets.only(
                       left: AppValues.paddingWidth * 10,
                       right: AppValues.paddingWidth * 10,
+                      bottom: AppValues.paddingHeight * 10,
                     ),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       mainAxisSpacing: AppValues.sizeHeight * 10,
@@ -69,7 +75,10 @@ class BestSellerComponent extends StatelessWidget {
                     itemCount: state.products.length,
                     itemBuilder: (context, index) =>
                         EcommerceComponents.productCard(
-                      onTap: () {},
+                      onTap: () => context.navigateTo(
+                        screenRoute: Routes.productDetailsRoute,
+                        arg: state.products[index].id,
+                      ),
                       context: context,
                       imageUrl: state.products[index].image,
                       rating: state.products[index].rating,
@@ -81,8 +90,8 @@ class BestSellerComponent extends StatelessWidget {
                 }
                 return const SizedBox.shrink();
               },
-            )),
-        SizedBox(height: AppValues.sizeHeight * 50),
+            ))),
+        SizedBox(height: AppValues.sizeHeight * 30),
       ],
     );
   }

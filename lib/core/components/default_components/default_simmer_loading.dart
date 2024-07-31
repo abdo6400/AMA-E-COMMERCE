@@ -9,29 +9,106 @@ class DefaultSimmerLoading extends StatelessWidget {
   final double? width;
   final Axis? scrollDirection;
   const DefaultSimmerLoading(
-      {super.key, required this.type, this.height, this.width,this.scrollDirection});
+      {super.key,
+      required this.type,
+      this.height,
+      this.width,
+      this.scrollDirection});
 
   @override
   Widget build(BuildContext context) {
     switch (type) {
+      case SimmerLoadingType.detailsScreen:
+        return Shimmer.fromColors(
+            baseColor: Colors.grey.shade300,
+            highlightColor: Colors.grey.shade100,
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: height ?? AppValues.sizeHeight * 200,
+                      width: width ?? AppValues.screenWidth,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius:
+                            BorderRadius.circular(AppValues.radius * 20),
+                      ),
+                    ),
+                    SizedBox(
+                      height: AppValues.sizeHeight * 10,
+                    ),
+                    const Divider(),
+                    SizedBox(
+                      height: AppValues.sizeHeight * 10,
+                    ),
+                    Container(
+                      height: (AppValues.sizeHeight * 80),
+                      width: AppValues.screenWidth,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius:
+                            BorderRadius.circular(AppValues.radius * 20),
+                      ),
+                    ),
+                    SizedBox(
+                      height: AppValues.sizeHeight * 10,
+                    ),
+                    Container(
+                      height: (AppValues.sizeHeight * 90),
+                      width: AppValues.screenWidth,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius:
+                            BorderRadius.circular(AppValues.radius * 20),
+                      ),
+                    ),
+                    SizedBox(
+                      height: AppValues.sizeHeight * 10,
+                    ),
+                    Container(
+                      height: (AppValues.sizeHeight * 90),
+                      width: AppValues.screenWidth,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius:
+                            BorderRadius.circular(AppValues.radius * 20),
+                      ),
+                    ),
+                    SizedBox(
+                      height: AppValues.sizeHeight * 10,
+                    ),
+                    Container(
+                      height: height ?? AppValues.sizeHeight * 100,
+                      width: width ?? AppValues.screenWidth,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius:
+                            BorderRadius.circular(AppValues.radius * 20),
+                      ),
+                    ),
+                  ]),
+            ));
       case SimmerLoadingType.list:
         return Shimmer.fromColors(
           baseColor: Colors.grey.shade300,
           highlightColor: Colors.grey.shade100,
           child: ListView.separated(
             itemCount: 10,
-            padding:
-                EdgeInsets.symmetric(horizontal: AppValues.paddingWidth * 10),
+            padding: EdgeInsets.only(bottom: AppValues.paddingHeight * 50),
             separatorBuilder: (context, index) => SizedBox(
-              width: AppValues.sizeWidth * 15,
+              height: AppValues.sizeHeight * 10,
             ),
-            scrollDirection: scrollDirection??Axis.horizontal,
+            scrollDirection: scrollDirection ?? Axis.horizontal,
             itemBuilder: (context, index) => Padding(
               padding: EdgeInsets.all(AppValues.paddingWidth),
               child: Container(
-                height:
-                    AppValues.sizeHeight * 10, // Adjust size based on AppValues
-                color: Colors.white,
+                height: height ?? AppValues.sizeHeight * 100,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(AppValues.radius * 20),
+                ),
               ),
             ),
           ),
@@ -42,7 +119,7 @@ class DefaultSimmerLoading extends StatelessWidget {
           highlightColor: Colors.grey.shade100,
           child: GridView.builder(
             shrinkWrap: true,
-            scrollDirection: scrollDirection??Axis.horizontal,
+            scrollDirection: scrollDirection ?? Axis.horizontal,
             padding: EdgeInsets.only(
               left: AppValues.paddingWidth * 10,
               right: AppValues.paddingWidth * 10,
@@ -72,9 +149,7 @@ class DefaultSimmerLoading extends StatelessWidget {
               margin: EdgeInsets.all(AppValues.marginWidth),
               child: SizedBox(
                 width: width ?? double.infinity,
-                height: height ??
-                    AppValues.sizeHeight *
-                        100, // Adjust size based on AppValues
+                height: height ?? AppValues.sizeHeight * 100,
               ),
             ),
           ),
@@ -84,8 +159,8 @@ class DefaultSimmerLoading extends StatelessWidget {
           baseColor: Colors.grey.shade300,
           highlightColor: Colors.grey.shade100,
           child: Container(
-            width: AppValues.sizeWidth * 10, // Adjust size based on AppValues
-            height: AppValues.sizeHeight * 2, // Adjust size based on AppValues
+            width: AppValues.sizeWidth * 10,
+            height: AppValues.sizeHeight * 2,
             color: Colors.white,
           ),
         );
@@ -94,8 +169,8 @@ class DefaultSimmerLoading extends StatelessWidget {
           baseColor: Colors.grey.shade300,
           highlightColor: Colors.grey.shade100,
           child: Container(
-            width: AppValues.sizeWidth * 50, // Adjust size based on AppValues
-            height: AppValues.sizeHeight * 50, // Adjust size based on AppValues
+            width: AppValues.sizeWidth * 50,
+            height: AppValues.sizeHeight * 50,
             decoration: const BoxDecoration(
               color: Colors.white,
               shape: BoxShape.circle,
@@ -110,10 +185,8 @@ class DefaultSimmerLoading extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width:
-                    AppValues.sizeWidth * 80, // Adjust size based on AppValues
-                height:
-                    AppValues.sizeHeight * 80, // Adjust size based on AppValues
+                width: AppValues.sizeWidth * 80,
+                height: AppValues.sizeHeight * 80,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.circle,
@@ -121,10 +194,8 @@ class DefaultSimmerLoading extends StatelessWidget {
               ),
               SizedBox(height: AppValues.paddingHeight),
               Container(
-                width:
-                    AppValues.sizeWidth * 60, // Adjust size based on AppValues
-                height:
-                    AppValues.sizeHeight * 2, // Adjust size based on AppValues
+                width: AppValues.sizeWidth * 60,
+                height: AppValues.sizeHeight * 2,
                 color: Colors.white,
               ),
             ],
@@ -141,14 +212,12 @@ class DefaultSimmerLoading extends StatelessWidget {
             separatorBuilder: (context, index) => SizedBox(
               width: AppValues.sizeWidth * 15,
             ),
-            scrollDirection: scrollDirection??Axis.horizontal,
+            scrollDirection: scrollDirection ?? Axis.horizontal,
             itemBuilder: (context, index) => Padding(
               padding: EdgeInsets.all(AppValues.paddingWidth),
               child: Container(
-                width:
-                    AppValues.sizeWidth * 80, // Adjust size based on AppValues
-                height:
-                    AppValues.sizeHeight * 80, // Adjust size based on AppValues
+                width: AppValues.sizeWidth * 80,
+                height: AppValues.sizeHeight * 80,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.circle,
@@ -168,7 +237,7 @@ class DefaultSimmerLoading extends StatelessWidget {
             separatorBuilder: (context, index) => SizedBox(
               width: AppValues.sizeWidth * 15,
             ),
-            scrollDirection: scrollDirection??Axis.horizontal,
+            scrollDirection: scrollDirection ?? Axis.horizontal,
             itemBuilder: (context, index) => Padding(
               padding: EdgeInsets.all(AppValues.paddingWidth),
               child: Card(
@@ -176,9 +245,7 @@ class DefaultSimmerLoading extends StatelessWidget {
                 margin: EdgeInsets.all(AppValues.marginWidth),
                 child: SizedBox(
                   width: width ?? double.infinity,
-                  height: height ??
-                      AppValues.sizeHeight *
-                          20, // Adjust size based on AppValues
+                  height: height ?? AppValues.sizeHeight * 20,
                 ),
               ),
             ),
@@ -198,14 +265,12 @@ class DefaultSimmerLoading extends StatelessWidget {
               separatorBuilder: (context, index) => SizedBox(
                 width: AppValues.sizeWidth * 15,
               ),
-              scrollDirection: scrollDirection??Axis.horizontal,
+              scrollDirection: scrollDirection ?? Axis.horizontal,
               itemBuilder: (context, index) => Padding(
                 padding: EdgeInsets.all(AppValues.paddingWidth),
                 child: Container(
-                  width: AppValues.sizeWidth *
-                      10, // Adjust size based on AppValues
-                  height: AppValues.sizeHeight *
-                      2, // Adjust size based on AppValues
+                  width: AppValues.sizeWidth * 10,
+                  height: AppValues.sizeHeight * 2,
                   color: Colors.white,
                 ),
               ),
@@ -218,7 +283,7 @@ class DefaultSimmerLoading extends StatelessWidget {
           highlightColor: Colors.grey.shade100,
           child: ListView.separated(
             itemCount: 10,
-            scrollDirection: scrollDirection??Axis.horizontal,
+            scrollDirection: scrollDirection ?? Axis.horizontal,
             padding:
                 EdgeInsets.symmetric(horizontal: AppValues.paddingWidth * 10),
             separatorBuilder: (context, index) => SizedBox(
@@ -231,8 +296,7 @@ class DefaultSimmerLoading extends StatelessWidget {
                   Expanded(
                     flex: 10,
                     child: Container(
-                      width: AppValues.sizeWidth *
-                          80, // Adjust size based on AppValues
+                      width: AppValues.sizeWidth * 80,
                       decoration: const BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
@@ -242,9 +306,7 @@ class DefaultSimmerLoading extends StatelessWidget {
                   SizedBox(height: AppValues.paddingHeight),
                   Expanded(
                     child: Container(
-                      width: AppValues.sizeWidth *
-                          60, // Adjust size based on AppValues
-
+                      width: AppValues.sizeWidth * 60,
                       color: Colors.white,
                     ),
                   ),

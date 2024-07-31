@@ -1,9 +1,7 @@
 import 'package:ama/config/locale/app_localizations.dart';
 import 'package:avatar_glow/avatar_glow.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_strings.dart';
 import '../../utils/app_values.dart';
@@ -44,14 +42,13 @@ class _NoInternet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: ScreenUtil().screenHeight,
-      width: ScreenUtil().screenHeight,
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CircleAvatar(
-            radius: AppValues.radius * 60,
+            radius: AppValues.radius * 40,
             backgroundColor: AppColors.white,
             child: AvatarGlow(
               animate: true,
@@ -61,14 +58,14 @@ class _NoInternet extends StatelessWidget {
               repeat: true,
               child: Icon(
                 Icons.wifi_off_outlined,
-                size: AppValues.font * 40,
+                size: AppValues.font * 30,
                 color: AppColors.primary,
               ),
             ),
           ),
           Text(
             AppStrings.noInternetConnection.tr(context),
-            style: Theme.of(context).textTheme.titleLarge,
+            style: Theme.of(context).textTheme.bodyMedium,
           )
         ],
       ),

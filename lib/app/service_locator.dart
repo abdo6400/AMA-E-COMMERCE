@@ -38,6 +38,14 @@ import '../features/authentication/presentation/bloc/forget_password/forget_pass
 import '../features/authentication/presentation/bloc/login/login_bloc.dart';
 import '../features/authentication/presentation/bloc/register/register_bloc.dart';
 import '../features/authentication/presentation/bloc/timer/timer_cubit.dart';
+import '../features/cart/data/datasources/cart_remote_data_source.dart';
+import '../features/cart/data/repositories/cart_repository_imp.dart';
+import '../features/cart/domain/repositories/cart_repository.dart';
+import '../features/cart/domain/usecases/add_product_to_cart_usecase.dart';
+import '../features/cart/domain/usecases/get_cart_products_usecase.dart';
+import '../features/cart/domain/usecases/remove_product_from_cart_usecase.dart';
+import '../features/cart/domain/usecases/update_cart_quantity_usecase.dart';
+import '../features/cart/presentation/bloc/cart_bloc.dart';
 import '../features/home/domain/usecases/get_ads_usecase.dart';
 import '../features/home/domain/usecases/get_best_selling_products_usecase.dart';
 import '../features/home/domain/usecases/get_categories_usecase.dart';
@@ -46,6 +54,11 @@ import '../features/home/presentation/bloc/ads_bloc/ads_bloc.dart';
 import '../features/home/presentation/bloc/best_prodcuts_bloc/best_selling_products_bloc.dart';
 import '../features/home/presentation/bloc/categories_bloc/categories_bloc.dart';
 import '../features/home/presentation/bloc/offers_bloc/offers_bloc.dart';
+import '../features/product_details/data/datasources/product_details_remote_data_source.dart';
+import '../features/product_details/data/repositories/product_details_repository_impl.dart';
+import '../features/product_details/domain/repositories/product_details_repository.dart';
+import '../features/product_details/domain/usecases/get_product_details_usecase.dart';
+import '../features/product_details/presentation/bloc/product_details_bloc.dart';
 import '../features/wishlist/data/datasources/wishlist_remote_data_source.dart';
 import '../features/wishlist/data/repositories/wishlist_repository_impl.dart';
 import '../features/wishlist/domain/repositories/wishlist_repository.dart';
@@ -95,16 +108,16 @@ Future<void> serviceLocatorInit() async {
 Future<void> _app() async {
   //! Blocs or cubits
   sl.registerLazySingleton(() => BestSellingProductsBloc(sl()));
-  sl.registerLazySingleton(() => CategoriesBloc(sl())); // Add CategoriesBloc
-  sl.registerLazySingleton(() => OffersBloc(sl())); // Add OffersBloc
-  sl.registerLazySingleton(() => AdsBloc(sl())); // Add AdsBloc
-
+  sl.registerLazySingleton(() => CategoriesBloc(sl()));
+  sl.registerLazySingleton(() => OffersBloc(sl()));
+  sl.registerLazySingleton(() => AdsBloc(sl()));
   sl.registerLazySingleton(() => WishlistBloc(
-        getWishlistProductsUseCase: sl(),
-        addProductToWishlistUseCase: sl(),
-        removeProductFromWishlistUseCase: sl(),
-      )); // Add WishlistBloc
-
+        sl(),
+        sl(),
+        sl(),
+      ));
+  sl.registerFactory(() => ProductDetailsBloc(sl()));
+  sl.registerLazySingleton(() => CartBloc(sl(), sl(), sl(), sl()));
   //! Use cases
   sl.registerLazySingleton(() => GetBestSellingProductsUseCase(sl()));
   sl.registerLazySingleton(() => GetCategoriesUseCase(sl()));
@@ -115,6 +128,11 @@ Future<void> _app() async {
   sl.registerLazySingleton(() => AddProductToWishlistUseCase(sl()));
   sl.registerLazySingleton(() => RemoveProductFromWishlistUseCase(sl()));
 
+  sl.registerLazySingleton(() => GetCartProductsUseCase(sl()));
+  sl.registerLazySingleton(() => AddProductToCartUseCase(sl()));
+  sl.registerLazySingleton(() => RemoveProductFromCartUseCase(sl()));
+  sl.registerLazySingleton(() => UpdateCartQuantityUseCase(sl()));
+  sl.registerLazySingleton(() => GetProductDetailsUseCase(sl()));
   //! Repositories
   sl.registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl(
         remoteDataSource: sl(),
@@ -123,12 +141,21 @@ Future<void> _app() async {
   sl.registerLazySingleton<WishlistRepository>(() => WishlistRepositoryImpl(
         remoteDataSource: sl(),
       ));
-
+  sl.registerLazySingleton<CartRepository>(() => CartRepositoryImpl(
+        remoteDataSource: sl(),
+      ));
+  sl.registerLazySingleton<ProductRepository>(
+      () => ProductRepositoryImpl(remoteDataSource: sl()));
   //! Data sources
   sl.registerLazySingleton<HomeRemoteDataSource>(
       () => HomeRemoteDataSourceImpl(apiConsumer: sl()));
   sl.registerLazySingleton<WishlistRemoteDataSource>(
       () => WishlistRemoteDataSourceImpl(apiConsumer: sl()));
+  sl.registerLazySingleton<CartRemoteDataSource>(() => CartRemoteDataSourceImpl(
+        apiConsumer: sl(),
+      ));
+  sl.registerLazySingleton<ProductRemoteDataSource>(
+      () => ProductRemoteDataSourceImpl(apiConsumer: sl()));
 }
 
 Future<void> _authInit() async {

@@ -14,13 +14,7 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
   final AddProductToWishlistUseCase _addProductToWishlistUseCase;
   final RemoveProductFromWishlistUseCase _removeProductFromWishlistUseCase;
 
-  WishlistBloc({
-    required GetWishlistProductsUseCase getWishlistProductsUseCase,
-    required AddProductToWishlistUseCase addProductToWishlistUseCase,
-    required RemoveProductFromWishlistUseCase removeProductFromWishlistUseCase,
-  })  : _getWishlistProductsUseCase = getWishlistProductsUseCase,
-        _addProductToWishlistUseCase = addProductToWishlistUseCase,
-        _removeProductFromWishlistUseCase = removeProductFromWishlistUseCase,
+  WishlistBloc(this._getWishlistProductsUseCase, this._addProductToWishlistUseCase, this._removeProductFromWishlistUseCase)  : 
         super(WishlistInitial()) {
     on<AddProductToWishlistEvent>(_onAddProductToWishlistEvent);
     on<RemoveProductFromWishlistEvent>(_onRemoveProductFromWishlistEvent);

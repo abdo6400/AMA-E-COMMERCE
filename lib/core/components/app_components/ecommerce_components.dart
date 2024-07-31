@@ -622,20 +622,24 @@ class EcommerceComponents extends StatelessWidget {
     return EcommerceComponents(
       child: Row(
         children: [
-          const Icon(
+          Icon(
             Icons.remove,
-            color: Colors.black,
+            size: AppValues.font * 25,
           ).box.roundedSM.make().onInkTap(decreaseQuantity ?? () {}),
           5.widthBox,
-          (productQuantity ?? 0)
+          (productQuantity ?? 1)
               .text
-              .color(productQuantityColor ?? Colors.black)
+              .color(productQuantityColor)
+              .size(AppValues.font * 20)
               .make(),
           5.widthBox,
-          const Icon(
-            Icons.add,
-            color: Colors.black,
-          ).box.roundedSM.make().onInkTap(increaseQuantity ?? () {}),
+          CircleAvatar(
+            child: Icon(
+              Icons.add,
+              size: AppValues.font * 20,
+              
+            ).box.roundedSM.make().onInkTap(increaseQuantity ?? () {}),
+          ),
         ],
       ),
     );
@@ -906,59 +910,62 @@ class EcommerceComponents extends StatelessWidget {
   }
 
   /// Rating
-  factory EcommerceComponents.rating({
-    ///
-    /// [onRatingUpdate] for on rating update
-    ///
-    /// on rating update
-    ///
-    Function(String)? onRatingUpdate,
+  factory EcommerceComponents.rating(
+      {
+      ///
+      /// [onRatingUpdate] for on rating update
+      ///
+      /// on rating update
+      ///
+      Function(String)? onRatingUpdate,
 
-    ///
-    /// [normalColor] for normal color
-    ///
-    /// normal color
-    ///
-    Color? normalColor,
+      ///
+      /// [normalColor] for normal color
+      ///
+      /// normal color
+      ///
+      Color? normalColor,
 
-    ///
-    /// [selectionColor] for selection color
-    ///
-    /// selection color
-    ///
-    Color? selectionColor,
+      ///
+      /// [selectionColor] for selection color
+      ///
+      /// selection color
+      ///
+      Color? selectionColor,
 
-    ///
-    /// [count] for count
-    ///
-    /// count
-    ///
-    int? count,
+      ///
+      /// [count] for count
+      ///
+      /// count
+      ///
+      int? count,
 
-    ///
-    /// [size] for size
-    ///
-    /// size
-    ///
-    double? size,
+      ///
+      /// [size] for size
+      ///
+      /// size
+      ///
+      double? size,
 
-    ///
-    /// [stepInt] for step int
-    ///
-    /// step int
-    ///
-    bool? stepInt,
+      ///
+      /// [stepInt] for step int
+      ///
+      /// step int
+      ///
+      bool? stepInt,
 
-    ///
-    /// [isSelectable] for is selectable
-    ///
-    /// is selectable
-    ///
-    bool? isSelectable,
-  }) {
+      ///
+      /// [isSelectable] for is selectable
+      ///
+      /// is selectable
+      ///
+      bool? isSelectable,
+      double? value}) {
     return EcommerceComponents(
       child: VxRating(
         isSelectable: isSelectable ?? true,
+        value: value ?? 10,
+        maxRating: 5,
         onRatingUpdate: onRatingUpdate ?? (value) {},
         normalColor: normalColor ?? Colors.grey.shade300,
         selectionColor: selectionColor ?? Colors.amber,
