@@ -1,4 +1,5 @@
 import 'package:ama/config/locale/app_localizations.dart';
+import 'package:ama/core/utils/app_colors.dart';
 import 'package:ama/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,11 +32,13 @@ class SizesComponent extends StatelessWidget {
                   child: Chip(
                       color: WidgetStateColor.resolveWith((_) =>
                           sizes[index] == state
-                              ? Theme.of(context).colorScheme.error
+                              ? Theme.of(context).primaryColor
                               : Theme.of(context).scaffoldBackgroundColor),
                       label: Text(
                         sizes[index],
-                        style: Theme.of(context).textTheme.bodyLarge,
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            color:
+                                sizes[index] == state ? AppColors.white : null),
                       )),
                 ),
               ),

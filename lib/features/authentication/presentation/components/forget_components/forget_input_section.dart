@@ -39,7 +39,7 @@ class _ForgetInputSectionState extends State<ForgetInputSection> {
               prefix: Icons.email_outlined,
               label: AppStrings.email),
           SizedBox(
-            height: AppValues.sizeHeight * 40,
+            height: AppValues.sizeHeight * 20,
           ),
           DefaultButton(
             margin:

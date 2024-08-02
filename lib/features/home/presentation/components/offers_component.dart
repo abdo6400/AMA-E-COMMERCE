@@ -1,4 +1,6 @@
 import 'package:ama/config/locale/app_localizations.dart';
+import 'package:ama/config/routes/app_routes.dart';
+import 'package:ama/core/utils/commons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,7 +35,9 @@ class OffersComponent extends StatelessWidget {
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               InkWell(
-                onTap: () {},
+                onTap: () => context.navigateTo(
+                    screenRoute: Routes.offersRoute,
+                    arg: context.read<OffersBloc>()),
                 child: Text(
                   AppStrings.viewAll.tr(context),
                   style: Theme.of(context).textTheme.titleMedium,

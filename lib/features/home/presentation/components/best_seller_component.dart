@@ -4,7 +4,6 @@ import 'package:ama/core/utils/app_enums.dart';
 import 'package:ama/core/utils/commons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/components/app_components/ecommerce_components.dart';
 import '../../../../core/components/default_components/default_error_message.dart';
@@ -34,7 +33,9 @@ class BestSellerComponent extends StatelessWidget {
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               InkWell(
-                onTap: () {},
+                onTap: () => context.navigateTo(
+                    screenRoute: Routes.bestSellingProductsRoute,
+                    arg: context.read<BestSellingProductsBloc>()),
                 child: Text(
                   AppStrings.viewAll.tr(context),
                   style: Theme.of(context).textTheme.titleMedium,

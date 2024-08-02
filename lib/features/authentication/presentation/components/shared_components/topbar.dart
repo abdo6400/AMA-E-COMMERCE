@@ -3,10 +3,47 @@ import 'package:ama/config/locale/app_localizations.dart';
 import 'package:ama/core/utils/app_values.dart';
 import '../../../../../core/utils/app_images.dart';
 
-class TopBar extends StatelessWidget {
+class TopBar extends StatefulWidget {
   final String title;
   final String subTitle;
+
   const TopBar({super.key, required this.title, required this.subTitle});
+
+  @override
+  _TopBarState createState() => _TopBarState();
+}
+
+class _TopBarState extends State<TopBar> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _fadeInAnimation;
+  late Animation<double> _rotateAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
+    _fadeInAnimation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeIn,
+    );
+    _rotateAnimation = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeInOut,
+      ),
+    );
+
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,19 +60,25 @@ class TopBar extends StatelessWidget {
             children: [
               Flexible(
                 flex: 1,
-                child: Text(title.tr(context),
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headlineSmall!),
+                child: FadeTransition(
+                  opacity: _fadeInAnimation,
+                  child: Text(widget.title.tr(context),
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headlineSmall!),
+                ),
               ),
               Flexible(
                 flex: 1,
-                child: Material(
-                  elevation: 1,
-                  type: MaterialType.circle,
-                  color: Theme.of(context).cardColor,
-                  child: CircleAvatar(
-                    radius: AppValues.radius * 40,
-                    backgroundImage: const AssetImage(AppImages.appLogo),
+                child: RotationTransition(
+                  turns: _rotateAnimation,
+                  child: Material(
+                    elevation: 1,
+                    type: MaterialType.circle,
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    child: CircleAvatar(
+                      radius: AppValues.radius * 40,
+                      backgroundImage: const AssetImage(AppImages.appLogo),
+                    ),
                   ),
                 ),
               ),
@@ -44,11 +87,14 @@ class TopBar extends StatelessWidget {
           SizedBox(
             height: AppValues.sizeHeight * 35,
           ),
-          Text(
-            subTitle.tr(context),
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: Theme.of(context).hintColor
+          FadeTransition(
+            opacity: _fadeInAnimation,
+            child: Text(
+              widget.subTitle.tr(context),
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    color: Theme.of(context).hintColor,
+                  ),
             ),
           ),
         ],

@@ -8,6 +8,7 @@ class AAppBarTheme {
     iconTheme: IconThemeData(color: AppColors.black, size: AppValues.font * 25),
     backgroundColor: AppColors.white,
     elevation: 0,
+    scrolledUnderElevation: 0,
     titleTextStyle: AppTextTheme.lightTextTheme.labelLarge!.copyWith(
       color: AppColors.black,
     ),
@@ -17,6 +18,7 @@ class AAppBarTheme {
     iconTheme: IconThemeData(color: AppColors.white, size: AppValues.font * 25),
     backgroundColor: AppColors.black,
     elevation: 0,
+    scrolledUnderElevation: 0,
     titleTextStyle: AppTextTheme.lightTextTheme.labelLarge!.copyWith(
       color: AppColors.white,
     ),

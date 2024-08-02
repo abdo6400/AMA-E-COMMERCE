@@ -21,7 +21,8 @@ class ImageViewComponent extends StatelessWidget {
         ]),
       itemWidth: AppValues.screenWidth * 0.92,
       itemBuilder: (context, index) {
-        return Padding(
+        return Container(
+          margin: EdgeInsets.only(top: AppValues.sizeHeight*20),
           padding: EdgeInsets.symmetric(
               vertical: AppValues.paddingHeight * 20,
               horizontal: AppValues.paddingWidth * 20),

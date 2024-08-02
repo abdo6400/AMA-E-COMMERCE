@@ -38,8 +38,24 @@ class ProductDetailsScreen extends StatelessWidget {
                         SliverAppBar(
                           floating: true,
                           snap: true,
-                          expandedHeight: AppValues.sizeHeight * 200,
+                          expandedHeight: AppValues.sizeHeight * 220,
                           pinned: true,
+                          scrolledUnderElevation: 0,
+                          actions: [
+                            SizedBox(
+                              width: AppValues.sizeWidth * 10,
+                            ),
+                            IconButton.outlined(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.shopping_bag_outlined,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                )),
+                            SizedBox(
+                              width: AppValues.sizeWidth * 10,
+                            ),
+                          ],
                           flexibleSpace:
                               ImageViewComponent(images: product.images),
                         )
@@ -60,7 +76,9 @@ class ProductDetailsScreen extends StatelessWidget {
                         ),
                     ],
                     child: Scaffold(
-                      bottomNavigationBar: const BottomBarComponent(),
+                      bottomNavigationBar: BottomBarComponent(
+                        isFavorite: false,
+                      ),
                       body: ListView(
                         padding: EdgeInsets.symmetric(
                             horizontal: AppValues.paddingWidth * 20,

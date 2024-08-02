@@ -30,6 +30,9 @@ import '../../features/home/presentation/bloc/ads_bloc/ads_bloc.dart';
 import '../../features/home/presentation/bloc/best_prodcuts_bloc/best_selling_products_bloc.dart';
 import '../../features/home/presentation/bloc/categories_bloc/categories_bloc.dart';
 import '../../features/home/presentation/bloc/offers_bloc/offers_bloc.dart';
+import '../../features/home/presentation/screens/best_selling_products_screen.dart';
+import '../../features/home/presentation/screens/categories_screen.dart';
+import '../../features/home/presentation/screens/offers_screen.dart';
 import '../../features/wishlist/presentation/bloc/wishlist_bloc.dart';
 
 class Routes {
@@ -50,11 +53,15 @@ class Routes {
   static const String mainRoute = "/mainRoute";
   static const String changePasswordRoute = "/changePasswordRoute";
   static const String editProfileRoute = "/editProfileRoute";
-
   static const String notifcationsRoute = "/notifcationsRoute";
   static const String checkOutRoute = "/checkOutRoute";
-
   static const String productDetailsRoute = "/productDetailsRoute";
+  static const String categoriesRoute = "/categoriesRoute";
+
+  static const String offersRoute = "/offersRoute";
+  static const String bestSellingProductsRoute = "/bestSellingProductsRoute";
+  static const String subCategoriesRoute = "/subCategoriesRoute";
+  static const String productsRoute = "/productsRoute";
 }
 
 class AppRoutes {
@@ -206,6 +213,21 @@ class AppRoutes {
               child: const ProductDetailsScreen(),
             ),
             type: PageTransitionType.fade,
+            settings: routeSettings);
+      case Routes.categoriesRoute:
+        return PageTransition(
+            child: const CategoriesScreen(),
+            type: PageTransitionType.leftToRightWithFade,
+            settings: routeSettings);
+      case Routes.bestSellingProductsRoute:
+        return PageTransition(
+            child: const BestSellingProductsScreen(),
+            type: PageTransitionType.leftToRightWithFade,
+            settings: routeSettings);
+      case Routes.offersRoute:
+        return PageTransition(
+            child: const OffersScreen(),
+            type: PageTransitionType.leftToRightWithFade,
             settings: routeSettings);
       default:
         return undefinedRoute();

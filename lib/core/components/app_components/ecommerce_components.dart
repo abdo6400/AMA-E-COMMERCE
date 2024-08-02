@@ -637,7 +637,6 @@ class EcommerceComponents extends StatelessWidget {
             child: Icon(
               Icons.add,
               size: AppValues.font * 20,
-              
             ).box.roundedSM.make().onInkTap(increaseQuantity ?? () {}),
           ),
         ],
@@ -1066,6 +1065,9 @@ class EcommerceComponents extends StatelessWidget {
                       child: StatefulBuilder(builder: (context, setState) {
                         return IconButton(
                           onPressed: () {
+                            setState(() {
+                              isFavorite = !isFavorite;
+                            });
                             if (onFavoritePressed != null) {
                               onFavoritePressed();
                             }
@@ -1099,8 +1101,6 @@ class EcommerceComponents extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),
-
-                      // Product rating (if available)
                       if (rating != null)
                         Padding(
                           padding:

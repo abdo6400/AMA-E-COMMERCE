@@ -22,6 +22,7 @@ class AppTheme {
     return FlexThemeData.dark(
         useMaterial3: true,
         useMaterial3ErrorColors: true,
+        scaffoldBackground: AppColors.nearlyBlack,
         scheme: FlexScheme.blueM3,
         primary: AppColors.blueLight,
         fontFamily: 'Cairo',

@@ -30,12 +30,13 @@ class LangAppbar extends StatelessWidget implements PreferredSizeWidget {
                   child: GestureDetector(
                     onTap: Navigator.of(context).pop,
                     child: CircleAvatar(
-                        radius: AppValues.radius * 15,
-                        backgroundColor: Theme.of(context).cardColor,
-                        child: Icon(
-                          Icons.arrow_back_outlined,
-                          color: Theme.of(context).hintColor,
-                        )),
+                      // radius: AppValues.radius * 20,
+                      backgroundColor: Theme.of(context).cardColor,
+                      child: Icon(
+                        Icons.arrow_back_outlined,
+                        color: Theme.of(context).hintColor,
+                      ),
+                    ),
                   )),
             Material(
                 elevation: 0.5,
