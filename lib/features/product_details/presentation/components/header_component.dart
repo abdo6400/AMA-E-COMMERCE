@@ -3,6 +3,9 @@ import 'package:ama/core/components/app_components/ecommerce_components.dart';
 import 'package:ama/core/utils/app_strings.dart';
 import 'package:ama/core/utils/app_values.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../bloc/cubits/counter_cubit/counter_cubit.dart';
 
 class HeaderComponent extends StatelessWidget {
   final String title;
@@ -25,7 +28,17 @@ class HeaderComponent extends StatelessWidget {
           children: [
             Text(title, style: Theme.of(context).textTheme.headlineSmall),
             const Spacer(),
-            EcommerceComponents.increaseDecreaseQuantity()
+            BlocBuilder<CounterCubit, int>(
+              builder: (context, state) {
+                return EcommerceComponents.increaseDecreaseQuantity(
+                  productQuantity: state,
+                  increaseQuantity: () =>
+                      context.read<CounterCubit>().increment(),
+                  decreaseQuantity: () =>
+                      context.read<CounterCubit>().decrement(),
+                );
+              },
+            )
           ],
         ),
         SizedBox(

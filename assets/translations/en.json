@@ -192,5 +192,10 @@
   "moreInformation": "More Information",
   "colors": "Colors",
   "sizes": "Sizes",
-  "relatedProducts": "Related Products"
+  "relatedProducts": "Related Products",
+  "send": "Send",
+  "signInWithGoogle": "Sign in with Google",
+  "signInAsGuest": "Sign in as Guest"
+
+
 }

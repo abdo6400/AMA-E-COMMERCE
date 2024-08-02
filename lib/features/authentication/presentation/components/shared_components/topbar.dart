@@ -25,11 +25,7 @@ class TopBar extends StatelessWidget {
                 flex: 1,
                 child: Text(title.tr(context),
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          color: Theme.of(context).cardColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: AppValues.font * 25,
-                        )),
+                    style: Theme.of(context).textTheme.headlineSmall!),
               ),
               Flexible(
                 flex: 1,
@@ -51,7 +47,9 @@ class TopBar extends StatelessWidget {
           Text(
             subTitle.tr(context),
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              color: Theme.of(context).hintColor
+            ),
           ),
         ],
       ),

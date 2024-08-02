@@ -1,8 +1,9 @@
 import 'package:ama/config/locale/app_localizations.dart';
 import 'package:ama/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/app_values.dart';
+import '../bloc/cubits/size_cubit/size_cubit.dart';
 
 class SizesComponent extends StatelessWidget {
   final List<String> sizes;
@@ -18,19 +19,28 @@ class SizesComponent extends StatelessWidget {
         SizedBox(
           height: AppValues.sizeHeight * 10,
         ),
-        Wrap(
-          spacing: AppValues.paddingWidth * 10,
-          children: List<Widget>.generate(
-            sizes.length,
-            (index) => Chip(
-                color: WidgetStateColor.resolveWith((_) => index == 0
-                    ? Theme.of(context).colorScheme.error
-                    : Theme.of(context).scaffoldBackgroundColor),
-                label: Text(
-                  sizes[index],
-                  style: Theme.of(context).textTheme.bodyLarge,
-                )),
-          ),
+        BlocBuilder<SizeCubit, String>(
+          builder: (context, state) {
+            return Wrap(
+              spacing: AppValues.paddingWidth * 10,
+              children: List<Widget>.generate(
+                sizes.length,
+                (index) => InkWell(
+                  onTap: () =>
+                      context.read<SizeCubit>().changeSize(sizes[index]),
+                  child: Chip(
+                      color: WidgetStateColor.resolveWith((_) =>
+                          sizes[index] == state
+                              ? Theme.of(context).colorScheme.error
+                              : Theme.of(context).scaffoldBackgroundColor),
+                      label: Text(
+                        sizes[index],
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      )),
+                ),
+              ),
+            );
+          },
         )
       ],
     );

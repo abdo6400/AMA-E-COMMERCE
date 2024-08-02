@@ -13,7 +13,7 @@ import '../../bloc/login/login_bloc.dart';
 import '../../components/login_components/login_input_section.dart';
 import '../../components/shared_components/auth_curve.dart';
 import '../../components/shared_components/bottombar.dart';
-import '../../components/shared_components/sign_with_google.dart';
+import '../../components/shared_components/sign_with_options.dart';
 import '../../components/shared_components/topbar.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -51,34 +51,29 @@ class LoginScreen extends StatelessWidget {
           });
         }
       },
-      child: AuthCurve(
-        widget: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: const LangAppbar(),
-          body: ListView(
-              padding: EdgeInsets.symmetric(
-                  horizontal: AppValues.paddingWidth * 22,
-                  vertical: AppValues.paddingHeight * 15),
-              children: [
-                const TopBar(
-                    title: AppStrings.letsSignIn,
-                    subTitle: AppStrings.loginSubTitle),
-                SizedBox(
-                  height: AppValues.sizeHeight * 30,
-                ),
-                const LoginInputSection(),
-                SizedBox(
-                  height: AppValues.sizeHeight * 20,
-                ),
-                const SignWithGoogle()
-              ]),
-          bottomNavigationBar: BottomBar(
-            firstTitle: AppStrings.dontHaveAnAccount,
-            secondTitle: AppStrings.signUp,
-            function: () {
-              context.navigateAndFinish(screenRoute: Routes.registerRoute);
-            },
-          ),
+      child: Scaffold(
+        appBar: const LangAppbar(),
+        body: AuthCurve(
+          widget: Column(children: [
+            const TopBar(
+                title: AppStrings.letsSignIn,
+                subTitle: AppStrings.loginSubTitle),
+            SizedBox(
+              height: AppValues.sizeHeight * 20,
+            ),
+            const LoginInputSection(),
+            SizedBox(
+              height: AppValues.sizeHeight * 10,
+            ),
+            const SignWithOptions(),
+          ]),
+        ),
+        bottomNavigationBar: BottomBar(
+          firstTitle: AppStrings.dontHaveAnAccount,
+          secondTitle: AppStrings.signUp,
+          function: () {
+            context.navigateAndFinish(screenRoute: Routes.registerRoute);
+          },
         ),
       ),
     ));

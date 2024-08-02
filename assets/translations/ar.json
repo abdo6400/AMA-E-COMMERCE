@@ -192,5 +192,8 @@
     "moreInformation": "مزيد من المعلومات",
     "colors": "الالوان",
     "sizes": "الحجم",
-    "relatedProducts": "منتجات ذات صلة"
+    "relatedProducts": "منتجات ذات صلة",
+    "send": "ارسال",
+    "signInWithGoogle": "تسجيل الدخول باستخدام جوجل",
+    "signInAsGuest": "تسجيل الدخول كضيف"
 }

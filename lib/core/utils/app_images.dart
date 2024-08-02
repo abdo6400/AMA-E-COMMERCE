@@ -1,5 +1,6 @@
 const imagesPath = "assets/images";
 const iconsPath = "assets/icons";
+const signIconsPath = "assets/sign_icons";
 
 class AppImages {
   //main images
@@ -18,5 +19,7 @@ class AppImages {
   //app images
   static const homeCarve = "$imagesPath/home_carve.png";
 
- static const loginBackground="$imagesPath/login_bg.jpg";
+  static const loginBackground = "$imagesPath/login_bg.jpg";
+
+  static const guestLogo = "$signIconsPath/guest.png";
 }

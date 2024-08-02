@@ -196,9 +196,10 @@ class AppStrings {
   static const stars = "stars";
   static const addToCart = "addToCart";
   static const moreInformation = "moreInformation";
-
   static const colors = "colors";
   static const sizes = "sizes";
-
   static const relatedProducts = "relatedProducts";
+  static const send = "send";
+  static const signInWithGoogle = "signInWithGoogle";
+  static const signInAsGuest = "signInAsGuest";
 }

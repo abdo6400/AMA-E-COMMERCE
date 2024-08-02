@@ -44,6 +44,7 @@ dependencies:
   shimmer: ^3.0.0
   popup_banner: ^1.0.0
   card_swiper: ^3.0.1
+  particles_fly: ^0.0.9
 ####################### Not used ############################
 
 ####################### App ############################
@@ -86,6 +87,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/sign_icons/
     - assets/translations/en.json
     - assets/translations/ar.json
   fonts:

@@ -1,10 +1,14 @@
 import 'package:ama/core/components/default_components/default_error_message.dart';
 import 'package:ama/core/components/default_components/default_simmer_loading.dart';
+import 'package:ama/core/utils/app_colors.dart';
+import 'package:ama/features/product_details/presentation/bloc/cubits/color_cubit/color_cubit.dart';
+import 'package:ama/features/product_details/presentation/bloc/cubits/counter_cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/app_enums.dart';
 import '../../../../core/utils/app_values.dart';
+import '../bloc/cubits/size_cubit/size_cubit.dart';
 import '../bloc/product_details_bloc.dart';
 import '../components/bottom_bar_component.dart';
 import '../components/header_component.dart';
@@ -40,33 +44,49 @@ class ProductDetailsScreen extends StatelessWidget {
                               ImageViewComponent(images: product.images),
                         )
                       ],
-                  body: Scaffold(
-                    bottomNavigationBar: const BottomBarComponent(),
-                    body: ListView(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: AppValues.paddingWidth * 20,
-                          vertical: AppValues.paddingHeight * 10),
-                      children: [
-                        const Divider(),
-                        SizedBox(
-                          height: AppValues.sizeHeight * 10,
+                  body: MultiBlocProvider(
+                    providers: [
+                      BlocProvider(
+                        create: (context) => CounterCubit(),
+                      ),
+                      if (product.colors.isNotEmpty)
+                        BlocProvider(
+                          create: (context) => ColorCubit(
+                              AppColors.hexToColor(product.colors.first)),
                         ),
-                        HeaderComponent(
-                          title: product.title,
-                          price: product.price,
-                          rating: product.rating,
-                          description: product.description,
+                      if (product.sizes.isNotEmpty)
+                        BlocProvider(
+                          create: (context) => SizeCubit(product.sizes.first),
                         ),
-                        SizedBox(
-                          height: AppValues.sizeHeight * 10,
-                        ),
-                        ProductInformationComponent(product: product),
-                        SizedBox(
-                          height: AppValues.sizeHeight * 10,
-                        ),
-                        RelatedProductsComponent(
-                            products: product.relatedProducts),
-                      ],
+                    ],
+                    child: Scaffold(
+                      bottomNavigationBar: const BottomBarComponent(),
+                      body: ListView(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: AppValues.paddingWidth * 20,
+                            vertical: AppValues.paddingHeight * 10),
+                        children: [
+                          const Divider(),
+                          SizedBox(
+                            height: AppValues.sizeHeight * 10,
+                          ),
+                          HeaderComponent(
+                            title: product.title,
+                            price: product.price,
+                            rating: product.rating,
+                            description: product.description,
+                          ),
+                          SizedBox(
+                            height: AppValues.sizeHeight * 10,
+                          ),
+                          ProductInformationComponent(product: product),
+                          SizedBox(
+                            height: AppValues.sizeHeight * 10,
+                          ),
+                          RelatedProductsComponent(
+                              products: product.relatedProducts),
+                        ],
+                      ),
                     ),
                   ));
             } else if (state is ProductDetailsError) {

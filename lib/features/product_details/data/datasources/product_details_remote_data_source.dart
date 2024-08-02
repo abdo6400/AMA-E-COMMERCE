@@ -28,7 +28,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
         category: 'Mens',
         brand: 'ZARA',
         sizes: const ['S', 'M', 'L'],
-        colors: const ['Red', 'Blue'],
+        colors: const ['#FF0000', '#0000FF', '#00FF00'],
         images: const [
           'https://images.pexels.com/photos/934070/pexels-photo-934070.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
           'https://images.pexels.com/photos/1082529/pexels-photo-1082529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'

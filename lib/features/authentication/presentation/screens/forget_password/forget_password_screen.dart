@@ -74,34 +74,28 @@ class ForgetPasswordScreen extends StatelessWidget {
                       screenRoute: Routes.loginRoute));
             }
           },
-          child: AuthCurve(
-            widget: Scaffold(
-              backgroundColor: Colors.transparent,
-              appBar: const LangAppbar(
-                addBackButton: true,
-              ),
-              body: ListView(
-                padding: EdgeInsets.symmetric(
-                    horizontal: AppValues.paddingWidth * 20),
+          child: Scaffold(
+            appBar: const LangAppbar(
+              addBackButton: true,
+            ),
+            body: AuthCurve(
+              widget: Column(
                 children: [
-                  SizedBox(
-                    height: AppValues.sizeHeight * 20,
-                  ),
                   const TopBar(
                       title: AppStrings.forgetPassword,
                       subTitle: AppStrings.enterEmailThat),
                   SizedBox(
-                    height: AppValues.sizeHeight * 20,
+                    height: AppValues.sizeHeight * 10,
                   ),
                   const ForgetInputSection(),
                   SizedBox(
-                    height: AppValues.sizeHeight * 20,
+                    height: AppValues.sizeHeight * 10,
                   ),
                   Text(AppStrings.forgetPasswordInstructions.tr(context),
                       textAlign: TextAlign.start,
                       style: Theme.of(context).textTheme.titleSmall),
                   SizedBox(
-                    height: AppValues.sizeHeight * 20,
+                    height: AppValues.sizeHeight * 10,
                   ),
                   const StepWidget(
                     stepText: [
@@ -131,7 +125,7 @@ class StepWidget extends StatelessWidget {
     return Column(
         children: stepText.map((step) {
       return ListTile(
-        contentPadding: EdgeInsets.zero,
+        contentPadding: EdgeInsets.symmetric(horizontal: AppValues.paddingWidth*10),
         title: Text(step.tr(context),
             style: Theme.of(context).textTheme.bodyLarge),
         leading: CircleAvatar(

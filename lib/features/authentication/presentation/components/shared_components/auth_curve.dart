@@ -1,5 +1,7 @@
+import 'package:ama/config/locale/app_localizations.dart';
 import 'package:flutter/material.dart';
-import '../../../../../config/locale/app_localizations.dart';
+import 'package:particles_fly/particles_fly.dart';
+import '../../../../../core/utils/app_values.dart';
 
 class AuthCurve extends StatelessWidget {
   final Widget widget;
@@ -9,60 +11,60 @@ class AuthCurve extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        child: Stack(children: [
-          CustomPaint(
-            size: Size(MediaQuery.of(context).size.width,
-                MediaQuery.of(context).size.height * height),
-            painter: CurvePainter(
-                isEn: AppLocalizations.of(context)!.isEnLocale,
-                color: Theme.of(context).colorScheme.secondary),
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: Stack(children: [
+        // const AnimatedCircles(),
+        ParticlesFly(
+            height: AppValues.screenHeight,
+            width: AppValues.screenWidth,
+            particleColor: Theme.of(context).colorScheme.secondary,
+            lineColor: Theme.of(context).hintColor,
+            connectDots: true,
+            numberOfParticles: 40),
+        Card(
+          margin: EdgeInsets.symmetric(
+              horizontal: AppValues.paddingWidth * 15,
+              vertical: AppValues.paddingHeight * 30),
+          elevation: 1,
+          shadowColor: Theme.of(context).colorScheme.secondary,
+          //color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.9),
+          shape: RoundedRectangleBorder(
+              borderRadius: AppLocalizations.of(context)!.isEnLocale
+                  ? BorderRadius.only(
+                      topLeft: Radius.circular(
+                        AppValues.radius * 10,
+                      ),
+                      bottomRight: Radius.circular(
+                        AppValues.radius * 10,
+                      ),
+                      bottomLeft: Radius.circular(
+                        AppValues.radius * 10,
+                      ),
+                      topRight: Radius.circular(
+                        AppValues.radius * 150,
+                      ))
+                  : BorderRadius.only(
+                      topRight: Radius.circular(
+                        AppValues.radius * 10,
+                      ),
+                      bottomLeft: Radius.circular(
+                        AppValues.radius * 10,
+                      ),
+                      topLeft: Radius.circular(
+                        AppValues.radius * 150,
+                      ),
+                      bottomRight: Radius.circular(
+                        AppValues.radius * 10,
+                      ),
+                    )),
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: AppValues.paddingWidth * 22,
+                vertical: AppValues.paddingHeight * 15),
+            child: SingleChildScrollView(child: widget),
           ),
-          widget
-        ]));
-  }
-}
-
-class CurvePainter extends CustomPainter {
-  final bool isEn;
-  final Color color;
-  CurvePainter({required this.isEn, required this.color});
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
-
-    Path path = Path();
-
-    // Get the text direction from the context
-
-    if (!isEn) {
-      // Right to left curve
-      path.moveTo(size.width, size.height * 0.5);
-      path.quadraticBezierTo(size.width * 0.75, size.height * 0.75,
-          size.width * 0.5, size.height * 0.5);
-      path.quadraticBezierTo(
-          size.width * 0.25, size.height * 0.25, 0, size.height * 0.5);
-      path.lineTo(0, 0);
-      path.lineTo(size.width, 0);
-    } else {
-      // Left to right curve
-      path.moveTo(0, size.height * 0.5);
-      path.quadraticBezierTo(size.width * 0.25, size.height * 0.75,
-          size.width * 0.5, size.height * 0.5);
-      path.quadraticBezierTo(
-          size.width * 0.75, size.height * 0.25, size.width, size.height * 0.5);
-      path.lineTo(size.width, 0);
-      path.lineTo(0, 0);
-    }
-
-    path.close();
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
+        ),
+      ]),
+    );
   }
 }

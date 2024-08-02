@@ -51,7 +51,7 @@ class _ForgetInputSectionState extends State<ForgetInputSection> {
                     .add(ForgetPasswordCheckEmailEvent(email: _email.text));
               }
             },
-            text: AppStrings.confirm,
+            text: AppStrings.send,
           ),
         ],
       ),

@@ -12,7 +12,7 @@ import '../../components/register_components/register_input_section.dart';
 import '../../components/shared_components/auth_curve.dart';
 import '../../components/shared_components/bottombar.dart';
 import '../../components/shared_components/lang_appbar.dart';
-import '../../components/shared_components/sign_with_google.dart';
+import '../../components/shared_components/sign_with_options.dart';
 import '../../components/shared_components/topbar.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -73,33 +73,28 @@ class RegisterScreen extends StatelessWidget {
                   screenRoute: Routes.informationRoute, arg: state.email));
         }
       },
-      child: AuthCurve(
-        widget: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: const LangAppbar(),
-          body: ListView(
-              padding: EdgeInsets.symmetric(
-                  horizontal: AppValues.paddingWidth * 22,
-                  vertical: AppValues.paddingHeight * 15),
-              children: [
-                const TopBar(
-                    title: AppStrings.createAccount,
-                    subTitle: AppStrings.registerSubTitle),
-                SizedBox(
-                  height: AppValues.sizeHeight * 30,
-                ),
-                const RegisterInputSection(),
-                SizedBox(
-                  height: AppValues.sizeHeight * 20,
-                ),
-                const SignWithGoogle()
-              ]),
-          bottomNavigationBar: BottomBar(
-            firstTitle: AppStrings.haveAnAccount,
-            secondTitle: AppStrings.login,
-            function: () =>
-                context.navigateAndFinish(screenRoute: Routes.loginRoute),
-          ),
+      child: Scaffold(
+        appBar: const LangAppbar(),
+        body: AuthCurve(
+          widget: Column(children: [
+            const TopBar(
+                title: AppStrings.createAccount,
+                subTitle: AppStrings.registerSubTitle),
+            SizedBox(
+              height: AppValues.sizeHeight * 30,
+            ),
+            const RegisterInputSection(),
+            SizedBox(
+              height: AppValues.sizeHeight * 20,
+            ),
+            const SignWithOptions()
+          ]),
+        ),
+        bottomNavigationBar: BottomBar(
+          firstTitle: AppStrings.haveAnAccount,
+          secondTitle: AppStrings.login,
+          function: () =>
+              context.navigateAndFinish(screenRoute: Routes.loginRoute),
         ),
       ),
     ));
