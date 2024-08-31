@@ -20,7 +20,7 @@ class SettingsGroup extends StatelessWidget {
       children: [
         (settingsGroupTitle != null)
             ? Card(
-                elevation: 0.5,
+                elevation: 0,
                 child: Container(
                   width: AppValues.screenWidth,
                   padding: EdgeInsets.symmetric(

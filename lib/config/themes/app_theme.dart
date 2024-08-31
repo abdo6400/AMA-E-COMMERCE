@@ -10,11 +10,12 @@ class AppTheme {
         useMaterial3: true,
         useMaterial3ErrorColors: true,
         scheme: FlexScheme.blueM3,
+        tertiaryContainer: AppColors.white,
         scaffoldBackground: AppColors.nearlyWhite,
         primary: AppColors.blueLight,
         fontFamily: 'Cairo',
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        appBarStyle: FlexAppBarStyle.background,
+        appBarStyle: FlexAppBarStyle.scaffoldBackground,
         textTheme: AppTextTheme.lightTextTheme);
   }
 
@@ -23,11 +24,12 @@ class AppTheme {
         useMaterial3: true,
         useMaterial3ErrorColors: true,
         scaffoldBackground: AppColors.nearlyBlack,
+        tertiaryContainer: AppColors.nearlyBlack,
         scheme: FlexScheme.blueM3,
         primary: AppColors.blueLight,
         fontFamily: 'Cairo',
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        appBarStyle: FlexAppBarStyle.background,
+        appBarStyle: FlexAppBarStyle.scaffoldBackground,
         textTheme: AppTextTheme.darkTextTheme);
   }
 }

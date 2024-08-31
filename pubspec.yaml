@@ -10,7 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.6
-####################### basic ############################
   dartz: ^0.10.1
   dio: ^5.3.2
   get_it: ^7.6.2
@@ -40,48 +39,18 @@ dependencies:
   flex_color_scheme: ^7.3.1
   floating_draggable_widget: ^2.1.5
   flutter_chat_ui: ^1.6.14
-  flutter_stripe: ^10.2.0
+  flutter_stripe: ^11.0.0
   shimmer: ^3.0.0
   popup_banner: ^1.0.0
   card_swiper: ^3.0.1
   particles_fly: ^0.0.9
-####################### Not used ############################
-
-####################### App ############################
-
-
-
-
-flutter_native_splash:
-  color: "#ffffff"
-  android: true
-  ios: true
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
-  flutter_launcher_icons: "^0.13.1"
   device_preview_screenshot: ^1.0.0
 
-flutter_launcher_icons:
-  android: "launcher_icon"
-  ios: true
-  remove_alpha_ios: true
-  image_path: "assets/icons/appicon.png"
-  min_sdk_android: 21 
-  web:
-    generate: true
-    image_path: "assets/icons/appicon.png"
-    background_color: "#hexcode"
-    theme_color: "#hexcode"
-  windows:
-    generate: true
-    image_path: "assets/icons/appicon.png"
-    icon_size: 48 # min:48, max:256, default: 48
-  macos:
-    generate: true
-    image_path: "assets/icons/appicon.png"
 flutter:
   uses-material-design: true
   assets:

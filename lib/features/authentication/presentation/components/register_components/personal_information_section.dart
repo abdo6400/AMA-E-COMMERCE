@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ama/config/locale/app_localizations.dart';
-import 'package:ama/features/authentication/presentation/bloc/cubit/information_cubit.dart';
 import '../../../../../core/components/default_components/default_button.dart';
 import '../../../../../core/components/default_components/default_form_field.dart';
 import '../../../../../core/utils/app_strings.dart';
@@ -11,8 +10,7 @@ import '../../bloc/register/register_bloc.dart';
 import '../shared_components/password_input.dart';
 
 class PersonalInformationSection extends StatefulWidget {
-  final String email;
-  const PersonalInformationSection({super.key, required this.email});
+  const PersonalInformationSection({super.key});
 
   @override
   State<PersonalInformationSection> createState() =>
@@ -26,7 +24,7 @@ class _PersonalInformationSectionState
   final TextEditingController _phoneNumber = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _confirmPassword = TextEditingController();
-
+  final TextEditingController _email = TextEditingController();
   @override
   void dispose() {
     _name.dispose();
@@ -44,18 +42,12 @@ class _PersonalInformationSectionState
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           DefaultTextFormField(
-            controller: null,
-            type: TextInputType.emailAddress,
-            backgroundColor: Theme.of(context).colorScheme.secondary,
-            color: Theme.of(context).cardColor,
-            hint: widget.email,
-            suffix: Icons.email_outlined,
-            textColor: Theme.of(context).cardColor,
-            contentPadding: EdgeInsets.symmetric(
-                horizontal: AppValues.paddingWidth * 20,
-                vertical: AppValues.paddingHeight * 6),
-            readOnly: true,
-          ),
+              controller: _email,
+              type: TextInputType.emailAddress,
+              validate: (value) => CustomValidationHandler.isValidEmail(value!)
+                  .translateWithNullSafetyString(context),
+              prefix: Icons.email_outlined,
+              label: AppStrings.email),
           SizedBox(
             height: AppValues.sizeHeight * 15,
           ),
@@ -99,14 +91,15 @@ class _PersonalInformationSectionState
             text: AppStrings.signUp,
             onPressed: () {
               if (_informationFormKey.currentState!.validate()) {
-                context.read<RegisterBloc>().add(SignUpEvent(
-                      image: context.read<InformationCubit>().profilePic,
-                      name: _name.text,
-                      phone: _phoneNumber.text,
-                      email: widget.email,
-                      password: _password.text,
-                      confirmPassword: _confirmPassword.text,
-                    ));
+                // context.read<RegisterBloc>().add(SignUpEvent(
+                //       name: _name.text,
+                //       phone: _phoneNumber.text,
+                //       email: _email.text,
+                //       password: _password.text,
+                //       confirmPassword: _confirmPassword.text,
+                //       otp: "",
+                //       otpSecret: "",
+                //     ));
               }
             },
             margin:

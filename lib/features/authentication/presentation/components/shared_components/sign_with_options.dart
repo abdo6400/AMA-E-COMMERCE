@@ -1,7 +1,5 @@
 import 'package:ama/config/locale/app_localizations.dart';
-import 'package:ama/core/utils/commons.dart';
 import 'package:flutter/material.dart';
-import '../../../../../config/routes/app_routes.dart';
 import '../../../../../core/components/default_components/default_sign_in_buttons.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_enums.dart';
@@ -56,10 +54,10 @@ class SignWithOptions extends StatelessWidget {
         SizedBox(
           height: AppValues.sizeHeight * 8,
         ),
-        SignInButton(
-          buttonType: ButtonType.guest,
-          onPressed: () =>  context.navigateAndFinish(screenRoute: Routes.mainRoute),
-        )
+        // SignInButton(
+        //   buttonType: ButtonType.guest,
+        //   onPressed: () =>  context.navigateAndFinish(screenRoute: Routes.mainRoute),
+        // )
       ],
     );
   }

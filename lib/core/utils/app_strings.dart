@@ -202,4 +202,14 @@ class AppStrings {
   static const send = "send";
   static const signInWithGoogle = "signInWithGoogle";
   static const signInAsGuest = "signInAsGuest";
+  static const recomendedForYou = "recomendedForYou";
+  static const discover = "discover";
+  static const shopping = "shopping";
+  static const addToFavorite = "addToFavorite";
+  static const removeFromFavorite = "removeFromFavorite";
+  static const noFavoriteSub = "noFavoriteSub";
+  static const clearWishList = "clearWishList";
+  static const coupon = "coupon";
+  static const apply = "apply";
+  static const pleaseSignToUseAllFeatures = "pleaseSignToUseAllFeatures";
 }

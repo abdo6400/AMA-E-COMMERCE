@@ -1,3 +1,4 @@
+import 'package:ama/config/database/api/end_points.dart';
 import 'package:ama/config/locale/app_localizations.dart';
 import 'package:ama/config/routes/app_routes.dart';
 import 'package:ama/core/components/default_components/default_simmer_loading.dart';
@@ -8,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/components/app_components/ecommerce_components.dart';
 import '../../../../core/components/default_components/default_error_message.dart';
-import '../../../../core/components/default_components/default_internet_connection_checker.dart';
+
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/app_values.dart';
 
@@ -32,11 +33,12 @@ class CategoriesComponent extends StatelessWidget {
             children: [
               Text(
                 AppStrings.categories.tr(context),
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
               InkWell(
-                onTap: () =>
-                    context.navigateTo(screenRoute: Routes.categoriesRoute,arg: context.read<CategoriesBloc>()),
+                onTap: () => context.navigateTo(
+                    screenRoute: Routes.categoriesRoute,
+                    arg: context.read<CategoriesBloc>()),
                 child: Text(
                   AppStrings.viewAll.tr(context),
                   style: Theme.of(context).textTheme.titleMedium,
@@ -49,8 +51,7 @@ class CategoriesComponent extends StatelessWidget {
         SizedBox(height: AppValues.sizeHeight * 20),
         SizedBox(
             height: AppValues.sizeHeight * 100,
-            child: CustomInternetConnectionChecker(
-                child: BlocBuilder<CategoriesBloc, CategoriesState>(
+            child: BlocBuilder<CategoriesBloc, CategoriesState>(
               builder: (context, state) {
                 if (state is CategoriesLoading) {
                   return const DefaultSimmerLoading(
@@ -67,10 +68,16 @@ class CategoriesComponent extends StatelessWidget {
                       width: AppValues.sizeWidth * 15,
                     ),
                     scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) =>
+                    itemBuilder: (ctx, index) =>
                         EcommerceComponents.categoryCard(
-                      image: state.categories[index].image,
+                      image:
+                          "${EndPoints.images}${state.categories[index].image}",
                       title: state.categories[index].name,
+                      context: context,
+                      onTap: () => context.navigateTo(
+                        screenRoute: Routes.categoryDetailsScreenRoute,
+                        arg: state.categories[index].id,
+                      ),
                     ),
                     itemCount: state.categories.length,
                     shrinkWrap: true,
@@ -79,7 +86,7 @@ class CategoriesComponent extends StatelessWidget {
                 }
                 return const SizedBox.shrink();
               },
-            ))),
+            )),
       ],
     );
   }

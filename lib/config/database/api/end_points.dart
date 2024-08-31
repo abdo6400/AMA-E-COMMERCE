@@ -1,8 +1,10 @@
 class EndPoints {
   //basic urls
-  static const String baseUrl = '';
+  static const String baseUrl = 'http://localhost:5053/api/';
   static const String prefixToken = 'Bearer';
-  static const String images = "";
+  static const String images = "http://localhost:5053/";
+
+  //auth
   static const String forgetPassword = "";
   static const String resendCode = "";
   static const String resetPassword = "";
@@ -11,21 +13,25 @@ class EndPoints {
   static const String register = "";
   static const String checkEmail = "";
 
-  static const String bestSellerProducts = "";
-  static const String categories = "";
-  static const String offers = "";
   static const String ads = "";
-
+  //products
+  static const String bestSellerProducts = "products/top-popular";
+  static const String categories = "categories";
+  static const String offers = "";
+  static const String recommendationProducts = "products/recommended";
+  static const String productDetails = "products";
+  //wishlist
   static const String addToWishlist = "";
   static const String removeFromWishlist = "";
   static const String wishlist = "";
 
+  //cart
   static const String updateCartQuantity = "";
   static const String removeProductFromCart = "";
   static const String addProductToCart = "";
   static const String cartProducts = "";
 
-  static var productDetails;
+  static var categoryDetails;
 }
 
 class ApiKeys {

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/components/app_components/ecommerce_components.dart';
 import '../../../../core/components/default_components/default_error_message.dart';
-import '../../../../core/components/default_components/default_internet_connection_checker.dart';
 import '../../../../core/components/default_components/default_simmer_loading.dart';
 import '../../../../core/utils/app_values.dart';
 import '../bloc/ads_bloc/ads_bloc.dart';
@@ -13,18 +12,16 @@ class AdsComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomInternetConnectionChecker(child:
-    
-     BlocBuilder<AdsBloc, AdsState>(
+    return BlocBuilder<AdsBloc, AdsState>(
       builder: (context, state) {
         if (state is AdsLoading) {
           return const DefaultSimmerLoading(
             type: SimmerLoadingType.card,
           );
         } else if (state is AdsError) {
-            return DefaultErrorMessage(
-              message: state.message,
-            );
+          return DefaultErrorMessage(
+            message: state.message,
+          );
         } else if (state is AdsLoaded) {
           return EcommerceComponents.slideShow(
             height: AppValues.sizeHeight * 100,
@@ -32,6 +29,6 @@ class AdsComponent extends StatelessWidget {
         }
         return const SizedBox.shrink();
       },
-     ) );
+    );
   }
 }

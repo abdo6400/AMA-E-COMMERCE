@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/components/app_components/ecommerce_components.dart';
 import '../../../../core/components/default_components/default_error_message.dart';
-import '../../../../core/components/default_components/default_internet_connection_checker.dart';
+
 import '../../../../core/components/default_components/default_simmer_loading.dart';
 import '../../../../core/utils/app_enums.dart';
 import '../../../../core/utils/app_strings.dart';
@@ -32,7 +32,7 @@ class OffersComponent extends StatelessWidget {
             children: [
               Text(
                 AppStrings.bestOffers.tr(context),
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
               InkWell(
                 onTap: () => context.navigateTo(
@@ -48,8 +48,7 @@ class OffersComponent extends StatelessWidget {
           ),
         ),
         SizedBox(height: AppValues.sizeHeight * 15),
-        CustomInternetConnectionChecker(
-            child: BlocBuilder<OffersBloc, OffersState>(
+        BlocBuilder<OffersBloc, OffersState>(
           builder: (context, state) {
             if (state is OffersLoading) {
               return DefaultSimmerLoading(
@@ -66,7 +65,7 @@ class OffersComponent extends StatelessWidget {
             }
             return const SizedBox.shrink();
           },
-        ))
+        )
       ],
     );
   }

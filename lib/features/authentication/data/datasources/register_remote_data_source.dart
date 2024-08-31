@@ -3,7 +3,6 @@ import '../../../../config/database/api/api_consumer.dart';
 import '../../../../config/database/api/end_points.dart';
 import '../../../../config/database/error/exceptions.dart';
 import '../../../../core/utils/app_strings.dart';
-import '../../../../core/utils/commons.dart';
 import '../models/auth_model.dart';
 import '../models/register_params_model.dart';
 
@@ -34,11 +33,7 @@ class RegisterRemoteDataSourceImpl extends RegisterRemoteDataSource {
       'name': registerParamsModel.name,
       'phone': registerParamsModel.phone,
       'email': registerParamsModel.email,
-      'password': registerParamsModel.password,
-      "logo": registerParamsModel.image == null
-          ? null
-          : await multipartConvertImage(image: registerParamsModel.image!),
-    "signWithGoogle": false
+      'password': registerParamsModel.password
     };
 
     final response = await _apiConsumer.post(EndPoints.register, body: body);
@@ -60,7 +55,6 @@ class RegisterRemoteDataSourceImpl extends RegisterRemoteDataSource {
       'phone': "0",
       'email': account.email,
       'password': account.id,
-      "signWithGoogle": true
     };
 
     final response = await _apiConsumer.post(EndPoints.register, body: body);

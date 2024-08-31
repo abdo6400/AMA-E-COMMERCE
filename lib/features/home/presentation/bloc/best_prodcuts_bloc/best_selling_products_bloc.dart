@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../../../../../core/bloc/usecases/usecase.dart';
-import '../../../domain/entities/best_selling.dart';
+import '../../../domain/entities/best_selling_and_reommended_product.dart';
 import '../../../domain/usecases/get_best_selling_products_usecase.dart';
 part 'best_selling_products_event.dart';
 part 'best_selling_products_state.dart';

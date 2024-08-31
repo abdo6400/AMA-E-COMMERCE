@@ -21,13 +21,10 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   _goNext() async {
-    (await sl<CacheConsumer>().getData(key: MySharedKeys.apiToken.name) != null)
+    (await sl<CacheConsumer>().getData(key: MySharedKeys.onBoarding.name) !=
+            null)
         ? context.navigateAndFinish(screenRoute: Routes.mainRoute)
-        : (await sl<CacheConsumer>()
-                    .getData(key: MySharedKeys.onBoarding.name) !=
-                null)
-            ? context.navigateAndFinish(screenRoute: Routes.loginRoute)
-            : context.navigateAndFinish(screenRoute: Routes.onBoardingRoute);
+        : context.navigateAndFinish(screenRoute: Routes.onBoardingRoute);
   }
 
   @override

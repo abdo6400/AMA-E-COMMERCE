@@ -45,13 +45,8 @@ class ProductDetailsScreen extends StatelessWidget {
                             SizedBox(
                               width: AppValues.sizeWidth * 10,
                             ),
-                            IconButton.outlined(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.shopping_bag_outlined,
-                                  color:
-                                      Theme.of(context).colorScheme.secondary,
-                                )),
+                            // const CartIconComponent(
+                            //     icon: Icons.shopping_cart_checkout),
                             SizedBox(
                               width: AppValues.sizeWidth * 10,
                             ),
@@ -65,15 +60,15 @@ class ProductDetailsScreen extends StatelessWidget {
                       BlocProvider(
                         create: (context) => CounterCubit(),
                       ),
-                      if (product.colors.isNotEmpty)
-                        BlocProvider(
-                          create: (context) => ColorCubit(
-                              AppColors.hexToColor(product.colors.first)),
-                        ),
-                      if (product.sizes.isNotEmpty)
-                        BlocProvider(
-                          create: (context) => SizeCubit(product.sizes.first),
-                        ),
+                      // if (product.colors.isNotEmpty)
+                      //   BlocProvider(
+                      //     create: (context) => ColorCubit(
+                      //         AppColors.hexToColor(product.colors.first)),
+                      //   ),
+                      // if (product.sizes.isNotEmpty)
+                      //   BlocProvider(
+                      //     create: (context) => SizeCubit(product.sizes.first),
+                      //   ),
                     ],
                     child: Scaffold(
                       bottomNavigationBar: BottomBarComponent(

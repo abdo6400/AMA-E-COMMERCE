@@ -1,3 +1,4 @@
+import 'package:ama/config/database/api/end_points.dart';
 import 'package:ama/config/locale/app_localizations.dart';
 import 'package:ama/core/utils/app_values.dart';
 import 'package:flutter/material.dart';
@@ -39,10 +40,11 @@ class CategoriesScreen extends StatelessWidget {
                   itemCount: state.categories.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3),
-                  itemBuilder: (context, index) =>
+                  itemBuilder: (ctx, index) =>
                       EcommerceComponents.categoryCard(
-                        image: state.categories[index].image,
+                        image: "${EndPoints.images}${state.categories[index].image}",
                         title: state.categories[index].name,
+                        context: context,
                       ));
             }
             return const SizedBox.shrink();

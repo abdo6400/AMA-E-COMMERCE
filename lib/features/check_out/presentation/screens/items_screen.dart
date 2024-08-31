@@ -1,12 +1,15 @@
 import 'package:ama/config/locale/app_localizations.dart';
 import 'package:flutter/material.dart';
-
+import 'package:supercharged/supercharged.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/app_values.dart';
+import '../../../cart/domain/entities/cart_product.dart';
 import '../components/item_component.dart';
+import '../components/items_components/amount_component.dart';
 
 class ItemsScreen extends StatelessWidget {
-  const ItemsScreen({super.key});
+  final List<CartProduct> items;
+  const ItemsScreen({super.key, required this.items});
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +24,15 @@ class ItemsScreen extends StatelessWidget {
           children: [
             SizedBox(height: AppValues.sizeHeight * 10),
             Row(
-              //mainAxisAlignment: MainAxisAlignment.spaceBetween, 
-              
-              children: [
-              const Icon(Icons.list),
-              SizedBox(width: AppValues.sizeWidth * 10),
-              Text(
-                AppStrings.orderReview.tr(context),
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            ]),
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Icon(Icons.receipt),
+                  SizedBox(width: AppValues.sizeWidth * 10),
+                  Text(
+                    AppStrings.orderReview.tr(context),
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+                ]),
             SizedBox(height: AppValues.sizeHeight * 10),
             Expanded(
               child: ListView.separated(
@@ -39,16 +41,20 @@ class ItemsScreen extends StatelessWidget {
                   separatorBuilder: (context, index) => SizedBox(
                         height: AppValues.sizeHeight * 10,
                       ),
-                  itemCount: 3,
+                  itemCount: items.length,
                   itemBuilder: (context, index) {
                     return ItemComponent(
-                      title: 'Graphic T-shirt',
-                      price: 12.99,
-                      quantity: 4,
-                      imageUrl: 'https://picsum.photos/1260/760?random=$index',
+                      title: items[index].name,
+                      price: items[index].price,
+                      quantity: items[index].quantity,
+                      imageUrl: items[index].image,
                     );
                   }),
             ),
+            SizedBox(height: AppValues.sizeHeight * 10),
+            AmountComponent(
+                subTotalAmount:
+                    items.sumByDouble((x) => (x.price * x.quantity))),
           ]),
     );
   }

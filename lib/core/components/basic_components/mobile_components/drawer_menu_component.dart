@@ -1,13 +1,13 @@
 import 'package:ama/config/locale/app_localizations.dart';
 import 'package:ama/core/utils/commons.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../config/routes/app_routes.dart';
-import '../../../utils/app_images.dart';
 import '../../../utils/app_strings.dart';
 import '../../../utils/app_values.dart';
+import '../app_logo_component.dart';
 
 class DrawerMenuComponent extends StatelessWidget {
+
   const DrawerMenuComponent({super.key});
 
   @override
@@ -30,24 +30,16 @@ class DrawerMenuComponent extends StatelessWidget {
     );
     return Card(
         shape: shape,
+        color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.8),
         margin: EdgeInsets.symmetric(
             horizontal: 0, vertical: AppValues.marginHeight * 20),
         child: Drawer(
           width: AppValues.screenWidth * 0.7,
           shape: shape,
+          backgroundColor:
+              Theme.of(context).scaffoldBackgroundColor.withOpacity(0.8),
           child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            Container(
-              color: Theme.of(context).cardColor,
-              width: double.infinity,
-              padding:
-                  EdgeInsets.symmetric(vertical: AppValues.paddingHeight * 20),
-              child: CircleAvatar(
-                radius: AppValues.radius * 40,
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(AppValues.radius * 100),
-                    child: Image.asset(AppImages.appLogo)),
-              ),
-            ),
+            const AppLogoComponent(),
             const Divider(),
             SizedBox(
               height: AppValues.sizeHeight * 10,
@@ -104,7 +96,7 @@ class DrawerMenuComponent extends StatelessWidget {
                 context.navigateTo(screenRoute: Routes.amaChatRoute);
               },
               title: Text(AppStrings.chatWithAi.tr(context)),
-              leading:  Icon(
+              leading: Icon(
                 Icons.chat,
                 color: Theme.of(context).textTheme.bodyLarge!.color,
               ),

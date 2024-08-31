@@ -51,30 +51,46 @@ class DefaultButton extends StatelessWidget {
       width: width,
       margin: margin,
       child: ElevatedButton(
-        style: buttonStyle ??
-            ButtonStyle(
-              elevation: WidgetStateProperty.all(elevation),
-              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                      side:
-                          BorderSide(color: borderColor ?? Colors.transparent),
-                      borderRadius: BorderRadius.circular(radius))),
-              backgroundColor: WidgetStateProperty.all<Color>(
-                  background ?? Theme.of(context).primaryColor),
-            ),
-        onPressed: onPressed,
-        child: Padding(
-          padding: padding ?? const EdgeInsets.symmetric(),
-          child: child ??
-              Text(
-                isUpperCase ? text!.toUpperCase() : text!.tr(context),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-                style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                    fontSize: AppValues.font * fontSize!, color: textColor),
+          style: buttonStyle ??
+              ButtonStyle(
+                elevation: WidgetStateProperty.all(elevation),
+                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                        side: BorderSide(
+                            color: borderColor ?? Colors.transparent),
+                        borderRadius: BorderRadius.circular(radius))),
+                backgroundColor: WidgetStateProperty.all<Color>(
+                    background ?? Theme.of(context).primaryColor),
               ),
-        ),
-      ),
+          onPressed: onPressed,
+          child: Padding(
+            padding: padding ?? const EdgeInsets.symmetric(),
+            child: (child != null && text != null)
+                ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        isUpperCase ? text!.toUpperCase() : text!.tr(context),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                            fontSize: AppValues.font * fontSize!,
+                            color: textColor),
+                      ),
+                      SizedBox(width: AppValues.sizeWidth * 10),
+                      child!
+                    ],
+                  )
+                : child ??
+                    Text(
+                      isUpperCase ? text!.toUpperCase() : text!.tr(context),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                          fontSize: AppValues.font * fontSize!,
+                          color: textColor),
+                    ),
+          )),
     );
   }
 }

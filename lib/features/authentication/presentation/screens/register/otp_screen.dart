@@ -19,7 +19,7 @@ class OtpRegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Map data = ModalRoute.of(context)?.settings.arguments as Map;
     String secureKey = data["secureKey"];
-    String email = data["email"] ;
+    Map<String, dynamic> reigsterInfo = data["data"] as Map<String, dynamic>;
     return SafeArea(
       child: Scaffold(
         appBar: const LangAppbar(
@@ -31,7 +31,7 @@ class OtpRegisterScreen extends StatelessWidget {
               vertical: AppValues.paddingHeight * 15),
           children: [
             OtpTopSection(
-              email: email,
+              email: reigsterInfo["email"],
             ),
             BlocConsumer<RegisterBloc, RegisterState>(
               listener: (context, state) {
@@ -53,20 +53,25 @@ class OtpRegisterScreen extends StatelessWidget {
               builder: (context, state) {
                 return OtpInputSection(
                   secureKey: secureKey,
-                  email: email,
+                  email: reigsterInfo["email"],
                   function: (value) => context.read<RegisterBloc>().add(
-                      VerfiyEmailEvent(
-                          code: value, secureKey: secureKey, email: email)),
+                      SignUpEvent(
+                          otp: value,
+                          otpSecret: secureKey,
+                          email: data["email"],
+                          name: reigsterInfo["name"],
+                          password: reigsterInfo["password"],
+                          phone: reigsterInfo["phone"])),
                 );
               },
             ),
           ],
         ),
         bottomNavigationBar: OtpBottomBar(
-          email: email,
+          email: reigsterInfo["email"],
           function: () => context
               .read<RegisterBloc>()
-              .add(ResendCodeEvent(emailOrPhone: email)),
+              .add(ResendCodeEvent(emailOrPhone: reigsterInfo["email"])),
         ),
       ),
     );

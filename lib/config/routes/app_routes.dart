@@ -3,6 +3,7 @@ import 'package:ama/core/components/basic_components/starting_components/splash_
 import 'package:ama/features/ama_chat/presentation/screens/ama_chat_screen.dart';
 import 'package:ama/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:ama/features/check_out/presentation/bloc/cubit/controller_screens_cubit.dart';
+import 'package:ama/features/home/presentation/bloc/recommendation_bloc/recommendation_bloc.dart';
 import 'package:ama/features/product_details/presentation/bloc/product_details_bloc.dart';
 import 'package:ama/features/product_details/presentation/screens/product_details_screen.dart';
 import 'package:ama/features/profile/presentation/screens/languages_screen.dart';
@@ -25,6 +26,8 @@ import '../../features/authentication/presentation/screens/login/login_screen.da
 import '../../features/authentication/presentation/screens/register/otp_screen.dart';
 import '../../features/authentication/presentation/screens/register/register_screen.dart';
 import '../../features/authentication/presentation/screens/register/user_information_screen.dart';
+import '../../features/category_details/presentation/bloc/category_details_bloc.dart';
+import '../../features/category_details/presentation/screens/category_details_screen_page.dart';
 import '../../features/check_out/presentation/screens/check_out_screen.dart';
 import '../../features/home/presentation/bloc/ads_bloc/ads_bloc.dart';
 import '../../features/home/presentation/bloc/best_prodcuts_bloc/best_selling_products_bloc.dart';
@@ -33,6 +36,7 @@ import '../../features/home/presentation/bloc/offers_bloc/offers_bloc.dart';
 import '../../features/home/presentation/screens/best_selling_products_screen.dart';
 import '../../features/home/presentation/screens/categories_screen.dart';
 import '../../features/home/presentation/screens/offers_screen.dart';
+import '../../features/home/presentation/screens/recommended_screen.dart';
 import '../../features/wishlist/presentation/bloc/wishlist_bloc.dart';
 
 class Routes {
@@ -57,11 +61,13 @@ class Routes {
   static const String checkOutRoute = "/checkOutRoute";
   static const String productDetailsRoute = "/productDetailsRoute";
   static const String categoriesRoute = "/categoriesRoute";
+  static const String categoryDetailsScreenRoute =
+      "/categoryDetailsScreenRoute";
 
   static const String offersRoute = "/offersRoute";
   static const String bestSellingProductsRoute = "/bestSellingProductsRoute";
   static const String subCategoriesRoute = "/subCategoriesRoute";
-  static const String productsRoute = "/productsRoute";
+  static const String recommendedProductsRoute = "/recommendedProductsRoute";
 }
 
 class AppRoutes {
@@ -190,6 +196,10 @@ class AppRoutes {
                   create: (_) => sl<AdsBloc>()..add(FetchAdsEvent()),
                 ),
                 BlocProvider(
+                  create: (_) => sl<RecommendationBloc>()
+                    ..add(GetRecommendationProductsEvent()),
+                ),
+                BlocProvider(
                   create: (_) => sl<CartBloc>()..add(GetCartProductsEvent()),
                 ),
               ],
@@ -227,6 +237,21 @@ class AppRoutes {
       case Routes.offersRoute:
         return PageTransition(
             child: const OffersScreen(),
+            type: PageTransitionType.leftToRightWithFade,
+            settings: routeSettings);
+      case Routes.recommendedProductsRoute:
+        return PageTransition(
+            child: const RecommendedScreen(),
+            type: PageTransitionType.leftToRightWithFade,
+            settings: routeSettings);
+      case Routes.categoryDetailsScreenRoute:
+        return PageTransition(
+            child: BlocProvider(
+              create: (context) => sl<CategoryDetailsBloc>()
+                ..add(GetCategoryDetailsEvent(
+                    id: routeSettings.arguments as int)),
+              child: const CategoryDetailsScreen(),
+            ),
             type: PageTransitionType.leftToRightWithFade,
             settings: routeSettings);
       default:

@@ -19,7 +19,7 @@ class AppImages {
   //app images
   static const homeCarve = "$imagesPath/home_carve.png";
 
-  static const loginBackground = "$imagesPath/login_bg.jpg";
+  static const authBackground = "$imagesPath/shopping.jpg";
 
   static const guestLogo = "$signIconsPath/guest.png";
 }

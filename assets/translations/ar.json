@@ -111,7 +111,7 @@
     "forgetPasswordStep2": "تحقق من بريدك الإلكتروني للحصول على رمز إعادة تعيين كلمة المرور.",
     "forgetPasswordStep3": "انقر على الرابط واتبع التعليمات للحصول على رمز إعادة التعيين.",
     "favourite": "المفضلة",
-    "cart": "عربة التسوق",
+    "cart": "السلة",
     "account": "الحساب",
     "deleteAccount": "حذف الحساب",
     "learnMoreAboutApp": "تعرف على المزيد عن التطبيق",
@@ -195,5 +195,17 @@
     "relatedProducts": "منتجات ذات صلة",
     "send": "ارسال",
     "signInWithGoogle": "تسجيل الدخول باستخدام جوجل",
-    "signInAsGuest": "تسجيل الدخول كضيف"
+    "signInAsGuest": "تسجيل الدخول كضيف",
+    "recomendedForYou": "مقترح لك",
+    "discover": "اكتشف",
+    "shopping": "تسوق",
+    "addToFavorite": "اضافة للمفضلة",
+    "removeFromFavorite": "ازالة من المفضلة",
+    "noFavorite": "ليس لديك منتجات مفضلة",
+    "noFavoriteSub": "ليس لديك منتجات مفضلة. سيتم تحقق في وقت لاحق.",
+    "clearWishList": " مسح المفضلة",
+    "coupon": "كوبون",
+    "apply": "تطبيق",
+    "noCoupons": "لا يوجد كوبونات",
+    "pleaseSignToUseAllFeatures": "الرجاء تسجيل الدخول لاستخدام جميع الميزات"
 }

@@ -4,10 +4,10 @@ import 'package:ama/core/utils/app_enums.dart';
 import 'package:ama/core/utils/commons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../config/database/api/end_points.dart';
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/components/app_components/ecommerce_components.dart';
 import '../../../../core/components/default_components/default_error_message.dart';
-import '../../../../core/components/default_components/default_internet_connection_checker.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/app_values.dart';
 import '../bloc/best_prodcuts_bloc/best_selling_products_bloc.dart';
@@ -30,7 +30,7 @@ class BestSellerComponent extends StatelessWidget {
             children: [
               Text(
                 AppStrings.bestSeller.tr(context),
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
               InkWell(
                 onTap: () => context.navigateTo(
@@ -47,8 +47,8 @@ class BestSellerComponent extends StatelessWidget {
         ),
         SizedBox(height: AppValues.sizeHeight * 20),
         SizedBox(
-            height: AppValues.sizeHeight * 500,
-            child: CustomInternetConnectionChecker(child:
+            height: AppValues.sizeHeight * 470,
+            child:
                 BlocBuilder<BestSellingProductsBloc, BestSellingProductsState>(
               builder: (context, state) {
                 if (state is BestSellingProductsLoading) {
@@ -65,7 +65,7 @@ class BestSellerComponent extends StatelessWidget {
                     padding: EdgeInsets.only(
                       left: AppValues.paddingWidth * 10,
                       right: AppValues.paddingWidth * 10,
-                      bottom: AppValues.paddingHeight * 10,
+                      bottom: AppValues.paddingHeight * 30,
                     ),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       mainAxisSpacing: AppValues.sizeHeight * 10,
@@ -81,17 +81,18 @@ class BestSellerComponent extends StatelessWidget {
                         arg: state.products[index].id,
                       ),
                       context: context,
-                      imageUrl: state.products[index].image,
+                      imageUrl:
+                          "${EndPoints.images}${state.products[index].images.first}",
                       rating: state.products[index].rating,
-                      productName: state.products[index].name,
-                      isAvailable: state.products[index].isAvailable,
+                      productName: state.products[index].title,
+                      isAvailable: state.products[index].stock > 0,
                       price: state.products[index].price,
                     ),
                   );
                 }
                 return const SizedBox.shrink();
               },
-            ))),
+            )),
         SizedBox(height: AppValues.sizeHeight * 30),
       ],
     );

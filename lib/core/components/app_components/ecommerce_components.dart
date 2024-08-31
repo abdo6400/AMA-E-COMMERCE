@@ -1,3 +1,4 @@
+import 'package:ama/config/locale/app_localizations.dart';
 import 'package:ama/core/utils/app_values.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -97,115 +98,131 @@ class EcommerceComponents extends StatelessWidget {
   }
 
   /// Category card with network image
-  factory EcommerceComponents.categoryCard({
-    ///
-    /// [image] for category image
-    ///
-    /// image
-    ///
-    String? image,
+  factory EcommerceComponents.categoryCard(
+      {
+      ///
+      /// [image] for category image
+      ///
+      /// image
+      ///
+      String? image,
 
-    ///
-    /// [title] for category title
-    ///
-    /// title
-    ///
-    String? title,
+      ///
+      /// [title] for category title
+      ///
+      /// title
+      ///
+      String? title,
 
-    ///
-    /// [titleColor] for category title color
-    ///
-    /// title color
-    ///
-    Color? titleColor,
+      ///
+      /// [titleColor] for category title color
+      ///
+      /// title color
+      ///
+      Color? titleColor,
 
-    ///
-    /// [titleFontFamily] for category title font family
-    ///
-    /// title font family
-    ///
-    String? titleFontFamily,
+      ///
+      /// [titleFontFamily] for category title font family
+      ///
+      /// title font family
+      ///
+      String? titleFontFamily,
 
-    ///
-    /// [titleFontSize] for category title font size
-    ///
-    /// title font size
-    ///
-    double? titleFontSize,
+      ///
+      /// [titleFontSize] for category title font size
+      ///
+      /// title font size
+      ///
+      double? titleFontSize,
 
-    ///
-    /// [description] for category description
-    ///
-    /// description
-    ///
-    String? description,
+      ///
+      /// [description] for category description
+      ///
+      /// description
+      ///
+      String? description,
 
-    ///
-    /// [descriptionColor] for category description color
-    ///
-    /// description color
-    ///
-    Color? descriptionColor,
+      ///
+      /// [descriptionColor] for category description color
+      ///
+      /// description color
+      ///
+      Color? descriptionColor,
 
-    ///
-    /// [descriptionFontFamily] for category description font family
-    ///
-    /// description font family
-    ///
-    String? descriptionFontFamily,
+      ///
+      /// [descriptionFontFamily] for category description font family
+      ///
+      /// description font family
+      ///
+      String? descriptionFontFamily,
 
-    ///
-    /// [descriptionFontSize] for category description font size
-    ///
-    /// description font size
-    ///
-    double? descriptionFontSize,
+      ///
+      /// [descriptionFontSize] for category description font size
+      ///
+      /// description font size
+      ///
+      double? descriptionFontSize,
 
-    ///
-    /// [backgroundColor] for category card background color
-    ///
-    /// background color
-    ///
-    Color? backgroundColor,
+      ///
+      /// [backgroundColor] for category card background color
+      ///
+      /// background color
+      ///
+      Color? backgroundColor,
 
-    ///
-    /// [onTap] for category card onTap
-    ///
-    /// onTap
-    ///
-    Function()? onTap,
+      ///
+      /// [onTap] for category card onTap
+      ///
+      /// onTap
+      ///
+      Function()? onTap,
 
-    ///
-    /// [height] for category card height
-    ///
-    /// height
-    ///
-    double? height,
+      ///
+      /// [height] for category card height
+      ///
+      /// height
+      ///
+      double? height,
 
-    ///
-    /// [width] for category card width
-    ///
-    /// width
-    ///
-    double? width,
+      ///
+      /// [width] for category card width
+      ///
+      /// width
+      ///
+      double? width,
 
-    ///
-    /// [imageBoxFit] for category card image box fit
-    ///
-    /// box fit
-    ///
-    BoxFit? imageBoxFit,
-  }) {
+      ///
+      /// [imageBoxFit] for category card image box fit
+      ///
+      /// box fit
+      ///
+      BoxFit? imageBoxFit,
+      required BuildContext context}) {
     return EcommerceComponents(
       child: Column(
         children: [
           Expanded(
             flex: 2,
-            child: CircleAvatar(
-              radius: AppValues.radius * 42,
-              child: CircleAvatar(
-                radius: AppValues.radius * 40,
-                backgroundImage: NetworkImage(image ?? ""),
+            child: Material(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppValues.radius * 10),
+              ),
+              type: MaterialType.card,
+              child: Material(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppValues.radius * 10),
+                ),
+                type: MaterialType.card,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(AppValues.radius * 10),
+                  child: Image.network(
+                    image ?? "",
+                    width: AppValues.sizeWidth * 80,
+                    fit: BoxFit.fill,
+                  ),
+                ),
               ),
             ),
           ),
@@ -1028,15 +1045,16 @@ class EcommerceComponents extends StatelessWidget {
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppValues.radius * 20),
+            side:
+                BorderSide(color: Theme.of(context).hintColor.withOpacity(0.2)),
           ),
           elevation: 0.5,
-          // color: cardColor,
+          color: Theme.of(context).scaffoldBackgroundColor,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Product image and favorite button
               Expanded(
-                flex: 4,
+                flex: 3,
                 child: Stack(
                   children: [
                     ClipRRect(
@@ -1044,11 +1062,14 @@ class EcommerceComponents extends StatelessWidget {
                       child: Builder(
                         builder: (context) {
                           try {
-                            return Image.network(
-                              imageUrl,
-                              fit: BoxFit.fill,
-                              width: double.infinity,
-                              height: double.infinity,
+                            return Padding(
+                              padding: EdgeInsets.all(AppValues.radius * 15),
+                              child: Image.network(
+                                imageUrl,
+                                fit: BoxFit.fill,
+                                width: double.infinity,
+                                height: double.infinity,
+                              ),
                             );
                           } catch (e) {
                             // Handle error
@@ -1063,7 +1084,12 @@ class EcommerceComponents extends StatelessWidget {
                       top: 8,
                       right: 8,
                       child: StatefulBuilder(builder: (context, setState) {
-                        return IconButton(
+                        return IconButton.filled(
+                          style: IconButton.styleFrom(
+                            backgroundColor:
+                                Theme.of(context).hintColor.withOpacity(0.1),
+                          ),
+                          tooltip: AppStrings.addToFavorite.tr(context),
                           onPressed: () {
                             setState(() {
                               isFavorite = !isFavorite;
@@ -1097,34 +1123,43 @@ class EcommerceComponents extends StatelessWidget {
                       SizedBox(height: AppValues.sizeHeight * 2),
                       Text(
                         productName,
-                        style: Theme.of(context).textTheme.titleSmall,
+                        style:
+                            Theme.of(context).textTheme.headlineSmall!.copyWith(
+                                  fontSize: AppValues.font * 15,
+                                ),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),
-                      if (rating != null)
-                        Padding(
-                          padding:
-                              EdgeInsets.only(top: AppValues.paddingHeight * 5),
-                          child: Row(
-                            children: List.generate(
-                              5,
-                              (index) => Icon(
-                                index < rating.round()
-                                    ? Icons.star
-                                    : Icons.star_border,
-                                color: Colors.amber,
-                                size: AppValues.font * 15,
-                              ),
-                            ),
-                          ),
-                        ),
-                      SizedBox(height: AppValues.sizeHeight * 5),
+                      SizedBox(height: AppValues.sizeHeight * 2),
+                      Text(
+                        '$currency${price.toStringAsFixed(2)}',
+                        style:
+                            Theme.of(context).textTheme.headlineSmall!.copyWith(
+                                  fontSize: AppValues.font * 15,
+                                ),
+                      ),
+                      SizedBox(height: AppValues.sizeHeight * 2),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text('$currency${price.toStringAsFixed(2)}',
-                              style: Theme.of(context).textTheme.bodyLarge),
+                          if (rating != null)
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: AppValues.paddingHeight * 5),
+                              child: Row(
+                                children: List.generate(
+                                  5,
+                                  (index) => Icon(
+                                    index < rating.round()
+                                        ? Icons.star
+                                        : Icons.star_border,
+                                    color: Colors.amber,
+                                    size: AppValues.font * 15,
+                                  ),
+                                ),
+                              ),
+                            ),
                           if (discountPercentage != null)
                             SizedBox(
                               width: AppValues.sizeWidth * 5,

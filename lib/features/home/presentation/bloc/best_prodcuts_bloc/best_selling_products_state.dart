@@ -12,7 +12,7 @@ class BestSellingProductsInitial extends BestSellingProductsState {}
 class BestSellingProductsLoading extends BestSellingProductsState {}
 
 class BestSellingProductsLoaded extends BestSellingProductsState {
-  final List<BestSellingProduct> products;
+  final List<BestSellingAndRecommendedProduct> products;
 
   const BestSellingProductsLoaded({required this.products});
 

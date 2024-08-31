@@ -20,7 +20,7 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
   Future<List<CartProductModel>> getCartProducts() async {
     if (kDebugMode) {
       // Return dummy data in debug mode
-      await Future.delayed(Durations.extralong1);
+      await Future.delayed(Durations.short1);
       return List.generate(2, (index) {
         return CartProductModel(
           id: 'id_$index',

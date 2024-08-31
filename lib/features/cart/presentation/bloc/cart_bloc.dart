@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:supercharged/supercharged.dart';
 import '../../../../../core/bloc/usecases/usecase.dart';
 import '../../domain/entities/cart_product.dart';
 import '../../domain/usecases/add_product_to_cart_usecase.dart';

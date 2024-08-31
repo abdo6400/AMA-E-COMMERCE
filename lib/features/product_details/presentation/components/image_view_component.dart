@@ -1,3 +1,4 @@
+import 'package:ama/config/database/api/end_points.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:popup_banner/popup_banner.dart';
@@ -22,7 +23,7 @@ class ImageViewComponent extends StatelessWidget {
       itemWidth: AppValues.screenWidth * 0.92,
       itemBuilder: (context, index) {
         return Container(
-          margin: EdgeInsets.only(top: AppValues.sizeHeight*20),
+          margin: EdgeInsets.only(top: AppValues.sizeHeight * 20),
           padding: EdgeInsets.symmetric(
               vertical: AppValues.paddingHeight * 20,
               horizontal: AppValues.paddingWidth * 20),
@@ -41,19 +42,23 @@ class ImageViewComponent extends StatelessWidget {
               margin: EdgeInsets.zero,
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(AppValues.radius * 50),
-                  child: InkWell(   borderRadius: BorderRadius.circular(AppValues.radius * 50),
+                  child: InkWell(
+                      borderRadius:
+                          BorderRadius.circular(AppValues.radius * 50),
                       onTap: () {
                         PopupBanner(
                           context: context,
                           dotsColorActive:
                               Theme.of(context).colorScheme.secondary,
-                          images: images,
+                          images: images.map((e) => "${EndPoints.images}$e").toList(),
                           dotsAlignment: Alignment.bottomCenter,
                           slideChangeDuration: Durations.long1,
                           onClick: (index) {},
                         ).show();
                       },
-                      child: Image.network(images[index], fit: BoxFit.fill)))),
+                      child: Image.network(
+                          "${EndPoints.images}${images[index]}",
+                          fit: BoxFit.fill)))),
         );
       },
       autoplay: true,

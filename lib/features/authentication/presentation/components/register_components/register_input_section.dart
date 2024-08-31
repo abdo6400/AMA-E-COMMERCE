@@ -45,8 +45,8 @@ class _RegisterInputSectionState extends State<RegisterInputSection> {
                   EdgeInsets.symmetric(horizontal: AppValues.marginWidth * 30),
             onPressed: () {
               if (_registerFormKey.currentState!.validate()) {
-                BlocProvider.of<RegisterBloc>(context)
-                    .add(CheckEmailEvent(true, emailOrPhone: _email.text));
+                // BlocProvider.of<RegisterBloc>(context)
+                //     .add(CheckEmailEvent(true, emailOrPhone: _email.text));
               }
             },
             text: AppStrings.signUp,

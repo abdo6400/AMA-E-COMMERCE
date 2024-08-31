@@ -30,9 +30,7 @@ class UserInformationScreen extends StatelessWidget {
             SizedBox(
               height: AppValues.sizeHeight * 35,
             ),
-            PersonalInformationSection(
-              email: ModalRoute.of(context)?.settings.arguments as String,
-            )
+            const PersonalInformationSection()
           ],
         ),
       ),

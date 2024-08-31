@@ -1,3 +1,4 @@
+import 'package:ama/config/database/api/end_points.dart';
 import 'package:ama/config/locale/app_localizations.dart';
 import 'package:ama/core/utils/commons.dart';
 import 'package:flutter/material.dart';
@@ -58,10 +59,10 @@ class BestSellingProductsScreen extends StatelessWidget {
                     arg: state.products[index].id,
                   ),
                   context: context,
-                  imageUrl: state.products[index].image,
-                  rating: state.products[index].rating,
-                  productName: state.products[index].name,
-                  isAvailable: state.products[index].isAvailable,
+                  imageUrl: "${EndPoints.images}${state.products[index].images.first}",
+                      rating: state.products[index].rating,
+                      productName: state.products[index].title,
+                      isAvailable: state.products[index].stock > 0,
                   price: state.products[index].price,
                 ),
               );

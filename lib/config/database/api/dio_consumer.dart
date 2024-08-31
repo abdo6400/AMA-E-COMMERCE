@@ -21,8 +21,8 @@ class DioConsumer extends ApiConsumer {
       ..baseUrl = EndPoints.baseUrl
       ..responseType = ResponseType.plain
       ..followRedirects = false
-      ..sendTimeout = const Duration(seconds: 3)
-      ..receiveTimeout = const Duration(seconds: 3);
+      ..sendTimeout = const Duration(seconds: 5)
+      ..receiveTimeout = const Duration(seconds: 5);
     client.interceptors.add(sl<AppIntercepters>());
     if (kDebugMode) {
       client.interceptors.add(sl<LogInterceptor>());
@@ -226,36 +226,40 @@ class DioConsumer extends ApiConsumer {
   }
 
   dynamic _handleDioError(DioException error) {
-    var errorResponse = jsonDecode(error.response.toString());
-
     switch (error.type) {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
       case DioExceptionType.badCertificate:
       case DioExceptionType.connectionError:
-        throw FetchDataException(error.message ??AppStrings.someThingWentWrong);
+        throw FetchDataException(
+            error.response?.statusMessage ?? AppStrings.someThingWentWrong);
       case DioExceptionType.badResponse:
         switch (error.response?.statusCode) {
           case StatusCode.parameterError:
-            throw ParamterErrorException(errorResponse['errors']??[AppStrings.someThingWentWrong,]);
+            throw ParamterErrorException([error.error]);
           case StatusCode.notFound:
-            throw NotFoundException(errorResponse['message']);
+            throw NotFoundException(
+                error.response?.statusMessage ?? AppStrings.someThingWentWrong);
           case StatusCode.unauthorized:
           case StatusCode.forbidden:
-            throw UnauthorizedException(errorResponse['message']);
-          case StatusCode.badRequest:
-            throw BadRequestException(errorResponse['message']);
+            throw UnauthorizedException(
+                error.response?.statusMessage ?? AppStrings.someThingWentWrong);
           case StatusCode.conflict:
-            throw ConflictException(errorResponse['message']);
+            throw ConflictException(
+                error.response?.statusMessage ?? AppStrings.someThingWentWrong);
           case StatusCode.internalServerError:
-            throw InternalServerErrorException(errorResponse['message']);
+            throw InternalServerErrorException(
+                error.response?.statusMessage ?? AppStrings.someThingWentWrong);
           case StatusCode.gatewayServerError:
-            throw InternalServerErrorException(errorResponse['message']);
+            throw InternalServerErrorException(
+                error.response?.statusMessage ?? AppStrings.someThingWentWrong);
           case StatusCode.requestEntityTooLarge:
-            throw InternalServerErrorException(errorResponse['message']);
+            throw InternalServerErrorException(
+                error.response?.statusMessage ?? AppStrings.someThingWentWrong);
           default:
-            throw ServerException(errorResponse['message']);
+            throw ServerException(
+                error.response?.statusMessage ?? AppStrings.someThingWentWrong);
         }
       case DioExceptionType.cancel:
         break;

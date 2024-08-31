@@ -59,12 +59,12 @@ class _TopBarState extends State<TopBar> with SingleTickerProviderStateMixin {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Flexible(
-                flex: 1,
+                flex: 2,
                 child: FadeTransition(
                   opacity: _fadeInAnimation,
                   child: Text(widget.title.tr(context),
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headlineSmall!),
+                      style: Theme.of(context).textTheme.headlineLarge!),
                 ),
               ),
               Flexible(
@@ -85,7 +85,7 @@ class _TopBarState extends State<TopBar> with SingleTickerProviderStateMixin {
             ],
           ),
           SizedBox(
-            height: AppValues.sizeHeight * 35,
+            height: AppValues.sizeHeight * 30,
           ),
           FadeTransition(
             opacity: _fadeInAnimation,

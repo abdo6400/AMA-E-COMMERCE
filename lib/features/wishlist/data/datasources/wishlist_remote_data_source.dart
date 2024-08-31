@@ -37,7 +37,7 @@ class WishlistRemoteDataSourceImpl implements WishlistRemoteDataSource {
   Future<List<WithListProductModel>> getWishlistProducts() async {
   if (kDebugMode) {
       // Return dummy data in debug mode
-      await Future.delayed(const Duration(seconds: 10));
+      await Future.delayed(const Duration(seconds: 1));
       return [
         WithListProductModel(
           id: 1,

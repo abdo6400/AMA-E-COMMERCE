@@ -22,10 +22,10 @@ class RegisterErrorState extends RegisterState {
 
 class CheckEmailLoadedState extends RegisterState {
   final String secureKey;
-  final String email;
-  const CheckEmailLoadedState({required this.secureKey, required this.email});
+  final Map<String, dynamic> data;
+  const CheckEmailLoadedState({required this.secureKey, required this.data});
   @override
-  List<Object> get props => [secureKey, email];
+  List<Object> get props => [secureKey, data];
 }
 
 class ResendCodeLoadedState extends RegisterState {
@@ -46,10 +46,10 @@ final String email;
   List<Object> get props => [message];
 }
 
-class SignUpLoadedState extends RegisterState {
+class RegisterLoadedState extends RegisterState {
   final Auth auth;
 
-  const SignUpLoadedState({required this.auth});
+  const RegisterLoadedState({required this.auth});
 
   @override
   List<Object> get props => [auth];

@@ -24,7 +24,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   ) : super(RegisterInitial()) {
     on<CheckEmailEvent>(onCheckEmailEvent);
     on<ResendCodeEvent>(onResendCodeEvent);
-    on<VerfiyEmailEvent>(onVerfiyEmailEvent);
     on<SignUpEvent>(onSignUpEvent);
   }
 
@@ -35,7 +34,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         value.fold(
             (l) => RegisterErrorState(message: l.errorMessage),
             (r) => CheckEmailLoadedState(
-                secureKey: r.token, email: event.emailOrPhone))));
+                secureKey: r.token, data: event.data))));
   }
 
   void onResendCodeEvent(
@@ -48,28 +47,17 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
                 message: r.message, secureKey: r.token))));
   }
 
-  void onVerfiyEmailEvent(
-      VerfiyEmailEvent event, Emitter<RegisterState> emit) async {
-    emit(RegisterLoadingState());
-    emit(await _verfiyEmailUseCase(
-            VerifyParams(code: event.code, secureKey: event.secureKey))
-        .then((value) => value.fold(
-                (l) => RegisterErrorState(message: l.errorMessage), (r) async {
-              return VerifyEmailLoadedState(
-                  message: r.message, email: event.email);
-            })));
-  }
-
   void onSignUpEvent(SignUpEvent event, Emitter<RegisterState> emit) async {
     emit(RegisterLoadingState());
     emit(await _registerUseCase(RegisterParamsModel(
       email: event.email,
       name: event.name,
       password: event.password,
-      image: event.image,
       phone: event.phone,
+      otp: event.otp,
+      otpSecret: event.otpSecret,
     )).then((value) => value.fold(
         (l) => RegisterErrorState(message: l.errorMessage),
-        (r) => SignUpLoadedState(auth: r))));
+        (r) => RegisterLoadedState(auth: r))));
   }
 }

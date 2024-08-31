@@ -28,26 +28,7 @@ class AddressCardComponent extends StatelessWidget {
     required this.districtController,
     required this.governorateController,
     required this.neatestLandmarkController,
-
   });
-  Widget _buildDetailRow(String label, String value, BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: AppValues.paddingHeight),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            "${label.tr(context)} :",
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-          Text(
-            value,
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,55 +58,71 @@ class AddressCardComponent extends StatelessWidget {
                         AppStrings.shippingAddress.tr(context),
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
-               
-                        Row(
-                          children: [
-                            InkWell(
-                                onTap: () {},
-                                child: const Icon(Icons.edit,
-                                    color: AppColors.greenDark)),
-                            SizedBox(
-                              width: AppValues.sizeWidth * 10,
-                            ),
-                            InkWell(
+                      Row(
+                        children: [
+                          InkWell(
                               onTap: () {},
-                              child: const Icon(Icons.delete,
-                                  color: AppColors.error),
-                            ),
-                          ],
-                        )
+                              child: const Icon(Icons.edit,
+                                  color: AppColors.greenDark)),
+                          SizedBox(
+                            width: AppValues.sizeWidth * 10,
+                          ),
+                          InkWell(
+                            onTap: () {},
+                            child: const Icon(Icons.delete,
+                                color: AppColors.error),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                   Divider(
                     thickness: 1,
                     color: Theme.of(context).primaryColor.withOpacity(0.5),
                   ),
-                  _buildDetailRow(
-                      AppStrings.shippingName, shippingNameController, context),
-                  _buildDetailRow(
-                      AppStrings.fullName, fullNameController, context),
-                  _buildDetailRow(
-                      AppStrings.shippingPhone, phoneController, context),
-                  _buildDetailRow(
-                      AppStrings.streetName, streetNameController, context),
-                  _buildDetailRow(AppStrings.buildingNumber,
-                      buildingNumberController, context),
-                  _buildDetailRow(
-                      AppStrings.houseNumber, houseNumberController, context),
-                  _buildDetailRow(
-                      AppStrings.cityORArea, cityORAreaController, context),
-                  _buildDetailRow(
-                      AppStrings.district, districtController, context),
-                  _buildDetailRow(
-                      AppStrings.governorate, governorateController, context),
-                  _buildDetailRow(AppStrings.nearestLandmark,
-                      neatestLandmarkController, context),
+                  RichText(
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.titleMedium,
+                      children: [
+                        TextSpan(
+                            text:
+                                '${AppStrings.shippingName.tr(context)}: $shippingNameController, '),
+                        TextSpan(
+                            text:
+                                '${AppStrings.fullName.tr(context)}: $fullNameController, '),
+                        TextSpan(
+                            text:
+                                '${AppStrings.shippingPhone.tr(context)}: $phoneController, '),
+                        TextSpan(
+                            text:
+                                '${AppStrings.streetName.tr(context)}: $streetNameController, '),
+                        TextSpan(
+                            text:
+                                '${AppStrings.buildingNumber.tr(context)}: $buildingNumberController, '),
+                        TextSpan(
+                            text:
+                                '${AppStrings.houseNumber.tr(context)}: $houseNumberController, '),
+                        TextSpan(
+                            text:
+                                '${AppStrings.cityORArea.tr(context)}: $cityORAreaController, '),
+                        TextSpan(
+                            text:
+                                '${AppStrings.district.tr(context)}: $districtController, '),
+                        TextSpan(
+                            text:
+                                '${AppStrings.governorate.tr(context)}: $governorateController, '),
+                        TextSpan(
+                            text:
+                                '${AppStrings.nearestLandmark.tr(context)}: $neatestLandmarkController, '),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
           ),
         ),
-     Checkbox(value: true, onChanged: (_) {}),
+        Checkbox(value: true, onChanged: (_) {}),
       ],
     );
   }

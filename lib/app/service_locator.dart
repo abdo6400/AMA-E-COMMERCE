@@ -46,14 +46,21 @@ import '../features/cart/domain/usecases/get_cart_products_usecase.dart';
 import '../features/cart/domain/usecases/remove_product_from_cart_usecase.dart';
 import '../features/cart/domain/usecases/update_cart_quantity_usecase.dart';
 import '../features/cart/presentation/bloc/cart_bloc.dart';
+import '../features/category_details/data/datasources/category_remote_data_source.dart';
+import '../features/category_details/data/repositories/category_repository_impl.dart';
+import '../features/category_details/domain/repositories/category_repository.dart';
+import '../features/category_details/domain/usecases/get_category_details_use_case.dart';
+import '../features/category_details/presentation/bloc/category_details_bloc.dart';
 import '../features/home/domain/usecases/get_ads_usecase.dart';
 import '../features/home/domain/usecases/get_best_selling_products_usecase.dart';
 import '../features/home/domain/usecases/get_categories_usecase.dart';
 import '../features/home/domain/usecases/get_offers_usecase.dart';
+import '../features/home/domain/usecases/get_recommendation_products_usecase.dart';
 import '../features/home/presentation/bloc/ads_bloc/ads_bloc.dart';
 import '../features/home/presentation/bloc/best_prodcuts_bloc/best_selling_products_bloc.dart';
 import '../features/home/presentation/bloc/categories_bloc/categories_bloc.dart';
 import '../features/home/presentation/bloc/offers_bloc/offers_bloc.dart';
+import '../features/home/presentation/bloc/recommendation_bloc/recommendation_bloc.dart';
 import '../features/product_details/data/datasources/product_details_remote_data_source.dart';
 import '../features/product_details/data/repositories/product_details_repository_impl.dart';
 import '../features/product_details/domain/repositories/product_details_repository.dart';
@@ -110,12 +117,18 @@ Future<void> _app() async {
   sl.registerLazySingleton(() => BestSellingProductsBloc(sl()));
   sl.registerLazySingleton(() => CategoriesBloc(sl()));
   sl.registerLazySingleton(() => OffersBloc(sl()));
+  sl.registerFactory(
+    () => RecommendationBloc(getRecommendationProductsUseCase: sl()),
+  );
   sl.registerLazySingleton(() => AdsBloc(sl()));
   sl.registerLazySingleton(() => WishlistBloc(
         sl(),
         sl(),
         sl(),
       ));
+  sl.registerFactory(
+    () => CategoryDetailsBloc(getCategoryDetailsUseCase: sl()),
+  );
   sl.registerFactory(() => ProductDetailsBloc(sl()));
   sl.registerLazySingleton(() => CartBloc(sl(), sl(), sl(), sl()));
   //! Use cases
@@ -123,7 +136,9 @@ Future<void> _app() async {
   sl.registerLazySingleton(() => GetCategoriesUseCase(sl()));
   sl.registerLazySingleton(() => GetOffersUseCase(sl()));
   sl.registerLazySingleton(() => GetAdsUseCase(sl()));
-
+  sl.registerLazySingleton(
+    () => GetRecommendationProductsUseCase(sl()),
+  );
   sl.registerLazySingleton(() => GetWishlistProductsUseCase(sl()));
   sl.registerLazySingleton(() => AddProductToWishlistUseCase(sl()));
   sl.registerLazySingleton(() => RemoveProductFromWishlistUseCase(sl()));
@@ -133,6 +148,8 @@ Future<void> _app() async {
   sl.registerLazySingleton(() => RemoveProductFromCartUseCase(sl()));
   sl.registerLazySingleton(() => UpdateCartQuantityUseCase(sl()));
   sl.registerLazySingleton(() => GetProductDetailsUseCase(sl()));
+
+  sl.registerLazySingleton(() => GetCategoryDetailsUseCase(sl()));
   //! Repositories
   sl.registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl(
         remoteDataSource: sl(),
@@ -146,6 +163,11 @@ Future<void> _app() async {
       ));
   sl.registerLazySingleton<ProductRepository>(
       () => ProductRepositoryImpl(remoteDataSource: sl()));
+
+  sl.registerLazySingleton<CategoryRepository>(
+    () => CategoryRepositoryImpl(remoteDataSource: sl()),
+  );
+
   //! Data sources
   sl.registerLazySingleton<HomeRemoteDataSource>(
       () => HomeRemoteDataSourceImpl(apiConsumer: sl()));
@@ -156,6 +178,10 @@ Future<void> _app() async {
       ));
   sl.registerLazySingleton<ProductRemoteDataSource>(
       () => ProductRemoteDataSourceImpl(apiConsumer: sl()));
+
+  sl.registerLazySingleton<CategoryRemoteDataSource>(
+    () => CategoryRemoteDataSourceImpl(apiConsumer: sl()),
+  );
 }
 
 Future<void> _authInit() async {

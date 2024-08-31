@@ -74,48 +74,50 @@ class FormCardComponentState extends State<AnimatedFormCardComponent>
 
   @override
   Widget build(BuildContext context) {
-    return SlideTransition(
-      position: _slideAnimation,
-      child: AnimatedBuilder(
-        animation: _shadowController,
-        builder: (context, child) {
-          return AnimatedContainer(
-            duration: const Duration(milliseconds: 2000),
-            curve: Curves.linearToEaseOut,
-            margin: EdgeInsets.symmetric(
-              horizontal: AppValues.paddingWidth * 15,
-              vertical: AppValues.paddingHeight * 30,
-            ),
-            decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
-              borderRadius: AppLocalizations.of(context)!.isEnLocale
-                  ? BorderRadius.only(
-                      topLeft: Radius.circular(AppValues.radius * 10),
-                      bottomRight: Radius.circular(AppValues.radius * 10),
-                      bottomLeft: Radius.circular(AppValues.radius * 10),
-                      topRight: Radius.circular(AppValues.radius * 150),
-                    )
-                  : BorderRadius.only(
-                      topRight: Radius.circular(AppValues.radius * 10),
-                      bottomLeft: Radius.circular(AppValues.radius * 10),
-                      topLeft: Radius.circular(AppValues.radius * 150),
-                      bottomRight: Radius.circular(AppValues.radius * 10),
-                    ),
-              boxShadow: [
-                BoxShadow(
-                  color: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
-                  offset: Offset(0, _shadowOffsetAnimation.value),
-                  blurRadius: _shadowBlurAnimation.value,
-                ),
-              ],
-            ),
-            padding: EdgeInsets.symmetric(
-              horizontal: AppValues.paddingWidth * 22,
-              vertical: AppValues.paddingHeight * 15,
-            ),
-            child: SingleChildScrollView(child: widget.widget),
-          );
-        },
+    return SingleChildScrollView(
+        child: SlideTransition(
+        position: _slideAnimation,
+        child: AnimatedBuilder(
+          animation: _shadowController,
+          builder: (context, child) {
+            return AnimatedContainer(
+              duration: const Duration(milliseconds: 2000),
+              curve: Curves.linearToEaseOut,
+              margin: EdgeInsets.symmetric(
+                horizontal: AppValues.paddingWidth * 15,
+                vertical: AppValues.paddingHeight * 30,
+              ),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.tertiaryContainer,
+                borderRadius: AppLocalizations.of(context)!.isEnLocale
+                    ? BorderRadius.only(
+                        topLeft: Radius.circular(AppValues.radius * 10),
+                        bottomRight: Radius.circular(AppValues.radius * 10),
+                        bottomLeft: Radius.circular(AppValues.radius * 10),
+                        topRight: Radius.circular(AppValues.radius * 150),
+                      )
+                    : BorderRadius.only(
+                        topRight: Radius.circular(AppValues.radius * 10),
+                        bottomLeft: Radius.circular(AppValues.radius * 10),
+                        topLeft: Radius.circular(AppValues.radius * 150),
+                        bottomRight: Radius.circular(AppValues.radius * 10),
+                      ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
+                    offset: Offset(0, _shadowOffsetAnimation.value),
+                    blurRadius: _shadowBlurAnimation.value,
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.symmetric(
+                horizontal: AppValues.paddingWidth * 22,
+                vertical: AppValues.paddingHeight * 15,
+              ),
+              child:  widget.widget,
+            );
+          },
+        ),
       ),
     );
   }

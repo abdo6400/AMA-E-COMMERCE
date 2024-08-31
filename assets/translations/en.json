@@ -159,7 +159,6 @@
   "orderPlaced": "Order Placed",
   "orderPlacedSub": "Your order has been placed successfully. We will contact you shortly.",
   "orderPlacedSub2": "You can check your order status in your account.",
-
   "fullName": "Full Name",
   "shippingName": "Shipping Name",
   "shippingAddress": "Shipping Address",
@@ -195,7 +194,17 @@
   "relatedProducts": "Related Products",
   "send": "Send",
   "signInWithGoogle": "Sign in with Google",
-  "signInAsGuest": "Sign in as Guest"
-
-
+  "signInAsGuest": "Sign in as Guest",
+  "recomendedForYou": "Recomended For You",
+  "discover": "Discover",
+  "shopping": "Shopping",
+  "addToFavorite": "Add To Favorite",
+  "removeFromFavorite": "Remove From Favorite",
+  "noFavorite": "No Favorite",
+  "noFavoriteSub": "You have no favorite products. Check back later",
+  "clearWishList": "Clear Wish List",
+  "coupon": "Coupon",
+  "apply": "Apply",
+  "noCoupons": "No Coupons",
+  "pleaseSignToUseAllFeatures": "Please sign in to use all features"
 }

@@ -10,12 +10,12 @@ class CustomDivider extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: AppValues.sizeHeight * 10,
+          height: AppValues.sizeHeight * 5,
         ),
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: AppValues.paddingWidth * 25),
-          child: Divider(color: Theme.of(context).canvasColor),
+          child: Divider(color: Theme.of(context).scaffoldBackgroundColor),
         ),
         SizedBox(
           height: AppValues.sizeHeight * 5,

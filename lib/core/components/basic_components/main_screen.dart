@@ -11,9 +11,9 @@ class MainScreen extends StatelessWidget {
 
   static final List<Map<String, dynamic>> _screens = [
     {
-      "icon": Icons.home,
-      "iconBorder": Icons.home_outlined,
-      "title": AppStrings.home,
+      "icon": Icons.dashboard,
+      "iconBorder": Icons.dashboard_outlined,
+      "title": AppStrings.shopping,
       "screen": const HomeScreen()
     },
     {
@@ -29,9 +29,9 @@ class MainScreen extends StatelessWidget {
       "screen": const CartScreen()
     },
     {
-      "icon": Icons.person,
-      "iconBorder": Icons.person_outline,
-      "title": AppStrings.profile,
+      "icon": Icons.account_circle,
+      "iconBorder": Icons.account_circle_outlined,
+      "title": AppStrings.account,
       "screen": const ProfileScreen()
     },
   ];

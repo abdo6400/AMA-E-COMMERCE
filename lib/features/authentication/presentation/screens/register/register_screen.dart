@@ -8,6 +8,7 @@ import '../../../../../config/routes/app_routes.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_values.dart';
 import '../../bloc/register/register_bloc.dart';
+import '../../components/register_components/personal_information_section.dart';
 import '../../components/register_components/register_input_section.dart';
 import '../../components/shared_components/auth_curve.dart';
 import '../../components/shared_components/bottombar.dart';
@@ -35,7 +36,7 @@ class RegisterScreen extends StatelessWidget {
               text: state.message,
               width: AppValues.screenWidth / 4,
               title: AppStrings.someThingWentWrong.tr(context));
-        } else if (state is SignUpLoadedState) {
+        } else if (state is RegisterLoadedState) {
           context.loaderOverlay.hide();
           saveToken(state.auth.token).then((value) => QuickAlert.show(
                   context: context,
@@ -58,19 +59,8 @@ class RegisterScreen extends StatelessWidget {
               .then((value) {
             context.navigateTo(
                 screenRoute: Routes.otpRegisterRoute,
-                arg: {"secureKey": state.secureKey, "email": state.email});
+                arg: {"secureKey": state.secureKey, "data": state.data});
           });
-        } else if (state is VerifyEmailLoadedState) {
-          context.loaderOverlay.hide();
-          QuickAlert.show(
-                  context: context,
-                  type: QuickAlertType.success,
-                  autoCloseDuration: Durations.extralong4,
-                  showConfirmBtn: false,
-                  width: AppValues.screenWidth / 4,
-                  title: AppStrings.success.tr(context))
-              .then((value) => context.navigateAndFinish(
-                  screenRoute: Routes.informationRoute, arg: state.email));
         }
       },
       child: Scaffold(
@@ -83,7 +73,8 @@ class RegisterScreen extends StatelessWidget {
             SizedBox(
               height: AppValues.sizeHeight * 30,
             ),
-            const RegisterInputSection(),
+            const PersonalInformationSection(),
+            // const RegisterInputSection(),
             SizedBox(
               height: AppValues.sizeHeight * 20,
             ),
