@@ -9,7 +9,7 @@ import '../../../../../core/components/default_components/default_form_field.dar
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_values.dart';
 import '../../../../../core/utils/custom_validation.dart';
-import '../../bloc/cubit/information_cubit.dart';
+import '../shared_components/password_input.dart';
 
 class LoginInputSection extends StatefulWidget {
   const LoginInputSection({super.key});
@@ -32,7 +32,6 @@ class _LoginInputSectionState extends State<LoginInputSection> {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<InformationCubit>();
     return Form(
       key: _loginFormKey,
       child: Column(
@@ -47,15 +46,10 @@ class _LoginInputSectionState extends State<LoginInputSection> {
           SizedBox(
             height: AppValues.sizeHeight * 15,
           ),
-          DefaultTextFormField(
-              controller: _password,
-              type: TextInputType.visiblePassword,
-              prefix: Icons.lock_outline,
-              validate: (value) =>
-                  CustomValidationHandler.isValidPassword(value!)
-                      .translateWithNullSafetyString(context),
-              isPassword: context.watch<InformationCubit>().isVisiable,
-              label: AppStrings.password),
+          PasswordInput(
+            controller: _password,
+            title: AppStrings.password,
+          ),
           SizedBox(
             height: AppValues.sizeHeight * 20,
           ),
@@ -77,17 +71,6 @@ class _LoginInputSectionState extends State<LoginInputSection> {
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () => cubit.changeVisiablity(),
-                  child: Text(
-                    context.watch<InformationCubit>().isVisiable
-                        ? AppStrings.showPassword.tr(context)
-                        : AppStrings.hidePassword.tr(context),
-                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        color: Theme.of(context).colorScheme.secondary,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
               ],
             ),
           ),
@@ -95,10 +78,9 @@ class _LoginInputSectionState extends State<LoginInputSection> {
             height: AppValues.sizeHeight * 20,
           ),
           DefaultButton(
-        margin:
-                  EdgeInsets.symmetric(horizontal: AppValues.marginWidth * 30),
+            margin:
+                EdgeInsets.symmetric(horizontal: AppValues.marginWidth * 30),
             onPressed: () {
-             
               if (_loginFormKey.currentState!.validate()) {
                 context.read<LoginBloc>().add(
                     SignInEvent(email: _email.text, password: _password.text));

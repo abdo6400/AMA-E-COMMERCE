@@ -1,17 +1,14 @@
-
 import 'package:ama/config/locale/app_localizations.dart';
 import 'package:flutter/material.dart';
-
-import '../../utils/app_colors.dart';
 import '../../utils/app_values.dart';
 
 class DefaultMessageCard extends StatelessWidget {
-  final String sign;
+  final IconData icon;
   final String title;
   final String subTitle;
   const DefaultMessageCard(
       {super.key,
-      required this.sign,
+      required this.icon,
       required this.title,
       required this.subTitle});
 
@@ -24,44 +21,30 @@ class DefaultMessageCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CircleAvatar(
-            radius: (AppValues.radius * 35),
-            backgroundColor: AppColors.primary.withOpacity(0.3),
+            radius: (AppValues.radius * 30),
+            
             child: CircleAvatar(
-              backgroundColor: AppColors.grey,
-              radius: (AppValues.radius * 30),
-              child: Text(
-                sign,
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    color: AppColors.blueLight, fontSize: AppValues.font * 28),
-              ),
+              radius: (AppValues.radius * 25),
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              child: Icon(icon,color:Theme.of(context).colorScheme.secondary),
             ),
           ),
           SizedBox(
-            height: AppValues.sizeHeight * 20,
+            height: AppValues.sizeHeight * 10,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 60),
             child: Column(
               children: [
-                Text(
-                  title.tr(context),
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontSize: AppValues.font * 22,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.grey),
-                ),
+                Text(title.tr(context),
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.labelLarge),
                 SizedBox(
                   height: AppValues.sizeHeight * 10,
                 ),
-                /*  Text(
-                  subTitle.tr(context),
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontSize: AppValues.font * 20,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.greyMedi),
-                ),*/
+                Text(subTitle.tr(context),
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.labelMedium),
               ],
             ),
           )

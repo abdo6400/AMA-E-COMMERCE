@@ -1,13 +1,19 @@
+import 'package:ama/app/service_locator.dart';
 import 'package:ama/config/locale/app_localizations.dart';
+import 'package:ama/core/components/cubits/auth_check_cubit/auth_check_cubit.dart';
 import 'package:ama/core/utils/commons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:quickalert/quickalert.dart';
+import '../../../../config/database/cache/cache_consumer.dart';
 import '../../../../config/routes/app_routes.dart';
+import '../../../utils/app_enums.dart';
 import '../../../utils/app_strings.dart';
 import '../../../utils/app_values.dart';
 import '../app_logo_component.dart';
 
 class DrawerMenuComponent extends StatelessWidget {
-
   const DrawerMenuComponent({super.key});
 
   @override
@@ -114,7 +120,24 @@ class DrawerMenuComponent extends StatelessWidget {
             const Spacer(),
             ListTile(
                 tileColor: Theme.of(context).colorScheme.secondary,
-                onTap: () => Navigator.of(context).pop(),
+                onTap: () async {
+                  context.loaderOverlay.show();
+                  await sl<CacheConsumer>()
+                      .clearValue(key: MySharedKeys.apiToken.name);
+                  context.loaderOverlay.hide();
+
+                  QuickAlert.show(
+                          context: context,
+                          type: QuickAlertType.success,
+                          autoCloseDuration: Durations.extralong4,
+                          showConfirmBtn: false,
+                          width: AppValues.screenWidth / 4,
+                          title: AppStrings.logout.tr(context))
+                      .then((value) {
+                    Navigator.of(context).pop();
+                    context.read<AuthCheckCubit>().checkAuthentication();
+                  });
+                },
                 title: Text(
                   AppStrings.logout.tr(context),
                   style: Theme.of(context)
@@ -125,7 +148,7 @@ class DrawerMenuComponent extends StatelessWidget {
                 leading: Icon(
                   Icons.logout_outlined,
                   color: Theme.of(context).cardColor,
-                ))
+                )),
           ]),
         ));
   }

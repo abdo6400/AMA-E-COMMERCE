@@ -1,4 +1,7 @@
-import 'package:ama/config/routes/route_observer.dart';
+import 'package:ama/config/intercepters/route_intercepter.dart';
+import 'package:ama/features/check_out/domain/repositories/address_repository.dart';
+import 'package:ama/features/check_out/domain/repositories/check_out_repository.dart';
+import 'package:ama/features/check_out/presentation/bloc/blocs/address_bloc/address_bloc.dart';
 import 'package:ama/features/home/data/datasources/home_remote_data_source.dart';
 import 'package:ama/features/home/data/repositories/home_repository_impl.dart';
 import 'package:ama/features/home/domain/repositories/home_repository.dart';
@@ -6,14 +9,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../config/database/api/api_consumer.dart';
-import '../config/database/api/app_interceptors.dart';
+import '../config/intercepters/requests_interceptor.dart';
 import '../config/database/api/dio_consumer.dart';
 import '../config/database/cache/cache_consumer.dart';
 import '../config/database/cache/secure_cache_helper.dart';
 import '../config/database/network/netwok_info.dart';
 import '../core/bloc/bloc_observer.dart';
+import '../core/components/cubits/auth_check_cubit/auth_check_cubit.dart';
 import '../features/authentication/data/datasources/forget_password_renote_data_source.dart';
 import '../features/authentication/data/datasources/login_remote_data_source.dart';
 import '../features/authentication/data/datasources/register_remote_data_source.dart';
@@ -51,6 +54,15 @@ import '../features/category_details/data/repositories/category_repository_impl.
 import '../features/category_details/domain/repositories/category_repository.dart';
 import '../features/category_details/domain/usecases/get_category_details_use_case.dart';
 import '../features/category_details/presentation/bloc/category_details_bloc.dart';
+import '../features/check_out/data/datasources/address_remote_data_source.dart';
+import '../features/check_out/data/datasources/check_out_remote_data_source.dart';
+import '../features/check_out/data/repositories/address_repository_impl.dart';
+import '../features/check_out/data/repositories/check_out_repository_impl.dart';
+import '../features/check_out/domain/usecases/add_address_usecase.dart';
+import '../features/check_out/domain/usecases/checkout_card_usecase.dart';
+import '../features/check_out/domain/usecases/checkout_cash_usecase.dart';
+import '../features/check_out/domain/usecases/get_addresses_usecase.dart';
+import '../features/check_out/presentation/bloc/blocs/checkout_bloc/check_out_bloc.dart';
 import '../features/home/domain/usecases/get_ads_usecase.dart';
 import '../features/home/domain/usecases/get_best_selling_products_usecase.dart';
 import '../features/home/domain/usecases/get_categories_usecase.dart';
@@ -87,17 +99,15 @@ Future<void> serviceLocatorInit() async {
         encryptedSharedPreferences: true,
       ),
       wOptions: WindowsOptions(useBackwardCompatibility: true));
-  sl.registerLazySingleton<RouteLogger>(() => RouteLogger());
+  sl.registerLazySingleton<RouteIntercepter>(() => RouteIntercepter());
   Bloc.observer = MyBlocObserver();
   sl.registerLazySingleton<CacheConsumer>(
       () => SecureCacheHelper(sharedPref: sharedPreferences));
-  sl.registerLazySingleton(() => InternetConnectionChecker());
-
-  sl.registerLazySingleton<NetworkInfo>(
-      () => NetworkInfoImpl(connectionChecker: sl()));
+  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl());
   sl.registerLazySingleton(() => Dio());
   sl.registerLazySingleton<LocaleCubit>(() => LocaleCubit());
   sl.registerLazySingleton<ThemeCubit>(() => ThemeCubit());
+  sl.registerLazySingleton<AuthCheckCubit>(() => AuthCheckCubit());
   sl.registerLazySingleton<ApiConsumer>(
       () => DioConsumer(client: sl(), networkInfo: sl()));
   sl.registerLazySingleton(() => LogInterceptor(
@@ -107,7 +117,7 @@ Future<void> serviceLocatorInit() async {
       responseHeader: true,
       request: true,
       requestBody: true));
-  sl.registerLazySingleton(() => AppIntercepters(
+  sl.registerLazySingleton(() => RequestsIntercepter(
         client: sl(),
       ));
 }
@@ -117,7 +127,7 @@ Future<void> _app() async {
   sl.registerLazySingleton(() => BestSellingProductsBloc(sl()));
   sl.registerLazySingleton(() => CategoriesBloc(sl()));
   sl.registerLazySingleton(() => OffersBloc(sl()));
-  sl.registerFactory(
+  sl.registerLazySingleton(
     () => RecommendationBloc(getRecommendationProductsUseCase: sl()),
   );
   sl.registerLazySingleton(() => AdsBloc(sl()));
@@ -126,11 +136,17 @@ Future<void> _app() async {
         sl(),
         sl(),
       ));
-  sl.registerFactory(
+  sl.registerLazySingleton(
     () => CategoryDetailsBloc(getCategoryDetailsUseCase: sl()),
   );
-  sl.registerFactory(() => ProductDetailsBloc(sl()));
+  sl.registerLazySingleton(() => ProductDetailsBloc(sl()));
   sl.registerLazySingleton(() => CartBloc(sl(), sl(), sl(), sl()));
+
+  sl.registerLazySingleton(() => CheckOutBloc(
+        sl(),
+        sl(),
+      ));
+  sl.registerLazySingleton(() => AddressBloc(sl(), sl()));
   //! Use cases
   sl.registerLazySingleton(() => GetBestSellingProductsUseCase(sl()));
   sl.registerLazySingleton(() => GetCategoriesUseCase(sl()));
@@ -150,6 +166,15 @@ Future<void> _app() async {
   sl.registerLazySingleton(() => GetProductDetailsUseCase(sl()));
 
   sl.registerLazySingleton(() => GetCategoryDetailsUseCase(sl()));
+
+  sl.registerLazySingleton(() => CheckoutCardUsecase(sl()));
+
+  sl.registerLazySingleton(() => CheckoutCashUsecase(sl()));
+
+  sl.registerLazySingleton(() => GetAddressesUseCase(sl()));
+
+  sl.registerLazySingleton(() => AddAddressUsecase(sl()));
+
   //! Repositories
   sl.registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl(
         remoteDataSource: sl(),
@@ -168,6 +193,13 @@ Future<void> _app() async {
     () => CategoryRepositoryImpl(remoteDataSource: sl()),
   );
 
+  sl.registerLazySingleton<CheckOutRepository>(
+    () => CheckOutRepositoryImpl(remoteDataSource: sl()),
+  );
+  sl.registerLazySingleton<AddressRepository>(
+    () => AddressRepositoryImpl(remoteDataSource: sl()),
+  );
+
   //! Data sources
   sl.registerLazySingleton<HomeRemoteDataSource>(
       () => HomeRemoteDataSourceImpl(apiConsumer: sl()));
@@ -182,13 +214,21 @@ Future<void> _app() async {
   sl.registerLazySingleton<CategoryRemoteDataSource>(
     () => CategoryRemoteDataSourceImpl(apiConsumer: sl()),
   );
+
+  sl.registerLazySingleton<CheckOutRemoteDataSource>(
+    () => CheckOutRemoteDataSourceImpl(apiConsumer: sl()),
+  );
+
+  sl.registerLazySingleton<AddressRemoteDataSource>(
+    () => AddressRemoteDataSourceImpl(apiConsumer: sl()),
+  );
 }
 
 Future<void> _authInit() async {
   //! Blocs or cubits
   sl.registerLazySingleton(() => LoginBloc(sl()));
   sl.registerLazySingleton(() => WorkoutCubit());
-  sl.registerLazySingleton(() => RegisterBloc(sl(), sl(), sl(), sl()));
+  sl.registerLazySingleton(() => RegisterBloc(sl(), sl(), sl()));
   sl.registerLazySingleton(() => ForgetPasswordBloc(sl(), sl(), sl(), sl()));
   //! Use cases
   sl.registerLazySingleton(() => LoginUseCase(loginRepository: sl()));

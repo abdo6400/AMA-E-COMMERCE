@@ -1,13 +1,16 @@
+import '../../../../core/models/product_model.dart';
 import '../../domain/entities/product_details.dart';
 import 'information_model.dart';
-import 'related_product_model.dart';
+
 
 class ProductDetailsModel extends ProductDetails {
   const ProductDetailsModel({
     required super.id,
     required super.sku,
-    required super.title,
-    required super.description,
+    required super.titleEn,
+    required super.descriptionEn,
+    required super.titleAr,
+    required super.descriptionAr,
     required super.price,
     required super.stock,
     required super.brand,
@@ -24,15 +27,17 @@ class ProductDetailsModel extends ProductDetails {
     return ProductDetailsModel(
       id: json['id'],
       sku: json['sku'],
-      title: json['title'],
-      description: json['description'],
-      discountPercentage: json['discountPercentage'] ?? 0.0,
-      relatedProducts: List<RelatedProductModel>.from(
-          json['relatedProducts'].map((e) => RelatedProductModel.fromJson(e))),
-      price: json['price'],
+      titleEn: json['titleEn'],
+      descriptionEn: json['descriptionEn'],
+      titleAr: json['titleAr'],
+      descriptionAr: json['descriptionAr'],
+      discountPercentage: double.parse(json['discountPercentage'].toString()) ,
+      relatedProducts: List<ProductModel>.from(
+          json['relatedProducts'].map((e) => ProductModel.fromJson(e))),
+      price: double.parse(json['price'].toString()),
       stock: json['stock'],
       brand: BrandModel.fromJson(json['brand']),
-      rating: json['rating'] ?? 0.0,
+      rating: double.parse(json['rating'].toString()),
       minumimOrderQuantity: json['minumimOrderQuantity'] ?? 1,
       extraInformation: List<InformationModel>.from(
           json['informations']?.map((e) => InformationModel.fromJson(e))),
@@ -45,7 +50,10 @@ class ProductDetailsModel extends ProductDetails {
     return {
       'id': id,
       'sku': sku,
-      'description': description,
+      'titleEn': titleEn,
+      'descriptionEn': descriptionEn,
+      'titleAr': titleAr,
+      'descriptionAr': descriptionAr,
       'price': price,
       'stock': stock,
       'brand': brand,
@@ -57,12 +65,13 @@ class ProductDetailsModel extends ProductDetails {
 }
 
 class BrandModel extends Brand {
-  BrandModel({required super.id, required super.name, required super.image});
+  BrandModel({required super.id, required super.nameAr,required super.nameEn ,required super.image});
 
   factory BrandModel.fromJson(Map<String, dynamic> json) {
     return BrandModel(
       id: json['id'],
-      name: json['name'],
+      nameAr: json['nameAr'],
+      nameEn: json['nameEn'],
       image: json['image'],
     );
   }

@@ -3,12 +3,10 @@ import 'package:ama/core/components/basic_components/authentication_checker_comp
 import 'package:ama/core/utils/commons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../config/database/api/end_points.dart';
 import '../../../../config/routes/app_routes.dart';
-import '../../../../core/components/app_components/ecommerce_components.dart';
+import '../../../../core/components/app_components/product_card.dart';
 import '../../../../core/components/default_components/default_error_message.dart';
 import '../../../../core/components/default_components/default_simmer_loading.dart';
-import '../../../../core/utils/app_enums.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/app_values.dart';
 import '../bloc/recommendation_bloc/recommendation_bloc.dart';
@@ -48,46 +46,38 @@ class RecommendedComponent extends StatelessWidget {
         ),
         SizedBox(height: AppValues.sizeHeight * 20),
         AuthenticationCheckerComponent(
-          child: 
-          SizedBox(
-              height: AppValues.sizeHeight * 220,
+          child: SizedBox(
+              height: AppValues.sizeHeight * 240,
               child: BlocBuilder<RecommendationBloc, RecommendationState>(
                 builder: (context, state) {
-                  if (state is RecommendationLoading) {
-                    return const DefaultSimmerLoading(
-                        type: SimmerLoadingType.grid);
-                  } else if (state is RecommendationError) {
+                  if (state is RecommendationError) {
                     return DefaultErrorMessage(
                       message: state.message,
                     );
-                  } else if (state is RecommendationLoaded) {
-                    return ListView.separated(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      padding: EdgeInsets.only(
-                        left: AppValues.paddingWidth * 10,
-                        right: AppValues.paddingWidth * 10,
-                      ),
-                      separatorBuilder: (context, index) => SizedBox(
-                        width: AppValues.sizeWidth * 10,
-                      ),
-                      itemCount: state.products.length,
-                      itemBuilder: (context, index) => SizedBox(
-                        width: AppValues.sizeWidth * 180,
-                        child: EcommerceComponents.productCard(
-                          onTap: () => context.navigateTo(
-                            screenRoute: Routes.productDetailsRoute,
-                            arg: state.products[index].id,
+                  } else if (state is RecommendationLoaded ||
+                      state is RecommendationLoading) {
+                    return DefaultSimmerLoading(
+                      loading: state is RecommendationLoading,
+                      child: ListView.separated(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          padding: EdgeInsets.only(
+                            left: AppValues.paddingWidth * 10,
+                            right: AppValues.paddingWidth * 10,
                           ),
-                          context: context,
-                          imageUrl:
-                              "${EndPoints.images}${state.products[index].images.first}",
-                          rating: state.products[index].rating,
-                          productName: state.products[index].title,
-                          isAvailable: state.products[index].stock > 0,
-                          price: state.products[index].price,
-                        ),
-                      ),
+                          separatorBuilder: (context, index) => SizedBox(
+                                width: AppValues.sizeWidth * 10,
+                              ),
+                          itemCount: state is RecommendationLoaded
+                              ? state.products.length
+                              : 4,
+                          itemBuilder: (context, index) => SizedBox(
+                              width: AppValues.sizeWidth * 180,
+                              child: ProductCard(
+                                product: state is RecommendationLoaded
+                                    ? state.products[index]
+                                    : null,
+                              ))),
                     );
                   }
                   return const SizedBox.shrink();

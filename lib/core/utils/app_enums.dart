@@ -1,6 +1,12 @@
-enum MySharedKeys { theme, language, apiToken, id, onBoarding }
+enum MySharedKeys { theme, language, apiToken, id, onBoarding, refreshToken }
 
 enum ToastStates { success, error, warning }
+
+enum ToastType { shortToast, longToast }
+
+enum SnackBarType { info, error, success }
+
+enum QuickAlertTypeEnum { success, error }
 
 enum AlertDialogType { success, error, warrning, info }
 
@@ -42,7 +48,8 @@ enum ButtonType {
   instagram,
   discord,
   discordCircle,
-  custom, guest
+  custom,
+  guest
 }
 
 enum ImagePosition {

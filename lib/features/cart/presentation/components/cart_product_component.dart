@@ -3,30 +3,18 @@ library cart_item;
 import 'package:ama/config/locale/app_localizations.dart';
 import 'package:ama/core/utils/app_values.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CartItem extends StatefulWidget {
-  const CartItem(
-      {super.key,
-      required this.name,
-      required this.price,
-      required this.quantity,
-      required this.imageUrl,
-      required this.category,
-      this.onAdd,
-      this.onRemove});
-  final String category;
-  final String name;
-  final double price;
-  final int quantity;
-  final String imageUrl;
-  final VoidCallback? onAdd;
-  final VoidCallback? onRemove;
+import '../../domain/entities/cart_product.dart';
+import '../bloc/cart_bloc.dart';
 
-  @override
-  State<CartItem> createState() => _CartItemState();
-}
+class CartItem extends StatelessWidget {
+  const CartItem({
+    super.key,
+    required this.cartProduct,
+  });
+  final CartProduct? cartProduct;
 
-class _CartItemState extends State<CartItem> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -60,11 +48,17 @@ class _CartItemState extends State<CartItem> {
                               BorderRadius.circular(AppValues.radius * 20),
                           child: Padding(
                             padding: EdgeInsets.all(AppValues.radius * 5),
-                            child: Image(
-                              image: NetworkImage(widget.imageUrl),
-                              height: AppValues.sizeHeight * 80,
-                              fit: BoxFit.fill,
-                            ),
+                            child: cartProduct != null
+                                ? Image(
+                                    image: NetworkImage(
+                                        cartProduct!.product.images[0]),
+                                    height: AppValues.sizeHeight * 80,
+                                    fit: BoxFit.fill,
+                                  )
+                                : Container(
+                                    height: AppValues.sizeHeight * 80,
+                                    color: Theme.of(context).hintColor,
+                                  ),
                           ),
                         ),
                       ),
@@ -80,7 +74,10 @@ class _CartItemState extends State<CartItem> {
                             SizedBox(
                               height: AppValues.sizeHeight * 5,
                             ),
-                            Text(widget.name,
+                            Text(
+                                cartProduct != null
+                                    ? cartProduct!.product.titleEn
+                                    : "loading...",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: Theme.of(context)
@@ -90,7 +87,10 @@ class _CartItemState extends State<CartItem> {
                             SizedBox(
                               height: AppValues.sizeHeight * 5,
                             ),
-                            Text(widget.category,
+                            Text(
+                                cartProduct != null
+                                    ? cartProduct!.product.descriptionEn
+                                    : "loading...",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style:
@@ -99,7 +99,9 @@ class _CartItemState extends State<CartItem> {
                               height: AppValues.sizeHeight * 5,
                             ),
                             Text(
-                              '${widget.price} €',
+                              cartProduct != null
+                                  ? '${cartProduct!.product.price} EGP'
+                                  : "0.0 €",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: Theme.of(context).textTheme.displaySmall,
@@ -120,7 +122,11 @@ class _CartItemState extends State<CartItem> {
                           height: AppValues.sizeHeight * 5,
                         ),
                         IconButton.outlined(
-                            onPressed: widget.onAdd,
+                            onPressed: () => cartProduct != null
+                                ? context.read<CartBloc>().add(
+                                    UpdateCartQuantityEvent(cartProduct!.id,
+                                        cartProduct!.quantity + 1))
+                                : null,
                             icon: Icon(
                               Icons.add,
                               color: Theme.of(context).colorScheme.secondary,
@@ -129,16 +135,26 @@ class _CartItemState extends State<CartItem> {
                           height: AppValues.sizeHeight * 8,
                         ),
                         Text(
-                          widget.quantity.toString(),
-                          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                            fontSize: AppValues.font * 15,
-                          ),
+                          cartProduct != null
+                              ? cartProduct!.quantity.toString()
+                              : "0",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(
+                                fontSize: AppValues.font * 15,
+                              ),
                         ),
                         SizedBox(
                           height: AppValues.sizeHeight * 5,
                         ),
                         IconButton(
-                            onPressed: widget.onRemove,
+                            onPressed: () => cartProduct != null
+                                ? context.read<CartBloc>().add(
+                                      UpdateCartQuantityEvent(cartProduct!.id,
+                                          cartProduct!.quantity - 1),
+                                    )
+                                : null,
                             icon: const Icon(Icons.remove)),
                       ],
                     ))
@@ -147,7 +163,11 @@ class _CartItemState extends State<CartItem> {
           ),
         ),
         IconButton.outlined(
-            onPressed: widget.onRemove,
+            onPressed: () => cartProduct != null
+                ? context.read<CartBloc>().add(
+                      RemoveProductFromCartEvent(cartProduct!.id),
+                    )
+                : null,
             style: IconButton.styleFrom(
                 shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppValues.radius * 5),

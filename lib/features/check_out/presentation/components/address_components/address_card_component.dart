@@ -2,32 +2,17 @@ import 'package:ama/config/locale/app_localizations.dart';
 import 'package:ama/core/utils/app_colors.dart';
 import 'package:ama/core/utils/app_strings.dart';
 import 'package:ama/core/utils/app_values.dart';
+import 'package:ama/features/check_out/domain/entities/address.dart';
+import 'package:ama/features/check_out/presentation/bloc/cubits/address_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddressCardComponent extends StatelessWidget {
-  final String shippingNameController;
-  final String fullNameController;
-  final String phoneController;
-  final String streetNameController;
-  final String buildingNumberController;
-  final String houseNumberController;
-  final String cityORAreaController;
-  final String districtController;
-  final String governorateController;
-  final String neatestLandmarkController;
+  final Address? address;
 
   const AddressCardComponent({
     super.key,
-    required this.shippingNameController,
-    required this.fullNameController,
-    required this.phoneController,
-    required this.streetNameController,
-    required this.buildingNumberController,
-    required this.houseNumberController,
-    required this.cityORAreaController,
-    required this.districtController,
-    required this.governorateController,
-    required this.neatestLandmarkController,
+    required this.address,
   });
 
   @override
@@ -86,34 +71,34 @@ class AddressCardComponent extends StatelessWidget {
                       children: [
                         TextSpan(
                             text:
-                                '${AppStrings.shippingName.tr(context)}: $shippingNameController, '),
+                                '${AppStrings.shippingName.tr(context)}: ${address?.shippingName}, '),
                         TextSpan(
                             text:
-                                '${AppStrings.fullName.tr(context)}: $fullNameController, '),
+                                '${AppStrings.fullName.tr(context)}: ${address?.fullName}, '),
                         TextSpan(
                             text:
-                                '${AppStrings.shippingPhone.tr(context)}: $phoneController, '),
+                                '${AppStrings.shippingPhone.tr(context)}: ${address?.shippingPhone}, '),
                         TextSpan(
                             text:
-                                '${AppStrings.streetName.tr(context)}: $streetNameController, '),
+                                '${AppStrings.streetName.tr(context)}: ${address?.streetName}, '),
                         TextSpan(
                             text:
-                                '${AppStrings.buildingNumber.tr(context)}: $buildingNumberController, '),
+                                '${AppStrings.buildingNumber.tr(context)}: ${address?.buildingNumber}, '),
                         TextSpan(
                             text:
-                                '${AppStrings.houseNumber.tr(context)}: $houseNumberController, '),
+                                '${AppStrings.houseNumber.tr(context)}: ${address?.houseNumber}, '),
                         TextSpan(
                             text:
-                                '${AppStrings.cityORArea.tr(context)}: $cityORAreaController, '),
+                                '${AppStrings.cityORArea.tr(context)}: ${address?.cityOrArea}, '),
                         TextSpan(
                             text:
-                                '${AppStrings.district.tr(context)}: $districtController, '),
+                                '${AppStrings.district.tr(context)}: ${address?.district}, '),
                         TextSpan(
                             text:
-                                '${AppStrings.governorate.tr(context)}: $governorateController, '),
+                                '${AppStrings.governorate.tr(context)}: ${address?.governorate}, '),
                         TextSpan(
                             text:
-                                '${AppStrings.nearestLandmark.tr(context)}: $neatestLandmarkController, '),
+                                '${AppStrings.nearestLandmark.tr(context)}: ${address?.nearestLandmark}, '),
                       ],
                     ),
                   )
@@ -122,7 +107,15 @@ class AddressCardComponent extends StatelessWidget {
             ),
           ),
         ),
-        Checkbox(value: true, onChanged: (_) {}),
+        BlocBuilder<AddressCubit, String>(
+          builder: (context, state) {
+            return Checkbox(
+                value: state == address?.id.toString(),
+                onChanged: (_) => context
+                    .read<AddressCubit>()
+                    .changeAddress(address?.id.toString() ?? ''));
+          },
+        ),
       ],
     );
   }

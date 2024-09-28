@@ -14,64 +14,63 @@ import '../../components/shared_components/otp_top_section.dart';
 
 class OtpRegisterScreen extends StatelessWidget {
   const OtpRegisterScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     Map data = ModalRoute.of(context)?.settings.arguments as Map;
-    String secureKey = data["secureKey"];
-    Map<String, dynamic> reigsterInfo = data["data"] as Map<String, dynamic>;
     return SafeArea(
-      child: Scaffold(
-        appBar: const LangAppbar(
-          addBackButton: true,
-        ),
-        body: ListView(
-          padding: EdgeInsets.symmetric(
-              horizontal: AppValues.paddingWidth * 22,
-              vertical: AppValues.paddingHeight * 15),
-          children: [
-            OtpTopSection(
-              email: reigsterInfo["email"],
-            ),
-            BlocConsumer<RegisterBloc, RegisterState>(
-              listener: (context, state) {
-                if (state is ResendCodeLoadedState) {
-                  context.loaderOverlay.hide();
-                  QuickAlert.show(
-                      context: context,
-                      type: QuickAlertType.error,
-                      autoCloseDuration: Durations.extralong4,
-                      showConfirmBtn: false,
-                      width: AppValues.screenWidth / 4,
-                      title: AppStrings.success.tr(context));
-                  secureKey = state.secureKey;
-                  context.read<WorkoutCubit>().startWorkout();
-                }
-              },
-              buildWhen: (previous, current) =>
-                  current is ResendCodeLoadedState,
-              builder: (context, state) {
-                return OtpInputSection(
-                  secureKey: secureKey,
-                  email: reigsterInfo["email"],
-                  function: (value) => context.read<RegisterBloc>().add(
-                      SignUpEvent(
-                          otp: value,
-                          otpSecret: secureKey,
-                          email: data["email"],
-                          name: reigsterInfo["name"],
-                          password: reigsterInfo["password"],
-                          phone: reigsterInfo["phone"])),
-                );
-              },
-            ),
-          ],
-        ),
-        bottomNavigationBar: OtpBottomBar(
-          email: reigsterInfo["email"],
-          function: () => context
-              .read<RegisterBloc>()
-              .add(ResendCodeEvent(emailOrPhone: reigsterInfo["email"])),
+      child: BlocProvider(
+        create: (context) => WorkoutCubit()..startWorkout(),
+        child: Scaffold(
+          appBar: const LangAppbar(
+            addBackButton: true,
+          ),
+          body: ListView(
+            padding: EdgeInsets.symmetric(
+                horizontal: AppValues.paddingWidth * 22,
+                vertical: AppValues.paddingHeight * 15),
+            children: [
+              OtpTopSection(
+                email: data["data"][AppStrings.email],
+              ),
+              BlocConsumer<RegisterBloc, RegisterState>(
+                listener: (context, state) {
+                  if (state is ResendCodeLoadedState) {
+                    context.loaderOverlay.hide();
+                    QuickAlert.show(
+                        context: context,
+                        type: QuickAlertType.success,
+                        autoCloseDuration: Durations.extralong4,
+                        showConfirmBtn: false,
+                        width: AppValues.screenWidth / 4,
+                        title: AppStrings.success.tr(context));
+                    data["secureKey"] = state.secureKey;
+                    context.read<WorkoutCubit>().startWorkout();
+                  }
+                },
+                buildWhen: (previous, current) =>
+                    current is ResendCodeLoadedState,
+                builder: (context, state) {
+                  return OtpInputSection(
+                    email: data["data"][AppStrings.email],
+                    function: (value) => context.read<RegisterBloc>().add(
+                        SignUpEvent(
+                            otp: value,
+                            otpSecret: data["secureKey"],
+                            email: data["data"][AppStrings.email],
+                            name: data["data"][AppStrings.name],
+                            password: data["data"][AppStrings.password],
+                            phone: data["data"][AppStrings.phoneNumber])),
+                  );
+                },
+              ),
+            ],
+          ),
+          bottomNavigationBar: OtpBottomBar(
+            email: data["data"][AppStrings.email],
+            function: () => context
+                .read<RegisterBloc>()
+                .add(ResendCodeEvent(email: data["data"][AppStrings.email])),
+          ),
         ),
       ),
     );

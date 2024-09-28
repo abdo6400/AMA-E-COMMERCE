@@ -1,7 +1,9 @@
 class Product {
   final int id;
-  final String title;
-  final String description;
+  final String titleEn;
+  final String descriptionEn;
+  final String titleAr;
+  final String descriptionAr;
   final String sku;
   final String productUnit;
   final double price;
@@ -13,8 +15,10 @@ class Product {
 
   Product({
     required this.id,
-    required this.title,
-    required this.description,
+    required this.titleEn,
+    required this.descriptionEn,
+        required this.titleAr,
+    required this.descriptionAr,
     required this.sku,
     required this.productUnit,
     required this.price,

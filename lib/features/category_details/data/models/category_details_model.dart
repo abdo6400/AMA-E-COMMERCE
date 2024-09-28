@@ -5,7 +5,8 @@ class CategoryDetailsModel extends CategoryDetails {
   CategoryDetailsModel({
     required super.id,
     required super.image,
-    required super.name,
+    required super.nameEn,
+    required super.nameAr,
     required List<SubCategoryModel> super.subCategories,
   });
 
@@ -13,7 +14,8 @@ class CategoryDetailsModel extends CategoryDetails {
     return CategoryDetailsModel(
       id: json['id'],
       image: json['image'],
-      name: json['name'],
+      nameEn: json['nameEn'],
+      nameAr: json['nameAr'],
       subCategories: (json['subCategories'] as List)
           .map((e) => SubCategoryModel.fromJson(e))
           .toList(),
@@ -24,7 +26,8 @@ class CategoryDetailsModel extends CategoryDetails {
     return {
       'id': id,
       'image': image,
-      'name': name,
+      'nameEn': nameEn,
+      'nameAr': nameAr,
       'subCategories':
           subCategories.map((e) => (e as SubCategoryModel).toJson()).toList(),
     };

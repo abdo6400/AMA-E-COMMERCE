@@ -85,7 +85,7 @@ class _TopBarState extends State<TopBar> with SingleTickerProviderStateMixin {
             ],
           ),
           SizedBox(
-            height: AppValues.sizeHeight * 30,
+            height: AppValues.sizeHeight * 5,
           ),
           FadeTransition(
             opacity: _fadeInAnimation,

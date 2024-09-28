@@ -29,21 +29,11 @@ class CheckEmailLoadedState extends RegisterState {
 }
 
 class ResendCodeLoadedState extends RegisterState {
-  final String message;
   final String secureKey;
-  const ResendCodeLoadedState({required this.message, required this.secureKey});
+  const ResendCodeLoadedState({required this.secureKey});
 
   @override
-  List<Object> get props => [message];
-}
-
-class VerifyEmailLoadedState extends RegisterState {
-  final String message;
-final String email;
-  const VerifyEmailLoadedState( {required this.message,required this.email,});
-
-  @override
-  List<Object> get props => [message];
+  List<Object> get props => [];
 }
 
 class RegisterLoadedState extends RegisterState {

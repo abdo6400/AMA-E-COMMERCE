@@ -2,17 +2,17 @@ import 'package:flutter/foundation.dart';
 
 import '../../../../config/database/api/api_consumer.dart';
 import '../../../../config/database/api/end_points.dart';
-import '../models/best_selling_and_recommended_product_model.dart';
+import '../../../../core/models/product_model.dart';
 import '../models/category_model.dart';
 import '../models/offer_model.dart';
 import '../models/ad_model.dart';
 
 abstract class HomeRemoteDataSource {
-  Future<List<BestSellingAndRecommendedProductModel>> getBestSellerProducts();
+  Future<List<ProductModel>> getBestSellerProducts();
   Future<List<CategoryModel>> getCategories();
   Future<List<OfferModel>> getOffers();
   Future<List<AdModel>> getAds();
-  Future<List<BestSellingAndRecommendedProductModel>>
+  Future<List<ProductModel>>
       getRecommendationProducts();
 }
 
@@ -22,21 +22,20 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   HomeRemoteDataSourceImpl({required ApiConsumer apiConsumer})
       : _apiConsumer = apiConsumer;
   @override
-  Future<List<BestSellingAndRecommendedProductModel>>
+  Future<List<ProductModel>>
       getRecommendationProducts() async {
-    // Fetch data from the API in production mode
     final response = await _apiConsumer.get(EndPoints.recommendationProducts);
     return (response as List)
-        .map((e) => BestSellingAndRecommendedProductModel.fromJson(e))
+        .map((e) => ProductModel.fromJson(e))
         .toList();
   }
 
   @override
-  Future<List<BestSellingAndRecommendedProductModel>>
+  Future<List<ProductModel>>
       getBestSellerProducts() async {
     final response = await _apiConsumer.get(EndPoints.bestSellerProducts);
     return (response as List)
-        .map((json) => BestSellingAndRecommendedProductModel.fromJson(json))
+        .map((json) => ProductModel.fromJson(json))
         .toList();
   }
 

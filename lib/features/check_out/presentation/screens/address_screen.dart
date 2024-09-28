@@ -1,8 +1,10 @@
 import 'package:ama/config/locale/app_localizations.dart';
 import 'package:ama/core/components/default_components/default_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/app_values.dart';
+import '../bloc/blocs/address_bloc/address_bloc.dart';
 import '../components/address_components/add_address_component.dart';
 import '../components/address_components/saved_addresses_component.dart';
 
@@ -48,7 +50,8 @@ class AddressScreen extends StatelessWidget {
                           useSafeArea: true,
                           isScrollControlled: true,
                           context: context,
-                          builder: (context) => const AddAddressComponent());
+                          builder: (ctx) => AddAddressComponent(
+                              addressBloc: context.read<AddressBloc>()));
                     },
                     fontSize: 12,
                     text: AppStrings.addNewAddress),

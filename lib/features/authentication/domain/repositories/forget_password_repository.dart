@@ -4,7 +4,7 @@ import '../../../../config/database/error/failures.dart';
 import '../entities/auth.dart';
 
 abstract class ForgetPasswordRepository {
-  Future<Either<Failure, Auth>> resetPassword(
+  Future<Either<Failure, String>> resetPassword(
       {required String email,
       required String newPassword,
       required String confirmNewPassword});

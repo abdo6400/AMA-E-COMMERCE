@@ -1,12 +1,14 @@
 
+import '../../../../core/models/product_model.dart';
 import '../../domain/entities/brand.dart';
-import 'product_model.dart';
+
 
 class BrandModel extends Brand {
   BrandModel({
     required super.id,
     required super.image,
-    required super.name,
+    required super.nameEn,
+    required super.nameAr,
     required List<ProductModel> super.products,
   });
 
@@ -14,7 +16,8 @@ class BrandModel extends Brand {
     return BrandModel(
       id: json['id'],
       image: json['image'],
-      name: json['name'],
+      nameEn: json['nameEn'],
+      nameAr: json['nameAr'],  
       products: (json['products'] as List)
           .map((e) => ProductModel.fromJson(e))
           .toList(),
@@ -25,7 +28,8 @@ class BrandModel extends Brand {
     return {
       'id': id,
       'image': image,
-      'name': name,
+      'nameEn': nameEn,
+      'nameAr': nameAr,
       'products': products.map((e) => (e as ProductModel).toJson()).toList(),
     };
   }

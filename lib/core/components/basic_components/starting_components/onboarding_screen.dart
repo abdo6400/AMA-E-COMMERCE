@@ -156,7 +156,7 @@ class OnBoardingScreen extends StatelessWidget {
                 sl<CacheConsumer>().saveData(
                     key: MySharedKeys.onBoarding.name,
                     value: MySharedKeys.onBoarding.name);
-                context.navigateAndFinish(screenRoute: Routes.loginRoute);
+                context.navigateAndFinish(screenRoute: Routes.mainRoute);
               },
               nextStyle: TextButton.styleFrom(),
             ),

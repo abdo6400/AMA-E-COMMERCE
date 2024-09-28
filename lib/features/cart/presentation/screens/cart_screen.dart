@@ -1,6 +1,6 @@
-import 'package:ama/config/locale/app_localizations.dart';
 import 'package:ama/config/routes/app_routes.dart';
 import 'package:ama/core/components/default_components/default_button.dart';
+import 'package:ama/core/utils/alerts_extensions.dart';
 import 'package:ama/core/utils/commons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,15 +22,22 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AuthenticationCheckerComponent(
       child: CustomInternetConnectionChecker(
-        child: BlocBuilder<CartBloc, CartState>(
+        child: BlocConsumer<CartBloc, CartState>(
+          listener: (context, state) {
+            if (state.isDeleted) {
+              context.showToast(AppStrings.productRemovedFromCart,
+                  state: ToastStates.error);
+            }
+          },
           builder: (context, state) {
-            if (state is CartLoading) {
-              return const DefaultSimmerLoading(
-                type: SimmerLoadingType.list,
-                scrollDirection: Axis.vertical,
+            if (state.hasError) {
+              return DefaultErrorMessage(
+                message: state.message,
               );
-            } else if (state is CartLoaded) {
-              return Column(
+            }
+            return DefaultSimmerLoading(
+              loading: state.isLoading,
+              child: Column(
                 children: [
                   Expanded(
                     child: Padding(
@@ -38,85 +45,44 @@ class CartScreen extends StatelessWidget {
                             horizontal: AppValues.paddingWidth * 15,
                             vertical: AppValues.paddingHeight * 5),
                         child: CartProductListviewComponent(
-                          products: state.products,
+                          products: state.hasData ? state.products : [],
+                          isLoading: state.isLoading,
                         )),
                   ),
                   SizedBox(
                     width: AppValues.screenWidth,
-                    child: Card(
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(AppValues.radius * 50),
-                            topRight: Radius.circular(AppValues.radius * 50)),
-                      ),
-                      color: Theme.of(context).hintColor.withOpacity(0.05),
+                    child: Container(
+                      color: Colors.transparent,
                       margin:
                           EdgeInsets.only(bottom: AppValues.marginHeight * 50),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: AppValues.paddingHeight * 10,
-                            horizontal: AppValues.paddingWidth * 30),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "${AppStrings.subTotalAmount.tr(context)} :",
-                                  style: Theme.of(context).textTheme.titleSmall,
-                                ),
-                                Text(
-                                  "${state.totalQuantity.toStringAsFixed(2)} \$",
-                                  style: Theme.of(context).textTheme.titleSmall,
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: AppValues.sizeHeight * 3),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "${AppStrings.deliveryFees.tr(context)} :",
-                                  style: Theme.of(context).textTheme.titleSmall,
-                                ),
-                                Text(
-                                  "500 \$",
-                                  style: Theme.of(context).textTheme.titleSmall,
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: AppValues.sizeHeight * 3),
-                            SizedBox(height: AppValues.sizeHeight * 10),
-                            DefaultButton(
-                                width: AppValues.screenWidth,
-                                elevation: 0.5,
-                                radius: AppValues.radius * 10,
-                                onPressed: () => context.navigateTo(
-                                    screenRoute: Routes.checkOutRoute,
-                                    arg: state.products),
-                                text: AppStrings.checkOut,
-                                child: Text(
-                                  "${(state.totalQuantity + 500).toStringAsFixed(2)} \$",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium!
-                                      .copyWith(color: AppColors.white),
-                                )),
-                          ],
-                        ),
-                      ),
+                      padding: EdgeInsets.symmetric(
+                          vertical: AppValues.paddingHeight * 10,
+                          horizontal: AppValues.paddingWidth * 30),
+                      child: DefaultButton(
+                          width: AppValues.screenWidth,
+                          elevation: 0.5,
+                          radius: AppValues.radius * 10,
+                          onPressed: () =>
+                              state.hasData && state.products.isNotEmpty
+                                  ? context.navigateTo(
+                                      screenRoute: Routes.checkOutRoute,
+                                      arg: state.hasData ? state.products : [])
+                                  : null,
+                          text: AppStrings.checkOut,
+                          child: Text(
+                            state.hasData
+                                ? "${(state.totalQuantity).toStringAsFixed(2)} \$"
+                                : "",
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .copyWith(color: AppColors.white),
+                          )),
                     ),
-                  )
+                  ),
                 ],
-              );
-            } else if (state is CartError) {
-              return DefaultErrorMessage(
-                message: state.message,
-              );
-            }
-            return const SizedBox.shrink();
+              ),
+            );
           },
         ),
       ),

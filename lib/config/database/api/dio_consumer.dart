@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+import 'package:dio_http2_adapter/dio_http2_adapter.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../app/service_locator.dart';
 import '../../../core/utils/app_strings.dart';
@@ -9,9 +9,10 @@ import '../../../core/utils/commons.dart';
 import '../error/exceptions.dart';
 import '../network/netwok_info.dart';
 import 'api_consumer.dart';
-import 'app_interceptors.dart';
+import '../../intercepters/requests_interceptor.dart';
 import 'end_points.dart';
 import 'status_code.dart';
+import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 
 class DioConsumer extends ApiConsumer {
   final Dio client;
@@ -20,13 +21,23 @@ class DioConsumer extends ApiConsumer {
     client.options
       ..baseUrl = EndPoints.baseUrl
       ..responseType = ResponseType.plain
-      ..followRedirects = false
-      ..sendTimeout = const Duration(seconds: 5)
-      ..receiveTimeout = const Duration(seconds: 5);
-    client.interceptors.add(sl<AppIntercepters>());
-    if (kDebugMode) {
-      client.interceptors.add(sl<LogInterceptor>());
-    }
+      ..followRedirects = false;
+    client.interceptors.add(sl<LogInterceptor>());
+    client.httpClientAdapter = Http2Adapter(
+      ConnectionManager(idleTimeout: const Duration(seconds: 10)),
+    );
+    client.interceptors.add(sl<RequestsIntercepter>());
+    client.interceptors.add(DioCacheInterceptor(
+        options: CacheOptions(
+      store: MemCacheStore(),
+      policy: CachePolicy.request,
+      hitCacheOnErrorExcept: [401, 403],
+      maxStale: const Duration(days: 7),
+      priority: CachePriority.normal,
+      cipher: null,
+      keyBuilder: CacheOptions.defaultCacheKeyBuilder,
+      allowPostMethod: true,
+    )));
   }
 
   @override
@@ -58,7 +69,7 @@ class DioConsumer extends ApiConsumer {
   Future<dynamic> post(
     String path, {
     Map<String, dynamic>? body,
-    bool formDataIsEnabled = true,
+    bool formDataIsEnabled = false,
     List<XFile>? files,
     Map<String, String>? headers,
     String? name,
@@ -131,7 +142,7 @@ class DioConsumer extends ApiConsumer {
     Map<String, dynamic>? body,
     Map<String, String>? headers,
     bool responseIsParsing = true,
-    bool formDataIsEnabled = true,
+    bool formDataIsEnabled = false,
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
@@ -170,7 +181,7 @@ class DioConsumer extends ApiConsumer {
   Future<dynamic> put(
     String path, {
     Map<String, dynamic>? body,
-    bool formDataIsEnabled = true,
+    bool formDataIsEnabled = false,
     Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
   }) async {
@@ -233,33 +244,33 @@ class DioConsumer extends ApiConsumer {
       case DioExceptionType.badCertificate:
       case DioExceptionType.connectionError:
         throw FetchDataException(
-            error.response?.statusMessage ?? AppStrings.someThingWentWrong);
+            error.response?.data ?? AppStrings.someThingWentWrong);
       case DioExceptionType.badResponse:
         switch (error.response?.statusCode) {
           case StatusCode.parameterError:
             throw ParamterErrorException([error.error]);
           case StatusCode.notFound:
             throw NotFoundException(
-                error.response?.statusMessage ?? AppStrings.someThingWentWrong);
+                error.response?.data ?? AppStrings.someThingWentWrong);
           case StatusCode.unauthorized:
           case StatusCode.forbidden:
             throw UnauthorizedException(
-                error.response?.statusMessage ?? AppStrings.someThingWentWrong);
+                error.response?.data ?? AppStrings.someThingWentWrong);
           case StatusCode.conflict:
             throw ConflictException(
-                error.response?.statusMessage ?? AppStrings.someThingWentWrong);
+                error.response?.data ?? AppStrings.someThingWentWrong);
           case StatusCode.internalServerError:
             throw InternalServerErrorException(
-                error.response?.statusMessage ?? AppStrings.someThingWentWrong);
+                error.response?.data ?? AppStrings.someThingWentWrong);
           case StatusCode.gatewayServerError:
             throw InternalServerErrorException(
-                error.response?.statusMessage ?? AppStrings.someThingWentWrong);
+                error.response?.data ?? AppStrings.someThingWentWrong);
           case StatusCode.requestEntityTooLarge:
             throw InternalServerErrorException(
-                error.response?.statusMessage ?? AppStrings.someThingWentWrong);
+                error.response?.data ?? AppStrings.someThingWentWrong);
           default:
             throw ServerException(
-                error.response?.statusMessage ?? AppStrings.someThingWentWrong);
+                error.response?.data ?? AppStrings.someThingWentWrong);
         }
       case DioExceptionType.cancel:
         break;

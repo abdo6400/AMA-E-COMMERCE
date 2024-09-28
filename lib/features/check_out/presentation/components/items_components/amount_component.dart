@@ -29,7 +29,7 @@ class AmountComponent extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Text(
-                  "$subTotalAmount \$",
+                  "$subTotalAmount EGP",
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ],
@@ -43,7 +43,7 @@ class AmountComponent extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Text(
-                  "500 \$",
+                  "500 EGP",
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ],
@@ -57,7 +57,7 @@ class AmountComponent extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Text(
-                  "0 \$",
+                  "0 EGP",
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ],
@@ -71,7 +71,7 @@ class AmountComponent extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Text(
-                  "5000 \$",
+                  "${subTotalAmount + 500} EGP",
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ],
@@ -96,15 +96,6 @@ class AmountComponent extends StatelessWidget {
                         elevation: 0.2,
                         onPressed: () {},
                         text: AppStrings.apply)),
-                // IconButton.filled(
-                //     style: IconButton.styleFrom(
-                //       backgroundColor: AppColors.error,
-                //       shape: RoundedRectangleBorder(
-                //           borderRadius: BorderRadius.circular(
-                //               AppValues.radius * 10)),
-                //     ),
-                //     onPressed: () {},
-                //     icon: const Icon(Icons.add)),
               ],
             ),
           ],

@@ -1,13 +1,15 @@
 import 'package:equatable/equatable.dart';
-
+import '../../../../core/entities/product.dart';
 import 'information.dart';
-import 'related_product.dart';
+
 
 class ProductDetails extends Equatable {
   final int id;
-  final String title;
+  final String titleEn;
+  final String descriptionEn;
+  final String titleAr;
+  final String descriptionAr;
   final String sku;
-  final String description;
   final double price;
   final double discountPercentage;
   final int stock;
@@ -17,14 +19,16 @@ class ProductDetails extends Equatable {
   final List<String> images;
   final String productUnit;
 
-  final List<RelatedProduct> relatedProducts;
+  final List<Product> relatedProducts;
   final List<Information> extraInformation;
 
   const ProductDetails({
     required this.id,
     required this.sku,
-    required this.title,
-    required this.description,
+    required this.titleEn,
+    required this.descriptionEn,
+    required this.titleAr,
+    required this.descriptionAr,
     required this.price,
     required this.stock,
     required this.brand,
@@ -43,7 +47,11 @@ class ProductDetails extends Equatable {
   List<Object?> get props => [
         id,
         sku,
-        description,
+        titleEn,
+        descriptionEn,
+        titleAr,
+        descriptionAr,
+        discountPercentage,
         price,
         stock,
         brand,
@@ -58,7 +66,8 @@ class ProductDetails extends Equatable {
 
 class Brand{
   int id;
-  String name;
+  String nameAr;
+  String nameEn;
   String image;
-  Brand({required this.id, required this.name, required this.image});
+  Brand({required this.id, required this.nameEn,required this.nameAr ,required this.image});
 }

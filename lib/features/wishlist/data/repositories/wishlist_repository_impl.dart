@@ -12,21 +12,23 @@ class WishlistRepositoryImpl implements WishlistRepository {
   WishlistRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, void>> addProductToWishlist(int productId) async {
+  Future<Either<Failure, WithListProduct>> addProductToWishlist(
+      int productId) async {
     try {
-      await remoteDataSource.addProductToWishlist(productId);
-      return const Right(null);
+      final product = await remoteDataSource.addProductToWishlist(productId);
+      return  Right(product);
     } on ServerException catch (failure) {
       return Left(ServerFailure(errorMessage: failure.errorMessage));
     }
   }
 
   @override
-  Future<Either<Failure, void>> removeProductFromWishlist(int productId) async {
+  Future<Either<Failure, WithListProduct>> removeProductFromWishlist(
+      int id) async {
     try {
-      await remoteDataSource.removeProductFromWishlist(productId);
-      return const Right(null);
-   } on ServerException catch (failure) {
+      final product = await remoteDataSource.removeProductFromWishlist(id);
+      return  Right(product);
+    } on ServerException catch (failure) {
       return Left(ServerFailure(errorMessage: failure.errorMessage));
     }
   }
@@ -36,7 +38,7 @@ class WishlistRepositoryImpl implements WishlistRepository {
     try {
       final products = await remoteDataSource.getWishlistProducts();
       return Right(products);
-   } on ServerException catch (failure) {
+    } on ServerException catch (failure) {
       return Left(ServerFailure(errorMessage: failure.errorMessage));
     }
   }

@@ -3,23 +3,26 @@ import '../../domain/entities/category.dart';
 class CategoryModel extends Category {
   CategoryModel({
     required super.id,
-    required super.name,
+    required super.nameEn,
+    required super.nameAr,
     required super.image,
   });
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) {
     return CategoryModel(
       id: json['id'],
-      name: json['name'],
       image: json['image'],
+      nameEn: json['nameEn'],
+      nameAr: json['nameAr'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'name': name,
       'image': image,
+      'nameEn': nameEn,
+      'nameAr': nameAr
     };
   }
 }

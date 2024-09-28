@@ -11,7 +11,7 @@ class CartIconComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CartBloc, CartState>(builder: (context, state) {
       return Badge.count(
-        count: state is CartLoaded ? state.products.length : 0,
+        count: state.products.length,
         child: Icon(icon),
       );
     });

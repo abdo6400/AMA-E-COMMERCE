@@ -1,13 +1,12 @@
 import 'package:ama/config/locale/app_localizations.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../core/components/app_components/ecommerce_components.dart';
+import '../../../../core/components/app_components/product_card.dart';
+import '../../../../core/entities/product.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/app_values.dart';
-import '../../domain/entities/related_product.dart';
 
 class RelatedProductsComponent extends StatelessWidget {
-  final List<RelatedProduct> products;
+  final List<Product> products;
   const RelatedProductsComponent({super.key, required this.products});
 
   @override
@@ -29,16 +28,10 @@ class RelatedProductsComponent extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: products.length,
               itemBuilder: (context, index) => SizedBox(
-                // height: AppValues.sizeHeight * 300,
-                width: AppValues.sizeWidth * 200,
-                child: EcommerceComponents.productCard(
-                  context: context,
-                  imageUrl: products[index].image,
-                  rating: products[index].rating,
-                  productName: products[index].name,
-                  price: products[index].price,
-                ),
-              ),
+                  width: AppValues.sizeWidth * 200,
+                  child: ProductCard(
+                    product: products[index],
+                  )),
               separatorBuilder: (BuildContext context, int index) => SizedBox(
                 width: AppValues.sizeWidth * 20,
               ),

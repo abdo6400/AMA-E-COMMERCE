@@ -14,52 +14,56 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
   final AddProductToWishlistUseCase _addProductToWishlistUseCase;
   final RemoveProductFromWishlistUseCase _removeProductFromWishlistUseCase;
 
-  WishlistBloc(this._getWishlistProductsUseCase, this._addProductToWishlistUseCase, this._removeProductFromWishlistUseCase)  : 
-        super(WishlistInitial()) {
+  WishlistBloc(this._getWishlistProductsUseCase,
+      this._addProductToWishlistUseCase, this._removeProductFromWishlistUseCase)
+      : super(const WishlistState()) {
     on<AddProductToWishlistEvent>(_onAddProductToWishlistEvent);
     on<RemoveProductFromWishlistEvent>(_onRemoveProductFromWishlistEvent);
     on<GetWishlistProductsEvent>(_onGetWishlistProductsEvent);
   }
-
+  List<int> favoriteItems = [];
   Future<void> _onAddProductToWishlistEvent(
       AddProductToWishlistEvent event, Emitter<WishlistState> emit) async {
-    emit(WishlistLoading());
+    favoriteItems.add(event.productId);
     final result = await _addProductToWishlistUseCase(event.productId);
-    result.fold(
-      (failure) => emit(WishlistError(message: failure.errorMessage)),
-      (_) async {
-        final productsResult = await _getWishlistProductsUseCase(NoParams());
-        productsResult.fold(
-          (failure) => emit(WishlistError(message: failure.errorMessage)),
-          (products) => emit(WishlistLoaded(products: products)),
-        );
-      },
-    );
+    result.fold((failure) => emit(WishlistState(message: failure.errorMessage)),
+        (newProduct) async {
+      emit(state.addProduct(newProduct));
+    });
+  }
+
+  void getFavoriteIds(List<WithListProduct> products) {
+    List<int> items = [];
+    for (var element in products) {
+      if (!items.contains(element.product.id)) {
+        items.add(element.product.id);
+      }
+    }
+    favoriteItems = items;
   }
 
   Future<void> _onRemoveProductFromWishlistEvent(
       RemoveProductFromWishlistEvent event, Emitter<WishlistState> emit) async {
-    emit(WishlistLoading());
+    favoriteItems.remove(event.productId);
     final result = await _removeProductFromWishlistUseCase(event.productId);
-    result.fold(
-      (failure) => emit(WishlistError(message: failure.errorMessage)),
-      (_) async {
-        final productsResult = await _getWishlistProductsUseCase(NoParams());
-        productsResult.fold(
-          (failure) => emit(WishlistError(message: failure.errorMessage)),
-          (products) => emit(WishlistLoaded(products: products)),
-        );
-      },
-    );
+    result.fold((failure) => emit(WishlistState(message: failure.errorMessage)),
+        (deletedProduct) async {
+      emit((state.removeProduct(deletedProduct)));
+    });
   }
 
   Future<void> _onGetWishlistProductsEvent(
       GetWishlistProductsEvent event, Emitter<WishlistState> emit) async {
-    emit(WishlistLoading());
+    emit(const WishlistState(isLoading: true));
     final result = await _getWishlistProductsUseCase(NoParams());
     result.fold(
-      (failure) => emit(WishlistError(message: failure.errorMessage)),
-      (products) => emit(WishlistLoaded(products: products)),
-    );
+        (failure) =>
+            emit(WishlistState(message: failure.errorMessage, hasError: true)),
+        (products) async {
+      getFavoriteIds(products);
+      emit(
+        WishlistState(products: products, hasData: true),
+      );
+    });
   }
 }

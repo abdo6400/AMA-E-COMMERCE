@@ -1,14 +1,11 @@
 import 'package:ama/config/locale/app_localizations.dart';
 import 'package:ama/core/utils/app_strings.dart';
 import 'package:ama/core/utils/app_values.dart';
-import 'package:ama/features/product_details/presentation/components/colors_component.dart';
-import 'package:ama/features/product_details/presentation/components/sizes_component.dart';
 import 'package:flutter/material.dart';
-
 import '../../domain/entities/product_details.dart';
 
 class ProductInformationComponent extends StatelessWidget {
-  final ProductDetails product;
+  final ProductDetails? product;
   const ProductInformationComponent({super.key, required this.product});
   TableRow buildRow(String title, String value) {
     return TableRow(
@@ -57,9 +54,11 @@ class ProductInformationComponent extends StatelessWidget {
                   0: FlexColumnWidth(1),
                   1: FlexColumnWidth(1),
                 },
-                children: product.extraInformation
-                    .map((e) => buildRow(e.title, e.description))
-                    .toList(),
+                children: product == null
+                    ? []
+                    : product!.extraInformation
+                        .map((e) => buildRow(e.titleEn, e.descriptionEn))
+                        .toList(),
               ),
             ])
       ],

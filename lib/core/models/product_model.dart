@@ -1,11 +1,13 @@
-import '../../domain/entities/best_selling_and_reommended_product.dart';
+import '../entities/product.dart';
 
-class BestSellingAndRecommendedProductModel
-    extends BestSellingAndRecommendedProduct {
-  BestSellingAndRecommendedProductModel({
+class ProductModel
+    extends Product {
+  ProductModel({
     required super.id,
-    required super.title,
-    required super.description,
+    required super.titleEn,
+    required super.descriptionEn,
+    required super.titleAr,
+    required super.descriptionAr,
     required super.sku,
     required super.productUnit,
     required super.price,
@@ -16,19 +18,21 @@ class BestSellingAndRecommendedProductModel
     required super.images,
   });
 
-  factory BestSellingAndRecommendedProductModel.fromJson(
+  factory ProductModel.fromJson(
       Map<String, dynamic> json) {
-    return BestSellingAndRecommendedProductModel(
+    return ProductModel(
       id: json["id"],
-      title: json["title"],
-      description: json["description"],
+      titleEn: json["titleEn"],
+      descriptionEn: json["descriptionEn"],
+      titleAr: json["titleAr"],
+      descriptionAr: json["descriptionAr"],
       sku: json["sku"],
       productUnit: json["product_Unit"],
-      price: json["price"],
+      price: double.parse(json["price"].toString()),
       stock: json["stock"],
       minimumOrderQuantity: json["minimumOrderQuantity"],
-      discountPercentage: json["discountPercentage"],
-      rating: json["rating"],
+      discountPercentage: double.parse(json["discountPercentage"].toString()),
+      rating: double.parse(json["rating"].toString()),
       images: List<String>.from(json["images"].map((x) => x)),
     );
   }
@@ -36,8 +40,10 @@ class BestSellingAndRecommendedProductModel
   Map<String, dynamic> toJson() {
     return {
       "id": id,
-      "title": title,
-      "description": description,
+      "titleEn": titleEn,
+      "descriptionEn": descriptionEn,
+      "titleAr": titleAr,
+      "descriptionAr": descriptionAr,
       "sku": sku,
       "product_Unit": productUnit,
       "price": price,

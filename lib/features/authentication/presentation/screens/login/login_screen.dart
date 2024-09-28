@@ -23,36 +23,39 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: BlocListener<LoginBloc, LoginState>(
-      listener: (context, state) {
+      listener: (ctx, state) {
         if (state is LoginLoadingState) {
           context.closeKeyboard();
           context.loaderOverlay.show();
         } else if (state is LoginErrorState) {
           context.loaderOverlay.hide();
           QuickAlert.show(
-              context: context,
-              type: QuickAlertType.error,
-              autoCloseDuration: Durations.extralong4,
-              text: state.message,
-              showConfirmBtn: false,
-              width: AppValues.screenWidth / 4,
-              title: AppStrings.someThingWentWrong.tr(context));
+            context: context,
+            type: QuickAlertType.error,
+            autoCloseDuration: Durations.extralong4,
+            title: state.message,
+            showConfirmBtn: false,
+            width: AppValues.screenWidth / 4,
+          );
         } else if (state is LoginLoadedState) {
           context.loaderOverlay.hide();
-          saveToken(state.auth.token).then((value) {
+          saveToken(state.auth.token, state.auth.refreshToken).then((value) {
             QuickAlert.show(
-                context: context,
-                type: QuickAlertType.success,
-                autoCloseDuration: Durations.extralong4,
-                showConfirmBtn: false,
-                width: AppValues.screenWidth / 4,
-                title: AppStrings.success.tr(context));
-            context.navigateAndFinish(screenRoute: Routes.mainRoute);
+                    context: context,
+                    type: QuickAlertType.success,
+                    autoCloseDuration: Durations.extralong4,
+                    showConfirmBtn: false,
+                    width: AppValues.screenWidth / 4,
+                    title: AppStrings.success.tr(context))
+                .then((value) => context.navigateAndFinishAll(
+                    screenRoute: Routes.mainRoute));
           });
         }
       },
       child: Scaffold(
-        appBar: const LangAppbar(),
+        appBar: const LangAppbar(
+          addBackButton: true,
+        ),
         body: AuthCurve(
           widget: Column(children: [
             const TopBar(

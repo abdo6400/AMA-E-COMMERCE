@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../../config/locale/app_localizations.dart';
-import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_values.dart';
 
@@ -21,11 +20,9 @@ class OtpTopSection extends StatelessWidget {
           height: AppValues.sizeHeight * 12,
         ),
         Container(
-          width: AppLocalizations.of(context)!.isEnLocale
-              ? AppValues.sizeWidth * 40
-              : AppValues.sizeWidth * 80,
+          width: AppValues.sizeWidth * 80,
           height: AppValues.sizeHeight * 4,
-          color: AppColors.primary,
+          color: Theme.of(context).primaryColor,
         ),
         SizedBox(
           height: AppValues.sizeHeight * 28,
@@ -36,7 +33,7 @@ class OtpTopSection extends StatelessWidget {
           style: Theme.of(context)
               .textTheme
               .titleSmall!
-              .copyWith(color: AppColors.hintColor),
+              .copyWith(color: Theme.of(context).hintColor,),
         ),
         SizedBox(
           height: AppValues.sizeHeight * 15,
@@ -47,7 +44,7 @@ class OtpTopSection extends StatelessWidget {
           style: Theme.of(context)
               .textTheme
               .titleSmall!
-              .copyWith(color: AppColors.primary),
+              .copyWith(),
         ),
       ],
     );

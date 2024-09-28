@@ -35,7 +35,7 @@ class ForgetPasswordRepositoryImpl extends ForgetPasswordRepository {
   }
 
   @override
-  Future<Either<Failure, AuthModel>> resetPassword(
+  Future<Either<Failure, String>> resetPassword(
       {required String email,
       required String newPassword,
       required String confirmNewPassword}) async {

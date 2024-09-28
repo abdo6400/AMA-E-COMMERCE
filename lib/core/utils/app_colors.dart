@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   //* Main Colors
-  static const Color primary = Color.fromRGBO(219, 56, 44, 1.0);
-  static const Color secondary = Color.fromRGBO(176, 81, 37, 1.0);
+  static const Color primary = Color.fromRGBO(46, 57, 206, 1);
+  static const Color secondary = Color.fromRGBO(108, 139, 241, 1);
 
   //* Greyscale Colors
   static const Color darkGrey = Color(0xff525252);
@@ -24,10 +24,7 @@ class AppColors {
   static const Color green = Color.fromRGBO(0, 217, 95, 1);
 
   static Color hexToColor(String hexString) {
-    // Ensure the string is in the right format
     hexString = hexString.replaceAll('#', '');
-
-    // If the string doesn't include an alpha value, add 'FF' for full opacity.
     if (hexString.length == 6) {
       hexString = 'FF$hexString';
     }

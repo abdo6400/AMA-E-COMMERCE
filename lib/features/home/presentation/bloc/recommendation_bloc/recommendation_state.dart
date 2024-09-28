@@ -13,7 +13,7 @@ class RecommendationInitial extends RecommendationState {}
 class RecommendationLoading extends RecommendationState {}
 
 class RecommendationLoaded extends RecommendationState {
-  final List<BestSellingAndRecommendedProduct> products;
+  final List<Product> products;
 
   const RecommendationLoaded({required this.products});
 

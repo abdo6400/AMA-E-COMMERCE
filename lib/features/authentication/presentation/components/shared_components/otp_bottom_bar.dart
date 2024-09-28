@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ama/config/locale/app_localizations.dart';
-import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_values.dart';
 import '../../bloc/timer/timer_cubit.dart';
@@ -32,8 +31,7 @@ class _OtpBottomBarState extends State<OtpBottomBar> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Card(
-            elevation: 0,
-            color: AppColors.white,
+            elevation: 0.5,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(AppValues.radius * 100)),
             child: Padding(
@@ -46,7 +44,6 @@ class _OtpBottomBarState extends State<OtpBottomBar> {
                 children: [
                   const Icon(
                     Icons.timer_outlined,
-                    color: AppColors.blueLight,
                   ),
                   SizedBox(
                     width: AppValues.sizeWidth * 12,
@@ -59,7 +56,6 @@ class _OtpBottomBarState extends State<OtpBottomBar> {
                         style: Theme.of(context).textTheme.titleSmall,
                       );
                     }
-
                     if (state is WorkoutInProgress) {
                       return Text(
                         state.elapsed.toString(),
@@ -99,8 +95,8 @@ class _OtpBottomBarState extends State<OtpBottomBar> {
                                   .labelLarge!
                                   .copyWith(
                                       color: state is WorkoutInProgress
-                                          ? AppColors.hintColor
-                                          : AppColors.primary,
+                                          ? Theme.of(context).hintColor
+                                          : Theme.of(context).primaryColor,
                                       fontSize: AppValues.font * 14,
                                       fontWeight: FontWeight.bold)),
                           Text(widget.email,
@@ -109,8 +105,8 @@ class _OtpBottomBarState extends State<OtpBottomBar> {
                                   .labelLarge!
                                   .copyWith(
                                       color: state is WorkoutInProgress
-                                          ? AppColors.hintColor
-                                          : AppColors.primary,
+                                          ? Theme.of(context).hintColor
+                                          : Theme.of(context).primaryColor,
                                       fontSize: AppValues.font * 14,
                                       fontWeight: FontWeight.bold)),
                         ],

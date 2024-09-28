@@ -1,14 +1,13 @@
 import 'package:ama/config/locale/app_localizations.dart';
 import 'package:flutter/material.dart';
+import '../../../../features/orders/presentation/components/order_icon_component.dart';
 import '../../../utils/app_strings.dart';
 import '../../../utils/app_values.dart';
 
 class AppbarComponents extends StatelessWidget implements PreferredSizeWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey;
   final String title;
 
-  const AppbarComponents(
-      {super.key, required this.scaffoldKey, required this.title});
+  const AppbarComponents({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class AppbarComponents extends StatelessWidget implements PreferredSizeWidget {
       snap: true,
       elevation: 2,
       leading: IconButton(
-          onPressed: () => scaffoldKey.currentState!.openDrawer(),
+          onPressed: () => Scaffold.of(context).openDrawer(),
           icon: const Icon(Icons.sort)),
       actions: [
         SizedBox(
@@ -57,16 +56,7 @@ class AppbarComponents extends StatelessWidget implements PreferredSizeWidget {
           padding: EdgeInsets.all(AppValues.radius * 10),
           child: Row(
             children: [
-              IconButton(
-                icon: Badge.count(
-                    count: 0,
-                    child: Icon(
-                      Icons.shopping_basket_outlined,
-                      color: Theme.of(context).primaryColor,
-                      size: AppValues.font * 28,
-                    )),
-                onPressed: () {},
-              ),
+              const OrderIconComponent(),
               SizedBox(
                 width: AppValues.sizeWidth * 5,
               ),

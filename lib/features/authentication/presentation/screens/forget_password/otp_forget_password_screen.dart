@@ -51,7 +51,6 @@ class OtpForgetPasswordScreen extends StatelessWidget {
                 current is ForgetPasswordResendCodeLoadedState,
             builder: (context, state) {
               return OtpInputSection(
-                secureKey: secureKey,
                 email: email,
                 function: (value) => context.read<ForgetPasswordBloc>().add(
                     ForgetPasswordVerfiyEmailEvent(

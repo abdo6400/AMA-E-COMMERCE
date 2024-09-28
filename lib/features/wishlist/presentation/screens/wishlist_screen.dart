@@ -25,6 +25,7 @@ class WithListScreen extends StatelessWidget {
             SizedBox(
               width: AppValues.screenWidth,
               child: Container(
+                color:Colors.transparent,
                 margin: EdgeInsets.only(bottom: AppValues.marginHeight * 50),
                 padding: EdgeInsets.symmetric(
                     vertical: AppValues.paddingHeight * 10,

@@ -15,39 +15,42 @@ class CartRepositoryImpl implements CartRepository {
   @override
   Future<Either<Failure, List<CartProduct>>> getCartProducts() async {
     try {
-      final remoteCartProducts = await remoteDataSource.getCartProducts();
-      return Right(remoteCartProducts);
+      final cartProducts = await remoteDataSource.getCartProducts();
+      return Right(cartProducts);
     } on ServerException catch (e) {
       return Left(ServerFailure(errorMessage: e.errorMessage));
     }
   }
 
   @override
-  Future<Either<Failure, void>> addProductToCart(String productId) async {
+  Future<Either<Failure, CartProduct>> addProductToCart(
+      int productId, int quantity) async {
     try {
-      await remoteDataSource.addProductToCart(productId);
-      return const Right(null);
+      final cartProduct =
+          await remoteDataSource.addProductToCart(productId, quantity);
+      return Right(cartProduct);
     } on ServerException catch (e) {
       return Left(ServerFailure(errorMessage: e.errorMessage));
     }
   }
 
   @override
-  Future<Either<Failure, void>> removeProductFromCart(String productId) async {
+  Future<Either<Failure, CartProduct>> removeProductFromCart(int id) async {
     try {
-      await remoteDataSource.removeProductFromCart(productId);
-      return const Right(null);
+      final cartProduct = await remoteDataSource.removeProductFromCart(id);
+      return Right(cartProduct);
     } on ServerException catch (e) {
       return Left(ServerFailure(errorMessage: e.errorMessage));
     }
   }
 
   @override
-  Future<Either<Failure, void>> updateCartQuantity(
-      String productId, int quantity) async {
+  Future<Either<Failure, CartProduct>> updateCartQuantity(
+      int id, int quantity) async {
     try {
-      await remoteDataSource.updateCartQuantity(productId, quantity);
-      return const Right(null);
+      final cartProduct =
+          await remoteDataSource.updateCartQuantity(id, quantity);
+      return Right(cartProduct);
     } on ServerException catch (e) {
       return Left(ServerFailure(errorMessage: e.errorMessage));
     }

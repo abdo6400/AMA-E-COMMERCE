@@ -206,5 +206,17 @@
   "coupon": "Coupon",
   "apply": "Apply",
   "noCoupons": "No Coupons",
-  "pleaseSignToUseAllFeatures": "Please sign in to use all features"
+  "pleaseSignToUseAllFeatures": "Please sign in to use all features",
+  "noProductsInThisBrandYet":"There are no products in this brand yet.",
+  "noBrandsInThisSubCategoryYet":"There are no brands in this subcategory yet.",
+  "noSubCategoriesInThisCategoryYet":"There are no subcategories in this category yet.",
+  "continueShoppingAndAddProductsToWishList": "Continue Shopping And Add Products To WishList",
+  "wishListEmpty": "Your wish list is empty",
+  "cartIsEmpty": "Your cart is empty",
+  "continueShoppingAndAddProductsToYourCart":"Continue Shopping And Add Products To Your Cart",
+  "addYourFirstAddress": "Add Your First Address to be able to place your order",
+  "productRemovedFromWishlist": "Product Removed From Wishlist",
+  "productAddedToWishlist": "Product Added To Wishlist",
+  "productAddedToCart": "Product Added To Cart",
+  "productRemovedFromCart": "Product Removed From Cart"
 }

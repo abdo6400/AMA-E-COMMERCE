@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:ama/core/components/cubits/auth_check_cubit/auth_check_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import '../config/locale/app_localizations_setup.dart';
 import '../config/routes/app_routes.dart';
-import '../config/routes/route_observer.dart';
+import '../config/intercepters/route_intercepter.dart';
 import '../config/themes/app_theme.dart';
 import '../core/bloc/global_cubit/locale_cubit.dart';
 import '../core/bloc/global_cubit/theme_cubit.dart';
@@ -32,6 +33,7 @@ class UserApp extends StatelessWidget {
         providers: [
           BlocProvider(create: (context) => sl<LocaleCubit>()..getSavedLang()),
           BlocProvider(create: (context) => sl<ThemeCubit>()..getThemeMode()),
+          BlocProvider(create: (context) => sl<AuthCheckCubit>()..checkAuthentication()),       
         ],
         child: BlocBuilder<ThemeCubit, ThemeState>(
           builder: (context, mode) {
@@ -41,7 +43,7 @@ class UserApp extends StatelessWidget {
             }, builder: (context, state) {
               return GlobalLoaderOverlay(
                 child: DevicePreview(
-                  enabled: true,
+                  enabled: !Platform.isAndroid,
                   tools: [
                     ...DevicePreview.defaultTools,
                     DevicePreviewScreenshot(
@@ -95,7 +97,7 @@ class UserApp extends StatelessWidget {
                           navigatorKey: UserApp.navigatorKey,
                           onGenerateRoute: AppRoutes.onGenerateRoute,
                           locale: state.locale,
-                          navigatorObservers: [sl<RouteLogger>()],
+                          navigatorObservers: [sl<RouteIntercepter>()],
                           supportedLocales:
                               AppLocalizationsSetup.supportedLocales,
                           localeResolutionCallback:

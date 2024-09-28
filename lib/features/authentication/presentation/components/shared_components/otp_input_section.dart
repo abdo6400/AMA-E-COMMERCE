@@ -6,12 +6,10 @@ import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_values.dart';
 
 class OtpInputSection extends StatelessWidget {
-  final String secureKey;
   final String email;
   final Function function;
   const OtpInputSection(
       {super.key,
-      required this.secureKey,
       required this.email,
       required this.function});
   static String? value;
@@ -63,8 +61,7 @@ class OtpInputSection extends StatelessWidget {
           height: AppValues.sizeHeight * 50,
         ),
         DefaultButton(
-       margin:
-                  EdgeInsets.symmetric(horizontal: AppValues.marginWidth * 30),
+          margin: EdgeInsets.symmetric(horizontal: AppValues.marginWidth * 30),
           onPressed: () {
             if (value != null) {
               function(value);

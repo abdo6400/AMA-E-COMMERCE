@@ -21,33 +21,30 @@ class ForgetPasswordErrorState extends ForgetPasswordState {
 }
 
 class ForgetPasswordResendCodeLoadedState extends ForgetPasswordState {
-  final String message;
   final String secureKey;
-  const ForgetPasswordResendCodeLoadedState(
-      {required this.message, required this.secureKey});
+  const ForgetPasswordResendCodeLoadedState({required this.secureKey});
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [];
 }
 
 class ForgetPasswordCheckEmailLoadedState extends ForgetPasswordState {
   final String secureKey;
- final String email;
-  const ForgetPasswordCheckEmailLoadedState( {required this.email,required this.secureKey});
+  final String email;
+  const ForgetPasswordCheckEmailLoadedState(
+      {required this.email, required this.secureKey});
   @override
   List<Object> get props => [secureKey];
 }
 
 class ForgetPasswordVerifyEmailLoadedState extends ForgetPasswordState {
-  final String message;
   final String email;
   const ForgetPasswordVerifyEmailLoadedState({
-    required this.message,
     required this.email,
   });
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [];
 }
 
 class ResetPasswordLoadedState extends ForgetPasswordState {

@@ -44,17 +44,17 @@ class ItemsScreen extends StatelessWidget {
                   itemCount: items.length,
                   itemBuilder: (context, index) {
                     return ItemComponent(
-                      title: items[index].name,
-                      price: items[index].price,
+                      title: items[index].product.titleEn,
+                      price: items[index].product.price,
                       quantity: items[index].quantity,
-                      imageUrl: items[index].image,
+                      imageUrl: items[index].product.images[0],
                     );
                   }),
             ),
             SizedBox(height: AppValues.sizeHeight * 10),
             AmountComponent(
                 subTotalAmount:
-                    items.sumByDouble((x) => (x.price * x.quantity))),
+                    items.sumByDouble((x) => (x.product.price * x.quantity))),
           ]),
     );
   }

@@ -6,7 +6,8 @@ class SubCategoryModel extends SubCategory {
   SubCategoryModel({
     required super.id,
     required super.image,
-    required super.name,
+     required super.nameEn,
+    required super.nameAr,
     required List<BrandModel> super.brands,
   });
 
@@ -14,7 +15,8 @@ class SubCategoryModel extends SubCategory {
     return SubCategoryModel(
       id: json['id'],
       image: json['image'],
-      name: json['name'],
+   nameEn: json['nameEn'],
+      nameAr: json['nameAr'],
       brands: (json['brands'] as List)
           .map((e) => BrandModel.fromJson(e))
           .toList(),
@@ -23,7 +25,8 @@ class SubCategoryModel extends SubCategory {
     return {
       'id': id,
       'image': image,
-      'name': name,
+       'nameEn': nameEn,
+      'nameAr': nameAr,
       'brands': brands.map((e) => (e as BrandModel).toJson()).toList(),
     };
   }

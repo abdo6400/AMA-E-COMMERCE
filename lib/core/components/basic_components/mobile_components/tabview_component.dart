@@ -15,47 +15,49 @@ class TabviewComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PersistentTabView(
-      context,
-      onItemSelected: (int index) =>
-          context.read<ManageMobileCubit>().changeCurrentPage(index),
-      confineToSafeArea: false,
-      screens: List<Widget>.from(screens.map(
-        (e) => Scaffold(
-          body: e["screen"],
-        ),
-      )),
-      items: screens
-          .map((e) => PersistentBottomNavBarItem(
-                icon: e["title"].toString() == AppStrings.cart
-                    ? CartIconComponent(icon: e["icon"])
-                    : Icon(e["icon"]),
-                title: e["title"].toString().tr(context),
-                activeColorSecondary:
-                    Theme.of(context).textTheme.bodyLarge!.color,
-                activeColorPrimary: Theme.of(context).primaryColor,
-                inactiveColorPrimary: Theme.of(context).hintColor,
-                contentPadding: AppValues.paddingWidth * 2,
-                inactiveIcon: e["title"].toString() == AppStrings.cart
-                    ? CartIconComponent(icon: e["iconBorder"])
-                    : Icon(e["iconBorder"]),
-              ))
-          .toList(),
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      resizeToAvoidBottomInset: true,
-      decoration: NavBarDecoration(
-        colorBehindNavBar: Theme.of(context).scaffoldBackgroundColor,
-        borderRadius: BorderRadius.zero,
-        boxShadow: [
-          BoxShadow(
-            color: Theme.of(context).cardColor,
-            blurRadius: 10,
-            spreadRadius: 0,
-            offset: const Offset(0, 2),
+    return FocusScope(
+      child: PersistentTabView(
+        context,
+        onItemSelected: (int index) =>
+            context.read<ManageMobileCubit>().changeCurrentPage(index),
+        confineToSafeArea: false,
+        screens: List<Widget>.from(screens.map(
+          (e) => Scaffold(
+            body: e["screen"],
           ),
-        ],
+        )),
+        items: screens
+            .map((e) => PersistentBottomNavBarItem(
+                  icon: e["title"].toString() == AppStrings.cart
+                      ? CartIconComponent(icon: e["icon"])
+                      : Icon(e["icon"]),
+                  title: e["title"].toString().tr(context),
+                  activeColorSecondary:
+                      Theme.of(context).textTheme.bodyLarge!.color,
+                  activeColorPrimary: Theme.of(context).primaryColor,
+                  inactiveColorPrimary: Theme.of(context).hintColor,
+                  contentPadding: AppValues.paddingWidth * 2,
+                  inactiveIcon: e["title"].toString() == AppStrings.cart
+                      ? CartIconComponent(icon: e["iconBorder"])
+                      : Icon(e["iconBorder"]),
+                ))
+            .toList(),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        resizeToAvoidBottomInset: true,
+        decoration: NavBarDecoration(
+          colorBehindNavBar: Theme.of(context).scaffoldBackgroundColor,
+          borderRadius: BorderRadius.zero,
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).cardColor,
+              blurRadius: 10,
+              spreadRadius: 0,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        navBarStyle: NavBarStyle.style9,
       ),
-      navBarStyle: NavBarStyle.style9,
     );
   }
 }

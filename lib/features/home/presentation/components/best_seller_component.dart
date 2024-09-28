@@ -1,12 +1,10 @@
 import 'package:ama/config/locale/app_localizations.dart';
 import 'package:ama/core/components/default_components/default_simmer_loading.dart';
-import 'package:ama/core/utils/app_enums.dart';
 import 'package:ama/core/utils/commons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../config/database/api/end_points.dart';
 import '../../../../config/routes/app_routes.dart';
-import '../../../../core/components/app_components/ecommerce_components.dart';
+import '../../../../core/components/app_components/product_card.dart';
 import '../../../../core/components/default_components/default_error_message.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/app_values.dart';
@@ -47,46 +45,38 @@ class BestSellerComponent extends StatelessWidget {
         ),
         SizedBox(height: AppValues.sizeHeight * 20),
         SizedBox(
-            height: AppValues.sizeHeight * 470,
+            height: AppValues.sizeHeight * 270,
             child:
                 BlocBuilder<BestSellingProductsBloc, BestSellingProductsState>(
               builder: (context, state) {
-                if (state is BestSellingProductsLoading) {
-                  return const DefaultSimmerLoading(
-                      type: SimmerLoadingType.grid);
-                } else if (state is BestSellingProductsError) {
+                if (state is BestSellingProductsError) {
                   return DefaultErrorMessage(
                     message: state.message,
                   );
-                } else if (state is BestSellingProductsLoaded) {
-                  return GridView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    padding: EdgeInsets.only(
-                      left: AppValues.paddingWidth * 10,
-                      right: AppValues.paddingWidth * 10,
-                      bottom: AppValues.paddingHeight * 30,
-                    ),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      mainAxisSpacing: AppValues.sizeHeight * 10,
-                      crossAxisSpacing: AppValues.sizeWidth * 10,
-                      crossAxisCount: 2,
-                      mainAxisExtent: AppValues.sizeHeight * 160,
-                    ),
-                    itemCount: state.products.length,
-                    itemBuilder: (context, index) =>
-                        EcommerceComponents.productCard(
-                      onTap: () => context.navigateTo(
-                        screenRoute: Routes.productDetailsRoute,
-                        arg: state.products[index].id,
+                } else if (state is BestSellingProductsLoaded ||
+                    state is BestSellingProductsLoading) {
+                  return DefaultSimmerLoading(
+                    loading: state is BestSellingProductsLoading,
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.only(
+                          left: AppValues.paddingWidth * 10,
+                          right: AppValues.paddingWidth * 10,
+                          bottom: AppValues.paddingHeight * 40),
+                      separatorBuilder: (context, index) => SizedBox(
+                        width: AppValues.sizeWidth * 10,
                       ),
-                      context: context,
-                      imageUrl:
-                          "${EndPoints.images}${state.products[index].images.first}",
-                      rating: state.products[index].rating,
-                      productName: state.products[index].title,
-                      isAvailable: state.products[index].stock > 0,
-                      price: state.products[index].price,
+                      itemCount: state is BestSellingProductsLoaded
+                          ? state.products.length
+                          : 5,
+                      itemBuilder: (context, index) => SizedBox(
+                          width: AppValues.sizeWidth * 180,
+                          child: ProductCard(
+                            product: state is BestSellingProductsLoaded
+                                ? state.products[index]
+                                : null,
+                          )),
                     ),
                   );
                 }

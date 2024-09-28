@@ -1,37 +1,47 @@
 class EndPoints {
   //basic urls
-  static const String baseUrl = 'http://localhost:5053/api/';
+  static const String baseUrl = 'https://ama.runasp.net/api/';
   static const String prefixToken = 'Bearer';
-  static const String images = "http://localhost:5053/";
+  static const String images = "";
 
   //auth
-  static const String forgetPassword = "";
-  static const String resendCode = "";
+  static const String accounts = "accounts/";
+  static const String forgetPassword = "${accounts}login";
   static const String resetPassword = "";
-  static const String verifyEmail = "";
-  static const String login = "";
-  static const String register = "";
-  static const String checkEmail = "";
-
+  static const String login = "${accounts}login";
+  static const String register = "${accounts}signup/customer";
+  static const String checkEmail = "${accounts}checkEmail";
+  static const String refreshToken = "${accounts}refresh-token";
+  //ads
   static const String ads = "";
+
+  //offers
+  static const String offers = "";
+
   //products
   static const String bestSellerProducts = "products/top-popular";
   static const String categories = "categories";
-  static const String offers = "";
   static const String recommendationProducts = "products/recommended";
   static const String productDetails = "products";
+
   //wishlist
-  static const String addToWishlist = "";
-  static const String removeFromWishlist = "";
-  static const String wishlist = "";
+  static const String wishlist = "wishlist";
 
   //cart
-  static const String updateCartQuantity = "";
-  static const String removeProductFromCart = "";
-  static const String addProductToCart = "";
-  static const String cartProducts = "";
+  static const String cartProducts = "carts";
 
-  static var categoryDetails;
+  //address
+  static const String address = "addresses";
+
+  //orders
+  static const String orders = "orders";
+
+  //coupons
+  static const String checkCoupon = "coupons/check-coupon";
+  //checkout
+  static const String checkout = "checkout";
+  static const String checkoutCard = "$checkout/card";
+  static const String checkoutCash = "$checkout/cash";
 }
 
 class ApiKeys {

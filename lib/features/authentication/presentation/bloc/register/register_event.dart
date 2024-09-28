@@ -8,15 +8,13 @@ sealed class RegisterEvent extends Equatable {
 }
 
 class CheckEmailEvent extends RegisterEvent {
-  final String emailOrPhone;
   final Map<String, dynamic> data;
-  const CheckEmailEvent(this.data, {required this.emailOrPhone});
+  const CheckEmailEvent({required this.data});
 }
 
 class ResendCodeEvent extends RegisterEvent {
-  final String emailOrPhone;
-
-  const ResendCodeEvent({required this.emailOrPhone});
+  final String email;
+  const ResendCodeEvent({required this.email});
 }
 
 class SignUpEvent extends RegisterEvent {

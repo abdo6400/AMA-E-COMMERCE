@@ -31,11 +31,10 @@ class ForgetPasswordBloc
   void onCheckEmailEvent(ForgetPasswordCheckEmailEvent event,
       Emitter<ForgetPasswordState> emit) async {
     emit(ForgetPasswordLoadingState());
-    emit(await _forgetPasswordUseCase(event.email).then((value) =>
-        value.fold(
-            (l) => ForgetPasswordErrorState(message: l.errorMessage),
-            (r) => ForgetPasswordCheckEmailLoadedState(
-                secureKey: r.token, email: event.email))));
+    emit(await _forgetPasswordUseCase(event.email).then((value) => value.fold(
+        (l) => ForgetPasswordErrorState(message: l.errorMessage),
+        (r) => ForgetPasswordCheckEmailLoadedState(
+            secureKey: r.token, email: event.email))));
   }
 
   void onResendCodeEvent(ForgetPasswordResendCodeEvent event,
@@ -44,8 +43,7 @@ class ForgetPasswordBloc
     emit(await _forgetPasswordResendCodeUseCase(event.emailOrPhone).then(
         (value) => value.fold(
             (l) => ForgetPasswordErrorState(message: l.errorMessage),
-            (r) => ForgetPasswordResendCodeLoadedState(
-                message: r.message, secureKey: r.token))));
+            (r) => ForgetPasswordResendCodeLoadedState(secureKey: r.token))));
   }
 
   void onVerfiyEmailEvent(ForgetPasswordVerfiyEmailEvent event,
@@ -56,8 +54,7 @@ class ForgetPasswordBloc
         .then((value) => value
                 .fold((l) => ForgetPasswordErrorState(message: l.errorMessage),
                     (r) async {
-              return ForgetPasswordVerifyEmailLoadedState(
-                  message: r.message, email: event.email);
+              return ForgetPasswordVerifyEmailLoadedState(email: event.email);
             })));
   }
 
@@ -70,6 +67,6 @@ class ForgetPasswordBloc
             confirmNewPassword: event.confirmPassword))
         .then((value) => value.fold(
             (l) => ForgetPasswordErrorState(message: l.errorMessage),
-            (r) => ResetPasswordLoadedState(message: r.message))));
+            (r) => ResetPasswordLoadedState(message: r))));
   }
 }

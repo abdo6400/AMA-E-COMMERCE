@@ -3,12 +3,9 @@ import 'package:ama/config/routes/app_routes.dart';
 import 'package:ama/core/utils/commons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../core/components/app_components/ecommerce_components.dart';
 import '../../../../core/components/default_components/default_error_message.dart';
-
 import '../../../../core/components/default_components/default_simmer_loading.dart';
-import '../../../../core/utils/app_enums.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/app_values.dart';
 
@@ -50,18 +47,14 @@ class OffersComponent extends StatelessWidget {
         SizedBox(height: AppValues.sizeHeight * 15),
         BlocBuilder<OffersBloc, OffersState>(
           builder: (context, state) {
-            if (state is OffersLoading) {
-              return DefaultSimmerLoading(
-                type: SimmerLoadingType.card,
-                width: AppValues.screenWidth * 0.8,
-                height: AppValues.sizeHeight * 150,
-              );
-            } else if (state is OffersError) {
+            if (state is OffersError) {
               return DefaultErrorMessage(
                 message: state.message,
               );
-            } else if (state is OffersLoaded) {
-              return EcommerceComponents.slider();
+            } else if (state is OffersLoaded || state is OffersLoading) {
+              return DefaultSimmerLoading(
+                  loading: state is OffersLoading,
+                  child: EcommerceComponents.slider());
             }
             return const SizedBox.shrink();
           },

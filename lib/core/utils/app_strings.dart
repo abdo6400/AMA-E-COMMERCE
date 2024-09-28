@@ -212,4 +212,21 @@ class AppStrings {
   static const coupon = "coupon";
   static const apply = "apply";
   static const pleaseSignToUseAllFeatures = "pleaseSignToUseAllFeatures";
+  static const noProductsInThisBrandYet = "noProductsInThisBrandYet";
+  static const noBrandsInThisSubCategoryYet = "noBrandsInThisSubCategoryYet";
+  static const noSubCategoriesInThisCategoryYet =
+      "noSubCategoriesInThisCategoryYet";
+  static const wishListEmpty = "wishListEmpty";
+  static const continueShoppingAndAddProductsToWishList =
+      "continueShoppingAndAddProductsToWishList";
+  static const cartIsEmpty = "cartIsEmpty";
+  static const continueShoppingAndAddProductsToYourCart =
+      "continueShoppingAndAddProductsToYourCart";
+
+  static const addYourFirstAddress = "addYourFirstAddress";
+
+  static const productRemovedFromWishlist = "productRemovedFromWishlist";
+  static const productAddedToWishlist = "productAddedToWishlist";
+  static const productAddedToCart = "productAddedToCart"; 
+  static const productRemovedFromCart = "productRemovedFromCart";
 }

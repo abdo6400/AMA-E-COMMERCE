@@ -73,8 +73,11 @@ Future<XFile?> pickvideo(ImageSource source) async {
   }
 }
 
+extension NavigateAndFinish on BuildContext {
+  void navigateToFirstRoute() {
+    Navigator.of(this, rootNavigator: true).popUntil((route) => route.isFirst);
+  }
 
-extension NavigateTo on BuildContext {
   void navigateTo({
     required String screenRoute,
     dynamic arg,
@@ -82,9 +85,7 @@ extension NavigateTo on BuildContext {
     Navigator.of(this, rootNavigator: true)
         .pushNamed(screenRoute, arguments: arg);
   }
-} 
 
-extension NavigateAndFinish on BuildContext {
   void navigateAndFinish({
     required String screenRoute,
     dynamic arg,
@@ -92,9 +93,7 @@ extension NavigateAndFinish on BuildContext {
     Navigator.of(this, rootNavigator: true)
         .pushReplacementNamed(screenRoute, arguments: arg);
   }
-}
 
-extension NavigateAndFinishAll on BuildContext {
   void navigateAndFinishAll({
     required String screenRoute,
     dynamic arg,
@@ -103,7 +102,6 @@ extension NavigateAndFinishAll on BuildContext {
         .pushNamedAndRemoveUntil(screenRoute, (value) => false, arguments: arg);
   }
 }
-
 
 extension ShowMultiSelect on BuildContext {
   void showMultiSelect({
@@ -229,15 +227,13 @@ Future<XFile> downloadAndSaveImage(String imageUrl) async {
   return XFile(filePath);
 }
 
-//save token to cache
-Future<void> saveTokenToCache(String token) async {
-  await sl<CacheConsumer>()
-      .saveData(key: MySharedKeys.apiToken.name, value: token);
-}
-
-Future<Either<CacheException, String>> saveToken(String token) async {
+Future<Either<CacheException, String>> saveToken(
+    String token, String refreshToken) async {
   try {
-    await saveTokenToCache(token);
+    await sl<CacheConsumer>()
+        .saveData(key: MySharedKeys.apiToken.name, value: token);
+    await sl<CacheConsumer>()
+        .saveData(key: MySharedKeys.refreshToken.name, value: refreshToken);
     return const Right('Done');
   } catch (e) {
     return Left(CacheException(message: e.toString()));
